@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-009",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jennifer Thompson",
+  "claimant_email": "claimant.434436@example.com",
+  "claimant_phone": "555-122-8517",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-19",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbrook, NY, at 3842 Solo Ridge on 2026-01-19. Severity assessed as total loss.",
+  "incident_location": "3842 Solo Ridge, Northbrook, NY",
+  "police_report_number": null,
+  "estimated_amount": 72930.0,
+  "vehicle_year": 2026,
+  "vehicle_make": "Accura",
+  "vehicle_model": "TL",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

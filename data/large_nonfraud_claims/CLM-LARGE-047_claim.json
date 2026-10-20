@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-047",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jennifer Garcia",
+  "claimant_email": "claimant.664442@example.com",
+  "claimant_phone": "555-091-1893",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-08",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, VA, at 2087 Apache Ave on 2026-01-08. Severity assessed as total loss.",
+  "incident_location": "2087 Apache Ave, Springfield, VA",
+  "police_report_number": "VAPD-20260108-4442",
+  "estimated_amount": 64240.0,
+  "vehicle_year": 2026,
+  "vehicle_make": "BMW",
+  "vehicle_model": "3 Series",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

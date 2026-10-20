@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-030",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Anderson",
+  "claimant_email": "claimant.868937@example.com",
+  "claimant_phone": "555-532-0610",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-27",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, NC, at 7466 MLK Ridge on 2026-01-27. Severity assessed as major damage.",
+  "incident_location": "7466 MLK Ridge, Columbus, NC",
+  "police_report_number": null,
+  "estimated_amount": 70510.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Forrestor",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,16 @@
+{
+  "police_report": {
+    "report_number": "PAPD-20260121-7972",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-21",
+    "incident_location": "4519 Embaracadero St, Hillsdale, PA",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Hillsdale, PA, at 4519 Embaracadero St on 2026-01-21. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Michael Rodriguez"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": null
+}

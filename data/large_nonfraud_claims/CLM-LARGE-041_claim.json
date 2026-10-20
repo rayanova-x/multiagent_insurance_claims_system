@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-041",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "David Taylor",
+  "claimant_email": "claimant.745360@example.com",
+  "claimant_phone": "555-561-8656",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, VA, at 4755 Best Lane on 2026-03-01. Severity assessed as minor damage.",
+  "incident_location": "4755 Best Lane, Springfield, VA",
+  "police_report_number": "VAPD-20260301-5360",
+  "estimated_amount": 42930.0,
+  "vehicle_year": 2016,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X6",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

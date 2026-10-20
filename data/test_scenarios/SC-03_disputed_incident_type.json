@@ -1,0 +1,27 @@
+{
+  "claim_id": "SC-03",
+  "_scenario_note": "Branch 3: claimant kept their own incident_type after /verify-type suggested a different one -> mandatory human review regardless of amount.",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_email": "claimant@example.com",
+  "claimant_phone": "555-010-1000",
+  "claimant_dob": "1988-04-12",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_location": "400 Market Street, Columbus, OH",
+  "police_report_number": null,
+  "vehicle_year": 2021,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Accord",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": true,
+  "type_dispute_reason": "The system suggested this was theft, not a collision, but I'm filing it as auto_collision because my window glass counts as collision damage to me.",
+  "claimant_name": "Felix Ngata",
+  "estimated_amount": 3200.0,
+  "incident_description": "Someone broke my driver side window and took my laptop bag from the back seat while I was at the gym."
+}

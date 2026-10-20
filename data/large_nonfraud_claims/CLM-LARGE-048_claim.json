@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-048",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Brown",
+  "claimant_email": "claimant.857873@example.com",
+  "claimant_phone": "555-034-6171",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 2 vehicles in Arlington, SC, at 8442 Britain Hwy on 2026-02-24. Severity assessed as total loss.",
+  "incident_location": "8442 Britain Hwy, Arlington, SC",
+  "police_report_number": null,
+  "estimated_amount": 66950.0,
+  "vehicle_year": 2006,
+  "vehicle_make": "Saab",
+  "vehicle_model": "93",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

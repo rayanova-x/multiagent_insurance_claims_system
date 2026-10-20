@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-096",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Brown",
+  "claimant_email": "claimant.792090@example.com",
+  "claimant_phone": "555-275-2911",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-19",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbend, SC, at 9737 Solo Hwy on 2026-01-19. Severity assessed as total loss.",
+  "incident_location": "9737 Solo Hwy, Northbend, SC",
+  "police_report_number": null,
+  "estimated_amount": 93720.0,
+  "vehicle_year": 2016,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "ML350",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-027",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Williams",
+  "claimant_email": "claimant.419299@example.com",
+  "claimant_phone": "555-517-2528",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-19",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 5667 4th Drive on 2026-01-19. Severity assessed as total loss.",
+  "incident_location": "5667 4th Drive, Northbend, WV",
+  "police_report_number": null,
+  "estimated_amount": 98160.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "RAM",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

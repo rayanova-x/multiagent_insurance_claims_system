@@ -1,0 +1,26 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-06",
+    "incident_location": "2299 1st St, Hillsdale, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, VA, at 2299 1st St on 2026-01-06. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Richard Williams",
+      "Michael Davis"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Michael Davis",
+    "driver_license_number": "24536815",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2026,
+    "license_plate": null
+  },
+  "repair_estimate": null
+}

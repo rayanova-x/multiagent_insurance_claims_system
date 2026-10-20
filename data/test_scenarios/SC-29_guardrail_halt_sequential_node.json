@@ -1,0 +1,27 @@
+{
+  "claim_id": "SC-29",
+  "_scenario_note": "Branch 29: a guardrail halt firing from a SEQUENTIAL node (e.g. settlement_calculator on a fast-mode claim), not during the fan-out - a different code path than SC-07. Demonstrate the same way: lower the guardrail budget in config below what this claim's own calls will use, then run it live.",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_email": "claimant@example.com",
+  "claimant_phone": "555-010-1000",
+  "claimant_dob": "1988-04-12",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_location": "400 Market Street, Columbus, OH",
+  "police_report_number": null,
+  "vehicle_year": 2021,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Accord",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "claimant_name": "Ingrid Castellanos",
+  "estimated_amount": 300.0,
+  "incident_description": "Tiny scrape from a shopping cart, fast-mode-eligible claim."
+}

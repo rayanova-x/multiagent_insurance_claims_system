@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-094",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Moore",
+  "claimant_email": "claimant.569514@example.com",
+  "claimant_phone": "555-719-1173",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-16",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Riverwood, NY, at 9588 Solo St on 2026-01-16. Severity assessed as major damage.",
+  "incident_location": "9588 Solo St, Riverwood, NY",
+  "police_report_number": null,
+  "estimated_amount": 59400.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Civic",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "conflict_notable_no_retry",
+  "_fraud_reported_ground_truth": false,
+  "_note": "real row's 'Major Damage' severity on a single-vehicle claim - plausible but not guaranteed notable-conflict trigger"
+}

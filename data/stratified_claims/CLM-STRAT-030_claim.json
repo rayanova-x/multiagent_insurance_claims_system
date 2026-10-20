@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-030",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "William Davis",
+  "claimant_email": "claimant.195859@example.com",
+  "claimant_phone": "555-394-9070",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, WV, at 3104 Sky Drive on 2026-01-24. Severity assessed as major damage.",
+  "incident_location": "3104 Sky Drive, Springfield, WV",
+  "police_report_number": "WVPD-20260124-5859",
+  "estimated_amount": 53100.0,
+  "vehicle_year": 2006,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "C300",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

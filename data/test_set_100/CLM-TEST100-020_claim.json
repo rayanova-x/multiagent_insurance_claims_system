@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-020",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Anderson",
+  "claimant_email": "claimant.162269@example.com",
+  "claimant_phone": "555-147-4313",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-08",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, SC, at 3220 Rock Drive on 2026-01-08. Severity assessed as minor damage. Claimant states the vehicles were racing on a closed stretch of road when the collision occurred.",
+  "incident_location": "3220 Rock Drive, Northbend, SC",
+  "police_report_number": "SCPD-20260108-2269",
+  "estimated_amount": 69840.0,
+  "vehicle_year": 2020,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "Neon",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_racing",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Narrative states the real racing trigger fact per policy_checker.py's own criteria"
+}

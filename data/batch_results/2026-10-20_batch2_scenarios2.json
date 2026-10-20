@@ -1,0 +1,119 @@
+{
+  "date": "2026-10-20",
+  "batch": "Batch 2, sub-batch scenarios2: 10 of 30 data/test_scenarios fixtures (SC-02,05,08,11,14,17,20,23,26,29)",
+  "model": "gemini-3.5-flash-lite (primary), gemini-3.1-flash-lite (fallback)",
+  "fraud_crew": "mocked (out of scope, never redesigned this session) - inert LOW/0.0 placeholder",
+  "run_notes": "Completed cleanly in a single run, no stalls or interruptions (unlike scenarios1, which hit a run_in_background output-lag and a real fork/resource-exhaustion incident).",
+  "results": [
+    {
+      "label": "SC-02_prompt_injection_attempt",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent"],
+      "agent_call_count": 1,
+      "elapsed_s": 5.5,
+      "resumed": false,
+      "assessment": "correct - injection detected at intake, paused before the fan-out even started, cheapest possible real-call path (1 call)"
+    },
+    {
+      "label": "SC-05_fast_mode_small_claim",
+      "paused": false,
+      "final_decision": "DENIED",
+      "final_amount_usd": 0.0,
+      "pipeline_path": ["intake_agent", "settlement_calculator", "evaluator", "communication_agent"],
+      "agent_call_count": 2,
+      "elapsed_s": 58.7,
+      "resumed": false,
+      "assessment": "fast-mode claim denied - consistent with the same small-claim-deductible pattern seen in Batch 1's path_e_fast_mode_small_claim and scenarios1's SC-04; not independently re-verified this round but matches known behavior"
+    },
+    {
+      "label": "SC-08_confirmed_fraud",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 33.6,
+      "resumed": false,
+      "real_pause_reason": "damage_assessor.requires_physical_inspection=True AND policy_checker.compliance_flags=['Suspected insurance fraud and intentional staging of an accident'] (confirmed via checkpoint inspection)",
+      "assessment": "correctly paused, though via different real triggers than the scenario's named intent (CONFIRMED fraud auto-reject) - fraud_crew is mocked at LOW/0.0 so the real CONFIRMED path this scenario was built to test could never fire. Genuinely interesting: policy_checker independently flagged the staged-accident narrative on its own, from a different angle than fraud_crew - the system caught a real signal even with fraud_crew excluded."
+    },
+    {
+      "label": "SC-11_conflict_missed_fact_exhausts_retries",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 26.1,
+      "resumed": false,
+      "assessment": "paused at consistency_coordinator without a visible retry loop in the trace (no repeated damage_assessor/consistency_coordinator cycle) - same observation as scenarios1's SC-10: the intended MATERIAL missed-fact retry-exhaustion was not clearly observed this round. Not independently verified via checkpoint inspection this round - worth checking in a future pass."
+    },
+    {
+      "label": "SC-14_physical_inspection_required",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 41.2,
+      "resumed": false,
+      "assessment": "correct and ON-TARGET - this scenario was specifically built to test the requires_physical_inspection gate, and it fired exactly as designed. The one scenario this round that tested precisely what its name says."
+    },
+    {
+      "label": "SC-17_clean_fanout_to_settlement",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 37.9,
+      "resumed": false,
+      "real_pause_reason": "damage_assessor.requires_physical_inspection=True (confirmed via checkpoint inspection)",
+      "assessment": "same known document-upload gap pattern - this scenario was meant to test a CLEAN straight-through path to settlement, but the recurring inspection trigger means it never reached settlement this round, same as several scenarios1 claims"
+    },
+    {
+      "label": "SC-20_failed_quality_gate",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 44.7,
+      "resumed": false,
+      "assessment": "paused before reaching the evaluator at all (same recurring pattern), so the scenario's intended quality-gate-failure path was never exercised this round - not independently re-verified via checkpoint inspection"
+    },
+    {
+      "label": "SC-23_passed_low_value_to_communication",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 22.3,
+      "resumed": false,
+      "assessment": "same recurring pattern - meant to test the simplest full-completion path, paused before settlement instead"
+    },
+    {
+      "label": "SC-26_resume_eval_triggered_pause",
+      "paused": false,
+      "final_decision": "APPROVED_PARTIAL",
+      "final_amount_usd": 10500.0,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator", "hitl_checkpoint", "settlement_calculator", "evaluator", "communication_agent"],
+      "agent_call_count": 6,
+      "elapsed_s": 79.4,
+      "resumed": true,
+      "assessment": "correct - resumed with decision=approved, did NOT re-run the fan-out (trace never repeats damage/policy/fraud after resume), reached settlement and evaluator correctly. Same final outcome as scenarios1's SC-28 ($10,500 APPROVED_PARTIAL) since these two scenarios use very similar underlying claim data by design (both test 'resume after a post-fan-out pause')."
+    },
+    {
+      "label": "SC-29_guardrail_halt_sequential_node",
+      "paused": false,
+      "final_decision": "DENIED",
+      "final_amount_usd": 0.0,
+      "pipeline_path": ["intake_agent", "settlement_calculator", "evaluator", "communication_agent"],
+      "agent_call_count": 2,
+      "elapsed_s": 26.3,
+      "resumed": false,
+      "assessment": "fast-mode claim denied, consistent with the small-claim-deductible pattern - this scenario was meant to test a forced guardrail-budget-halt (needs a config change to trigger for real, same caveat as scenarios1's SC-07), which was not exercised this round"
+    }
+  ],
+  "cross_batch_findings": [
+    "Confirms the SAME structural pattern from scenarios1: most full-fan-out claims pause at or before consistency_coordinator due to damage_assessor.requires_physical_inspection=True, driven by the known missing-document-upload gap - this is not new information, just further confirmation at scale.",
+    "SC-08's policy_checker independently flagging a 'staged accident' compliance concern, entirely separate from the mocked fraud_crew, is a genuinely positive finding: a real cross-check caught a real signal even with the fraud detection agent excluded from this round.",
+    "Several scenarios specifically designed to test paths AFTER the fan-out (SC-08's auto-reject, SC-14's own target succeeded, SC-17's clean settlement, SC-20's quality gate, SC-23's full completion) could not reach their intended target this round because the physical-inspection trigger fires first in most cases - this means the LIVE-TESTED coverage of 'what happens after settlement' is thinner than the scenario COUNT suggests. The mocked test suite (tests/test_scenarios_e2e.py) still proves these later branches are correctly WIRED; live runs with this particular document-less claim data just can't reach them as often as hoped."
+  ]
+}

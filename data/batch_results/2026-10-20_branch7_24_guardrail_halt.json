@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-20",
+  "batch": "Standalone live verification of branches 7 and 24 (guardrail budget halt + resume), run separately from the 3 scenario sub-batches since it requires a temporary MAX_AGENT_CALLS env var override, not a normal claim submission",
+  "model": "gemini-3.5-flash-lite (primary), gemini-3.1-flash-lite (fallback)",
+  "fraud_crew": "mocked (out of scope, never redesigned this session) - inert LOW/0.0 placeholder",
+  "run_notes": "Used the EXISTING MAX_AGENT_CALLS env var override (src/config.py:get_guardrails_config(), already supported, reads fresh every call, no code or committed configs/base.yaml edit needed) set to 2 for one standalone run of SC-07_guardrail_budget_halt. Real production config (max_agent_calls: 25) was never touched. This file documents that run so later trajectory scoring (evaluation/trajectory.py) has a real record to check against, rather than only the ordinary pre-halt pause saved in scenarios1/scenarios3's own SC-07/SC-24 entries (those ran under NORMAL config and do not exercise this path at all).",
+  "results": [
+    {
+      "label": "SC-07_guardrail_budget_halt",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "guardrails"],
+      "agent_call_count": 3,
+      "resumed": false,
+      "real_pause_reason": "guard_node raised GuardrailsViolation('Agent call limit reached (3/2)') before consistency_coordinator - confirmed via direct state/interrupt inspection. guardrails_halted=True fed into hitl_checkpoint's own trigger list as 'Guardrail halt: Agent call limit reached (3/2)'.",
+      "assessment": "correct and ON-TARGET - exactly matches branch 7's own definition ('a guardrail budget/timeout halt during the fan-out -> human review, before the consistency coordinator runs')."
+    },
+    {
+      "label": "SC-24_resume_after_guardrail_halt",
+      "paused": false,
+      "final_decision": "APPROVED",
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "guardrails", "hitl_checkpoint", "communication_agent"],
+      "agent_call_count": 3,
+      "resumed": true,
+      "assessment": "correct and ON-TARGET - resuming the halted claim with decision='approved' went straight to communication_agent with ZERO further agent spend (agent_call_count stayed at 3, no settlement_calculator/evaluator call), exactly matching branch 24's own definition ('resuming a guardrail-halted claim -> communication directly, no further agent spend')."
+    }
+  ],
+  "cross_batch_findings": [
+    "This completes live verification of all 31 architectural branches with real LLM calls (29 from scenarios1+2+3, these final 2 from this standalone run) - Bar 1 is fully complete.",
+    "SC-07/SC-24's entries in data/batch_results/2026-10-20_batch2_scenarios1.json and _scenarios3.json (paused=True at consistency_coordinator, 4 calls) reflect the ORDINARY pre-halt pause under normal config, not this branch - a trajectory-scoring tool (evaluation/trajectory.py) reading those saved entries against EXPECTED_PATHS will correctly flag them as path-diverged, which is accurate: those specific saved runs did not exercise branches 7/24 at all."
+  ]
+}

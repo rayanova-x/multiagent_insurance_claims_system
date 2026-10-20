@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-02-26",
+    "incident_location": "8118 Elm Ridge, Hillsdale, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Hillsdale, SC, at 8118 Elm Ridge on 2026-02-26. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Elizabeth Wilson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-26",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "19572.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13048.00"
+      }
+    ],
+    "line_items_sum": "32620.00",
+    "stated_total": "32620"
+  }
+}

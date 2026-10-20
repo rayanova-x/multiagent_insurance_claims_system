@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-074",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Williams",
+  "claimant_email": "claimant.005812@example.com",
+  "claimant_phone": "555-869-5380",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-09",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Columbus, NY, at 7121 Britain Drive on 2026-01-09. Severity assessed as total loss.",
+  "incident_location": "7121 Britain Drive, Columbus, NY",
+  "police_report_number": null,
+  "estimated_amount": 82720.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A3",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

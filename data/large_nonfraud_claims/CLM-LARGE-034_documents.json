@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-06",
+    "incident_location": "2299 1st St, Hillsdale, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, VA, at 2299 1st St on 2026-01-06. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Linda Williams",
+      "William Anderson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Anderson",
+    "driver_license_number": "31985508",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2021,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-06",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "27456.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "18304.00"
+      }
+    ],
+    "line_items_sum": "45760.00",
+    "stated_total": "45760"
+  }
+}

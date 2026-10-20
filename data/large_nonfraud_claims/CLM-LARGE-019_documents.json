@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-09",
+    "incident_location": "8353 Britain Ridge, Hillsdale, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 8353 Britain Ridge on 2026-01-09. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Elizabeth Davis",
+      "Patricia Taylor"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Patricia Taylor",
+    "driver_license_number": "22884863",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-09",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "29442.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "19628.00"
+      }
+    ],
+    "line_items_sum": "49070.00",
+    "stated_total": "49070"
+  }
+}

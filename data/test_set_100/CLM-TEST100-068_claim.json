@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-068",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Davis",
+  "claimant_email": "claimant.010660@example.com",
+  "claimant_phone": "555-930-0830",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-23",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 1126 Texas Hwy on 2026-02-23. Severity assessed as major damage.",
+  "incident_location": "1126 Texas Hwy, Columbus, WV",
+  "police_report_number": null,
+  "estimated_amount": 350.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "RAM",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "fast_mode_small_claim",
+  "_fraud_reported_ground_truth": false,
+  "_note": "estimated_amount overridden below pipeline.fast_mode.max_amount ($500) - no real row is naturally this small"
+}

@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-11",
+    "incident_location": "7459 Flute St, Springfield, OH",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, OH, at 7459 Flute St on 2026-02-11. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Michael Lee",
+      "Jessica Lee"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jessica Lee",
+    "driver_license_number": "95660434",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-11",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "19926.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13284.00"
+      }
+    ],
+    "line_items_sum": "33210.00",
+    "stated_total": "33210"
+  }
+}

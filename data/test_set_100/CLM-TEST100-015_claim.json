@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-015",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "James Davis",
+  "claimant_email": "claimant.578656@example.com",
+  "claimant_phone": "555-055-4647",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2015-01-19",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbrook, NY, at 3842 Solo Ridge on 2015-01-19. Severity assessed as total loss.",
+  "incident_location": "3842 Solo Ridge, Northbrook, NY",
+  "police_report_number": null,
+  "estimated_amount": 72930.0,
+  "vehicle_year": 2015,
+  "vehicle_make": "Accura",
+  "vehicle_model": "TL",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "lapsed_policy",
+  "_fraud_reported_ground_truth": false,
+  "_note": "incident_date intentionally NOT shifted into the policy's coverage window"
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-011",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Taylor",
+  "claimant_email": "claimant.590837@example.com",
+  "claimant_phone": "555-352-3142",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-01",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, NY, at 5380 Pine St on 2026-01-01. Severity assessed as minor damage.",
+  "incident_location": "5380 Pine St, Columbus, NY",
+  "police_report_number": null,
+  "estimated_amount": 47160.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Impreza",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "SC-15",
+  "_scenario_note": "Branch 15: a policy exclusion triggers (pre_existing_damage) -> always human review. Uses POL-AUTO-789456, the one seeded policy that lists pre_existing_damage as an exclusion. Narrative explicitly mentions prior unrepaired damage to the same area, matching the exclusion's real stated criteria (not just vague similarity).",
+  "policy_number": "POL-AUTO-789456",
+  "claimant_email": "claimant@example.com",
+  "claimant_phone": "555-010-1000",
+  "claimant_dob": "1988-04-12",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_location": "400 Market Street, Columbus, OH",
+  "police_report_number": null,
+  "vehicle_year": 2021,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Accord",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "claimant_name": "Terrence Boyle",
+  "estimated_amount": 6100.0,
+  "incident_description": "Got rear-ended again at the same spot on the back bumper that was already dented and never fully repaired from a previous accident last year."
+}

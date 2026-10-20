@@ -1,0 +1,81 @@
+{
+  "total_claims": 5,
+  "scoreable_claims": 5,
+  "correct": 2,
+  "completion_rate": 0.4,
+  "best_effort_claims_not_scored": 0,
+  "by_tag": {
+    "clean": {
+      "correct": 0,
+      "total": 1,
+      "best_effort": 0
+    },
+    "exclusion_racing": {
+      "correct": 1,
+      "total": 1,
+      "best_effort": 0
+    },
+    "missing_doc_repair_estimate": {
+      "correct": 0,
+      "total": 1,
+      "best_effort": 0
+    },
+    "invalid_policy_number": {
+      "correct": 1,
+      "total": 1,
+      "best_effort": 0
+    },
+    "low_confidence_low_value": {
+      "correct": 0,
+      "total": 1,
+      "best_effort": 0
+    }
+  },
+  "results": [
+    {
+      "claim": "CLM-TEST100-001",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Security: prompt-injection attempt detected at intake - Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.', 'First-time claimant with high-value claim ($34,650)', 'Intake flags: INJECTION_DETECTED: Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.']",
+      "elapsed_s": 18.1
+    },
+    {
+      "claim": "CLM-TEST100-021",
+      "tag": "exclusion_racing",
+      "expected": "paused_for_review",
+      "actual": "paused_for_review",
+      "correct": true,
+      "detail": "triggers=['Security: prompt-injection attempt detected at intake - Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.', 'First-time claimant with high-value claim ($75,600)', 'Intake flags: INJECTION_DETECTED: Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.']",
+      "elapsed_s": 13.2
+    },
+    {
+      "claim": "CLM-TEST100-041",
+      "tag": "missing_doc_repair_estimate",
+      "expected": "paused_for_inspection",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Security: prompt-injection attempt detected at intake - Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.', 'First-time claimant with high-value claim ($33,930)', 'Intake flags: Missing documents: repair_estimate, INJECTION_DETECTED: Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.']",
+      "elapsed_s": 12.2
+    },
+    {
+      "claim": "CLM-TEST100-061",
+      "tag": "invalid_policy_number",
+      "expected": "denied_at_intake",
+      "actual": "denied_at_intake",
+      "correct": true,
+      "detail": "decision=denied, amount=0.0",
+      "elapsed_s": 55.1
+    },
+    {
+      "claim": "CLM-TEST100-081",
+      "tag": "low_confidence_low_value",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Security: prompt-injection attempt detected at intake - Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.', 'First-time claimant with high-value claim ($52,030)', 'Intake flags: Missing documents: other_driver_info, INJECTION_DETECTED: Injection classifier itself failed (GoogleRateLimitError) - treated as unresolved, requires manual review.']",
+      "elapsed_s": 13.0
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-087",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Robert Rodriguez",
+  "claimant_email": "claimant.885465@example.com",
+  "claimant_phone": "555-416-3379",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-27",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbend, NY, at 4905 Francis Ave on 2026-02-27. Severity assessed as minor damage.",
+  "incident_location": "4905 Francis Ave, Northbend, NY",
+  "police_report_number": null,
+  "estimated_amount": 64000.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Saab",
+  "vehicle_model": "95",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "conflict_material_retry",
+  "_fraud_reported_ground_truth": false,
+  "_note": "real row's 'Minor Damage' severity label paired with a multi-vehicle narrative - plausible but not guaranteed severity-mismatch trigger"
+}

@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-089",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Moore",
+  "claimant_email": "claimant.733351@example.com",
+  "claimant_phone": "555-758-3473",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 9760 Solo Lane on 2026-01-24. Severity assessed as minor damage.",
+  "incident_location": "9760 Solo Lane, Riverwood, NY",
+  "police_report_number": "NYPD-20260124-3351",
+  "estimated_amount": 34320.0,
+  "vehicle_year": 2020,
+  "vehicle_make": "Volkswagen",
+  "vehicle_model": "Passat",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "conflict_material_retry",
+  "_fraud_reported_ground_truth": false,
+  "_note": "real row's 'Minor Damage' severity label paired with a multi-vehicle narrative - plausible but not guaranteed severity-mismatch trigger"
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-068",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jennifer Lee",
+  "claimant_email": "claimant.667766@example.com",
+  "claimant_phone": "555-834-0841",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-07",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, SC, at 7709 Rock Lane on 2026-01-07. Severity assessed as minor damage.",
+  "incident_location": "7709 Rock Lane, Springfield, SC",
+  "police_report_number": null,
+  "estimated_amount": 65500.0,
+  "vehicle_year": 2021,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

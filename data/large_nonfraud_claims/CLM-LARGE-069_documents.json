@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "NCPD-20260201-8999",
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-01",
+    "incident_location": "9358 Texas Ridge, Springfield, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, NC, at 9358 Texas Ridge on 2026-02-01. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Elizabeth Rodriguez",
+      "Linda Johnson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Linda Johnson",
+    "driver_license_number": "54073891",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2020,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "33216.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "22144.00"
+      }
+    ],
+    "line_items_sum": "55360.00",
+    "stated_total": "55360"
+  }
+}

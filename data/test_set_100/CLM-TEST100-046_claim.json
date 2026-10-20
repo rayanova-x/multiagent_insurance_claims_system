@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-046",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Brown",
+  "claimant_email": "claimant.762944@example.com",
+  "claimant_phone": "555-021-4862",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-11",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, NC, at 2324 Texas Ridge on 2026-02-11. Severity assessed as minor damage.",
+  "incident_location": "2324 Texas Ridge, Arlington, NC",
+  "police_report_number": null,
+  "estimated_amount": 30100.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Chevrolet",
+  "vehicle_model": "Malibu",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "missing_doc_other",
+  "_fraud_reported_ground_truth": false,
+  "_note": "other_driver_info omitted (repair_estimate present) - should NOT trigger inspection"
+}

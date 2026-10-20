@@ -1,0 +1,41 @@
+# Environment & secrets
+.env
+.env.local
+.env.*.local
+
+# Virtual environments
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# Build artifacts
+dist/
+build/
+
+# Data (generated at runtime)
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+data/memory/
+data/audit_logs/
+
+# Frontend
+node_modules/
+frontend/dist/
+
+# Claude Code (personal overrides)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Misc
+.streamlit/
+data/batch_results/_*.log
+data/batch_results/*_raw.txt
+data/batch_results/*_raw_v*.txt

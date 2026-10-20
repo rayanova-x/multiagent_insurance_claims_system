@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-029",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Williams",
+  "claimant_email": "claimant.284624@example.com",
+  "claimant_phone": "555-537-6255",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-03",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 5104 Francis Drive on 2026-01-03. Severity assessed as minor damage.",
+  "incident_location": "5104 Francis Drive, Riverwood, NY",
+  "police_report_number": "NYPD-20260103-4624",
+  "estimated_amount": 81800.0,
+  "vehicle_year": 2009,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

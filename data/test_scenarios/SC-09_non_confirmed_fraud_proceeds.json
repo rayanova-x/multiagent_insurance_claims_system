@@ -1,0 +1,27 @@
+{
+  "claim_id": "SC-09",
+  "_scenario_note": "Branch 9: fraud risk is elevated but not CONFIRMED (no explicit admission) -> still proceeds to the consistency coordinator like any other claim, rather than being blocked outright.",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_email": "claimant@example.com",
+  "claimant_phone": "555-010-1000",
+  "claimant_dob": "1988-04-12",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_location": "400 Market Street, Columbus, OH",
+  "police_report_number": null,
+  "vehicle_year": 2021,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Accord",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "claimant_name": "Georgia Finch",
+  "estimated_amount": 15500.0,
+  "incident_description": "Hit another car while merging onto the highway. The damage looked worse than I expected for the speed I was going."
+}

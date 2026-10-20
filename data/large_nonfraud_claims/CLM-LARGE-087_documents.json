@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-11",
+    "incident_location": "6012 Texas Hwy, Columbus, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Columbus, SC, at 6012 Texas Hwy on 2026-01-11. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Robert Lee"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-11",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "23898.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "15932.00"
+      }
+    ],
+    "line_items_sum": "39830.00",
+    "stated_total": "39830"
+  }
+}

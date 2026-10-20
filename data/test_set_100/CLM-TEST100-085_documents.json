@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260218-2837",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-02-18",
+    "incident_location": "4268 2nd Ave, Columbus, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, NY, at 4268 2nd Ave on 2026-02-18. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Michael Wilson",
+      "James Lee"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "James Lee",
+    "driver_license_number": "75831828",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-18",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30282.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20188.00"
+      }
+    ],
+    "line_items_sum": "50470.00",
+    "stated_total": "50470"
+  }
+}

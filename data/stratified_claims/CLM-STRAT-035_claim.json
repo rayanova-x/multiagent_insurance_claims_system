@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-035",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Barbara Anderson",
+  "claimant_email": "claimant.458946@example.com",
+  "claimant_phone": "555-726-2757",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-30",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, SC, at 9169 Pine Ridge on 2026-01-30. Severity assessed as minor damage.",
+  "incident_location": "9169 Pine Ridge, Springfield, SC",
+  "police_report_number": null,
+  "estimated_amount": 89700.0,
+  "vehicle_year": 2020,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_fraud",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

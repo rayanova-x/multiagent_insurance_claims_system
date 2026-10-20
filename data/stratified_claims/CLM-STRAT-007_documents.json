@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260222-8360",
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-02-22",
+    "incident_location": "5074 3rd St, Riverwood, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 5074 3rd St on 2026-02-22. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Miller",
+      "Barbara Thompson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Barbara Thompson",
+    "driver_license_number": "49392618",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2021,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "24318.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16212.00"
+      }
+    ],
+    "line_items_sum": "40530.00",
+    "stated_total": "40530"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-054",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "William Davis",
+  "claimant_email": "claimant.984135@example.com",
+  "claimant_phone": "555-370-3931",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, SC, at 7717 Britain Hwy on 2026-01-24. Severity assessed as minor damage.",
+  "incident_location": "7717 Britain Hwy, Northbend, SC",
+  "police_report_number": null,
+  "estimated_amount": 79300.0,
+  "vehicle_year": 2018,
+  "vehicle_make": "Saab",
+  "vehicle_model": "92x",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": true,
+  "type_dispute_reason": "Claimant believes this should be classified as auto_theft instead, since the vehicle was later found abandoned.",
+  "_selection_tag": "disputed_incident_type",
+  "_fraud_reported_ground_truth": false,
+  "_note": "type_disputed_by_claimant=True - should route to mandatory human review"
+}

@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-30",
+    "incident_location": "9169 Pine Ridge, Springfield, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, SC, at 9169 Pine Ridge on 2026-01-30. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Barbara Anderson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-30",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "37260.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "24840.00"
+      }
+    ],
+    "line_items_sum": "62100.00",
+    "stated_total": "62100"
+  }
+}

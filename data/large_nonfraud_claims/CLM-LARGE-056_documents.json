@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "5622 Best Ridge, Hillsdale, VA",
+    "narrative": "Multi-vehicle Collision involving 2 vehicles in Hillsdale, VA, at 5622 Best Ridge on 2026-03-01. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Michael Lee",
+      "Patricia Anderson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Patricia Anderson",
+    "driver_license_number": "13001342",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2025,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-03-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "20202.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13468.00"
+      }
+    ],
+    "line_items_sum": "33670.00",
+    "stated_total": "33670"
+  }
+}

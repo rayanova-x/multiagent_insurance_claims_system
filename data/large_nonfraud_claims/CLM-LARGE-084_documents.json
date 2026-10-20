@@ -1,0 +1,34 @@
+{
+  "police_report": {
+    "report_number": "PAPD-20260223-5279",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-02-23",
+    "incident_location": "9153 3rd Hwy, Hillsdale, PA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, PA, at 9153 3rd Hwy on 2026-02-23. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Linda Wilson",
+      "James Miller"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-23",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "17760.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "11840.00"
+      }
+    ],
+    "line_items_sum": "29600.00",
+    "stated_total": "29600"
+  }
+}

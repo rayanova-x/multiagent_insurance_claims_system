@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-02-23",
+    "incident_location": "8906 Elm Lane, Northbrook, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 8906 Elm Lane on 2026-02-23. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Johnson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-23",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "26736.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17824.00"
+      }
+    ],
+    "line_items_sum": "44560.00",
+    "stated_total": "44560"
+  }
+}

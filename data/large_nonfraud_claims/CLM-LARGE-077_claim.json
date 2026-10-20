@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-077",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "James Taylor",
+  "claimant_email": "claimant.818471@example.com",
+  "claimant_phone": "555-829-9085",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-18",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, NY, at 4268 2nd Ave on 2026-02-18. Severity assessed as minor damage.",
+  "incident_location": "4268 2nd Ave, Columbus, NY",
+  "police_report_number": "NYPD-20260218-8471",
+  "estimated_amount": 72100.0,
+  "vehicle_year": 2017,
+  "vehicle_make": "Jeep",
+  "vehicle_model": "Wrangler",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

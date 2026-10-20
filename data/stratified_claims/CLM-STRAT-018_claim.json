@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-018",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Taylor",
+  "claimant_email": "claimant.309365@example.com",
+  "claimant_phone": "555-064-8973",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-12",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, WV, at 3540 Maple St on 2026-02-12. Severity assessed as total loss.",
+  "incident_location": "3540 Maple St, Hillsdale, WV",
+  "police_report_number": "WVPD-20260212-9365",
+  "estimated_amount": 64800.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A3",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": "SCPD-20260108-2269",
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-08",
+    "incident_location": "3220 Rock Drive, Northbend, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, SC, at 3220 Rock Drive on 2026-01-08. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Linda Anderson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-08",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "27936.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "18624.00"
+      }
+    ],
+    "line_items_sum": "46560.00",
+    "stated_total": "46560"
+  }
+}

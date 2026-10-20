@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-02-11",
+    "incident_location": "2324 Texas Ridge, Arlington, NC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Arlington, NC, at 2324 Texas Ridge on 2026-02-11. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Michael Brown"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-11",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "16254.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "10836.00"
+      }
+    ],
+    "line_items_sum": "27090.00",
+    "stated_total": "27090"
+  }
+}

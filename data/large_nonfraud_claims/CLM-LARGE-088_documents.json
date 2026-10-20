@@ -1,0 +1,28 @@
+{
+  "police_report": {
+    "report_number": "VAPD-20260218-2304",
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-02-18",
+    "incident_location": "4053 Sky Lane, Riverwood, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, VA, at 4053 Sky Lane on 2026-02-18. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Robert Taylor",
+      "Joseph Johnson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Joseph Johnson",
+    "driver_license_number": "12332163",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": null
+}

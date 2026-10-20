@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-06",
+    "incident_location": "1558 1st Ridge, Northbend, NY",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, NY, at 1558 1st Ridge on 2026-01-06. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Mary Brown"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-06",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "37968.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "25312.00"
+      }
+    ],
+    "line_items_sum": "63280.00",
+    "stated_total": "63280"
+  }
+}

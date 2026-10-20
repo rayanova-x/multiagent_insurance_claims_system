@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-071",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Anderson",
+  "claimant_email": "claimant.843069@example.com",
+  "claimant_phone": "555-188-4263",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-21",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, NY, at 6408 Weaver Ridge on 2026-01-21. Severity assessed as total loss.",
+  "incident_location": "6408 Weaver Ridge, Northbend, NY",
+  "police_report_number": null,
+  "estimated_amount": 52030.0,
+  "vehicle_year": 2019,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "E400",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-043",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Martinez",
+  "claimant_email": "claimant.144749@example.com",
+  "claimant_phone": "555-117-6459",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-17",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbrook, WV, at 2804 Best St on 2026-02-17. Severity assessed as total loss.",
+  "incident_location": "2804 Best St, Northbrook, WV",
+  "police_report_number": null,
+  "estimated_amount": 59730.0,
+  "vehicle_year": 2016,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A3",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

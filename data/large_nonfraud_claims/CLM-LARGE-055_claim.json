@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-055",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Jones",
+  "claimant_email": "claimant.624971@example.com",
+  "claimant_phone": "555-837-8411",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-30",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 1454 5th Ridge on 2026-01-30. Severity assessed as total loss.",
+  "incident_location": "1454 5th Ridge, Columbus, WV",
+  "police_report_number": null,
+  "estimated_amount": 81070.0,
+  "vehicle_year": 2012,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

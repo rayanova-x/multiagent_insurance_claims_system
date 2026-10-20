@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-01-22",
+    "incident_location": "4693 Lincoln Hwy, Riverwood, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 4693 Lincoln Hwy on 2026-01-22. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "William Miller",
+      "Mary Wilson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Mary Wilson",
+    "driver_license_number": "87536238",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2021,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "34452.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "22968.00"
+      }
+    ],
+    "line_items_sum": "57420.00",
+    "stated_total": "57420"
+  }
+}

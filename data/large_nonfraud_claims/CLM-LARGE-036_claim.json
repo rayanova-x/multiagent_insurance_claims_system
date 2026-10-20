@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-036",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Barbara Jones",
+  "claimant_email": "claimant.289584@example.com",
+  "claimant_phone": "555-914-0611",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-12",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, WV, at 3567 4th Drive on 2026-01-12. Severity assessed as minor damage.",
+  "incident_location": "3567 4th Drive, Hillsdale, WV",
+  "police_report_number": "WVPD-20260112-9584",
+  "estimated_amount": 56300.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "BMW",
+  "vehicle_model": "M5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

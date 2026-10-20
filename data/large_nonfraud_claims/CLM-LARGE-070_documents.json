@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": "VAPD-20260221-8084",
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-21",
+    "incident_location": "8080 Oak Lane, Springfield, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, VA, at 8080 Oak Lane on 2026-02-21. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Joseph Brown",
+      "William Garcia"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Garcia",
+    "driver_license_number": "22314565",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-21",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "29424.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "19616.00"
+      }
+    ],
+    "line_items_sum": "49040.00",
+    "stated_total": "49040"
+  }
+}

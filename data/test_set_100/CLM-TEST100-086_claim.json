@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-086",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Susan Wilson",
+  "claimant_email": "claimant.007381@example.com",
+  "claimant_phone": "555-355-5601",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-23",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 7684 Francis Ridge on 2026-02-23. Severity assessed as minor damage.",
+  "incident_location": "7684 Francis Ridge, Columbus, WV",
+  "police_report_number": "WVPD-20260223-7381",
+  "estimated_amount": 61380.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "conflict_material_retry",
+  "_fraud_reported_ground_truth": false,
+  "_note": "real row's 'Minor Damage' severity label paired with a multi-vehicle narrative - plausible but not guaranteed severity-mismatch trigger"
+}

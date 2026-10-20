@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-087",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Robert Lee",
+  "claimant_email": "claimant.039029@example.com",
+  "claimant_phone": "555-912-8696",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-11",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Columbus, SC, at 6012 Texas Hwy on 2026-01-11. Severity assessed as minor damage.",
+  "incident_location": "6012 Texas Hwy, Columbus, SC",
+  "police_report_number": null,
+  "estimated_amount": 62590.0,
+  "vehicle_year": 2014,
+  "vehicle_make": "Volkswagen",
+  "vehicle_model": "Jetta",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: other_driver_info"
+}

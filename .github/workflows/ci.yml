@@ -1,0 +1,33 @@
+name: CI
+
+# The eval gate (baswe.ai field guide ss 7.6): a pytest-style eval runner
+# wired into CI, blocking any change that breaks a test from shipping. All
+# 273 tests here are deterministic and mocked (no real LLM calls), so this
+# runs on every push/PR at zero cost and zero quota risk - no secrets
+# needed. Live-LLM evaluation (evaluation/run_eval.py,
+# evaluation/validate_judges.py) is intentionally NOT in this workflow; see
+# llm-eval.yml for that (manually triggered, since it burns real API quota).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run test suite
+        run: pytest -q

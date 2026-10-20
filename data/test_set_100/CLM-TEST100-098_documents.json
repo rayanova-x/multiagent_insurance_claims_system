@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-21",
+    "incident_location": "4272 Oak Ridge, Springfield, NY",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, NY, at 4272 Oak Ridge on 2026-02-21. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Martinez"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-21",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "17856.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "11904.00"
+      }
+    ],
+    "line_items_sum": "29760.00",
+    "stated_total": "29760"
+  }
+}

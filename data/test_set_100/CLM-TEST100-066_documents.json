@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260217-1459",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-02-17",
+    "incident_location": "1598 3rd Drive, Hillsdale, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 1598 3rd Drive on 2026-02-17. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Jones",
+      "William Taylor"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Taylor",
+    "driver_license_number": "91682380",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-17",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "13860.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "9240.00"
+      }
+    ],
+    "line_items_sum": "23100.00",
+    "stated_total": "23100"
+  }
+}

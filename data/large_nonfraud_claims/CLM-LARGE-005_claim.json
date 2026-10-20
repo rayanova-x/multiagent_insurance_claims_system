@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-005",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Taylor",
+  "claimant_email": "claimant.619860@example.com",
+  "claimant_phone": "555-435-5609",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2015-02-27",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, VA, at 3525 3rd Hwy on 2015-02-27. Severity assessed as total loss.",
+  "incident_location": "3525 3rd Hwy, Columbus, VA",
+  "police_report_number": "VAPD-20150227-9860",
+  "estimated_amount": 51590.0,
+  "vehicle_year": 2015,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "lapsed_policy",
+  "_fraud_reported_ground_truth": false,
+  "_note": "incident_date intentionally NOT shifted into the policy's coverage window"
+}

@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-02-24",
+    "incident_location": "2502 Apache Hwy, Riverwood, VA",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Riverwood, VA, at 2502 Apache Hwy on 2026-02-24. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "David Johnson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-24",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "33984.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "22656.00"
+      }
+    ],
+    "line_items_sum": "56640.00",
+    "stated_total": "56640"
+  }
+}

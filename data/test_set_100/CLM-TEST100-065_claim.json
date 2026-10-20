@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-065",
+  "policy_number": "POL-DOES-NOT-EXIST-999",
+  "claimant_name": "Susan Lee",
+  "claimant_email": "claimant.784231@example.com",
+  "claimant_phone": "555-592-1636",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-03",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 2275 Best Lane on 2026-02-03. Severity assessed as total loss.",
+  "incident_location": "2275 Best Lane, Northbend, WV",
+  "police_report_number": null,
+  "estimated_amount": 42000.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X5",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "invalid_policy_number",
+  "_fraud_reported_ground_truth": false,
+  "_note": "policy_number does not exist in the system - is_valid=False at intake"
+}

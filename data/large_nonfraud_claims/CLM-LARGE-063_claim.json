@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-063",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Wilson",
+  "claimant_email": "claimant.558966@example.com",
+  "claimant_phone": "555-932-5938",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-09",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Columbus, WV, at 7740 MLK St on 2026-01-09. Severity assessed as total loss.",
+  "incident_location": "7740 MLK St, Columbus, WV",
+  "police_report_number": null,
+  "estimated_amount": 40320.0,
+  "vehicle_year": 2012,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Impreza",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

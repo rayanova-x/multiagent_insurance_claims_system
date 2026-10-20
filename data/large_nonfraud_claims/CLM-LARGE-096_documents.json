@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-19",
+    "incident_location": "9737 Solo Hwy, Northbend, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbend, SC, at 9737 Solo Hwy on 2026-01-19. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Patricia Brown",
+      "Jessica Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jessica Smith",
+    "driver_license_number": "13124024",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-19",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "40896.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "27264.00"
+      }
+    ],
+    "line_items_sum": "68160.00",
+    "stated_total": "68160"
+  }
+}

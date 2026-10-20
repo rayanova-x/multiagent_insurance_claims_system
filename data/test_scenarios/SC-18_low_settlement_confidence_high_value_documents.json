@@ -1,0 +1,34 @@
+{
+  "police_report": {
+    "report_number": "CPD-2026-55790",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "Multi-vehicle collision on the highway. Vehicle sustained extensive damage consistent with a high-speed impact.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": ["Claimant", "Other driver"]
+  },
+  "other_driver_info": {
+    "driver_name": "Unknown - pending police report supplement",
+    "driver_license_number": null,
+    "insurer_name": null,
+    "policy_number": null,
+    "vehicle_make": null,
+    "vehicle_model": null,
+    "vehicle_year": null,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Frame and structural repair", "amount": "38000.00"},
+      {"description": "Engine and drivetrain assessment and repair", "amount": "22000.00"},
+      {"description": "Full exterior panel replacement", "amount": "18000.00"},
+      {"description": "Labor and diagnostics", "amount": "12000.00"}
+    ],
+    "line_items_sum": "90000.00",
+    "stated_total": "90000"
+  }
+}

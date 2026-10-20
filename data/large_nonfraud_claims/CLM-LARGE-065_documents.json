@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-02-22",
+    "incident_location": "2808 Elm St, Arlington, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, NC, at 2808 Elm St on 2026-02-22. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "James Taylor",
+      "John Jones"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "John Jones",
+    "driver_license_number": "17383781",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "20400.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13600.00"
+      }
+    ],
+    "line_items_sum": "34000.00",
+    "stated_total": "34000"
+  }
+}

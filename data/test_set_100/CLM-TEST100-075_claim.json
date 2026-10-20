@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-075",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Jones",
+  "claimant_email": "claimant.818311@example.com",
+  "claimant_phone": "555-260-7466",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-28",
+  "incident_type": "auto_collision",
+  "incident_description": "There was a collision. The vehicle was damaged. Not sure of the exact details.",
+  "incident_location": "1815 Cherokee Drive, Hillsdale, NY",
+  "police_report_number": "NYPD-20260128-8311",
+  "estimated_amount": 86060.0,
+  "vehicle_year": 2013,
+  "vehicle_make": "Volkswagen",
+  "vehicle_model": "Passat",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "low_confidence_high_value",
+  "_fraud_reported_ground_truth": false,
+  "_note": "deliberately vague narrative on a high-value claim - confidence gate should fire"
+}

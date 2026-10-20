@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-083",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "David Lee",
+  "claimant_email": "claimant.425009@example.com",
+  "claimant_phone": "555-858-4181",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-10",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, SC, at 8689 Maple Hwy on 2026-01-10. Severity assessed as total loss.",
+  "incident_location": "8689 Maple Hwy, Arlington, SC",
+  "police_report_number": null,
+  "estimated_amount": 44910.0,
+  "vehicle_year": 2012,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "Neon",
+  "documents": [
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: police_report"
+}

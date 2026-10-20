@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-02-15",
+    "incident_location": "2100 Francis Drive, Northbrook, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbrook, SC, at 2100 Francis Drive on 2026-02-15. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Mary Martinez"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-15",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "38070.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "25380.00"
+      }
+    ],
+    "line_items_sum": "63450.00",
+    "stated_total": "63450"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-012",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "John Smith",
+  "claimant_email": "claimant.320999@example.com",
+  "claimant_phone": "555-888-9994",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-12",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbend, SC, at 4154 Lincoln Hwy on 2026-02-12. Severity assessed as total loss.",
+  "incident_location": "4154 Lincoln Hwy, Northbend, SC",
+  "police_report_number": null,
+  "estimated_amount": 93480.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Chevrolet",
+  "vehicle_model": "Malibu",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

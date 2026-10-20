@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-01-15",
+    "incident_location": "5053 Tree Drive, Riverwood, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, SC, at 5053 Tree Drive on 2026-01-15. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Johnson",
+      "Robert Martinez"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Robert Martinez",
+    "driver_license_number": "57737820",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-15",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "20484.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13656.00"
+      }
+    ],
+    "line_items_sum": "34140.00",
+    "stated_total": "34140"
+  }
+}

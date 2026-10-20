@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-21",
+    "incident_location": "3930 Embaracadero St, Hillsdale, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 3930 Embaracadero St on 2026-01-21. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Linda Taylor",
+      "Jennifer Moore"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jennifer Moore",
+    "driver_license_number": "51464335",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2025,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-21",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "26166.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17444.00"
+      }
+    ],
+    "line_items_sum": "43610.00",
+    "stated_total": "43610"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-083",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "John Brown",
+  "claimant_email": "claimant.389804@example.com",
+  "claimant_phone": "555-474-6667",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-19",
+  "incident_type": "auto_collision",
+  "incident_description": "There was a collision. The vehicle was damaged. Not sure of the exact details.",
+  "incident_location": "2204 Washington Lane, Northbrook, WV",
+  "police_report_number": null,
+  "estimated_amount": 47300.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "low_confidence_low_value",
+  "_fraud_reported_ground_truth": false,
+  "_note": "same vague narrative, but low-value - must NOT pause on confidence alone"
+}

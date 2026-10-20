@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-TEST100-040",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Anderson",
+  "claimant_email": "claimant.222728@example.com",
+  "claimant_phone": "555-811-6673",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-12",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, WV, at 3567 4th Drive on 2026-01-12. Severity assessed as minor damage.",
+  "incident_location": "3567 4th Drive, Hillsdale, WV",
+  "police_report_number": "WVPD-20260112-2728",
+  "estimated_amount": 56300.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "BMW",
+  "vehicle_model": "M5",
+  "documents": [
+    "police_report.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "missing_doc_repair_estimate",
+  "_fraud_reported_ground_truth": false,
+  "_note": "repair_estimate omitted - should trigger requires_physical_inspection"
+}

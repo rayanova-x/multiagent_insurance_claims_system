@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-01",
+    "incident_location": "6011 Britain St, Springfield, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, WV, at 6011 Britain St on 2026-01-01. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "James Rodriguez"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "32172.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "21448.00"
+      }
+    ],
+    "line_items_sum": "53620.00",
+    "stated_total": "53620"
+  }
+}

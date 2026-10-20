@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "7428 Sky Hwy, Columbus, WV",
+    "narrative": "Multi-vehicle Collision involving 2 vehicles in Columbus, WV, at 7428 Sky Hwy on 2026-03-01. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Robert Johnson",
+      "John Wilson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "John Wilson",
+    "driver_license_number": "06292980",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2026,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-03-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31164.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20776.00"
+      }
+    ],
+    "line_items_sum": "51940.00",
+    "stated_total": "51940"
+  }
+}

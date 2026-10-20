@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-085",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Rodriguez",
+  "claimant_email": "claimant.377972@example.com",
+  "claimant_phone": "555-403-5907",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-21",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, PA, at 4519 Embaracadero St on 2026-01-21. Severity assessed as minor damage.",
+  "incident_location": "4519 Embaracadero St, Hillsdale, PA",
+  "police_report_number": "PAPD-20260121-7972",
+  "estimated_amount": 79600.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "Jeep",
+  "vehicle_model": "Wrangler",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: repair_estimate"
+}

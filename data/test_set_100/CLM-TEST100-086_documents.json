@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20260223-7381",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-02-23",
+    "incident_location": "7684 Francis Ridge, Columbus, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 7684 Francis Ridge on 2026-02-23. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Susan Wilson",
+      "John Wilson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "John Wilson",
+    "driver_license_number": "76009605",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-23",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "26784.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17856.00"
+      }
+    ],
+    "line_items_sum": "44640.00",
+    "stated_total": "44640"
+  }
+}

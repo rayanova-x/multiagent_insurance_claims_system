@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-02-02",
+    "incident_location": "7477 MLK Drive, Northbrook, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbrook, NY, at 7477 MLK Drive on 2026-02-02. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Elizabeth Davis",
+      "Joseph Davis"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Joseph Davis",
+    "driver_license_number": "95578897",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2020,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-02",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "24486.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16324.00"
+      }
+    ],
+    "line_items_sum": "40810.00",
+    "stated_total": "40810"
+  }
+}

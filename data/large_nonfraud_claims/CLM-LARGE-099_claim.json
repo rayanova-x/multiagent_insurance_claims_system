@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-099",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Williams",
+  "claimant_email": "claimant.941364@example.com",
+  "claimant_phone": "555-415-4312",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, NY, at 9034 Weaver Ridge on 2026-01-22. Severity assessed as minor damage.",
+  "incident_location": "9034 Weaver Ridge, Arlington, NY",
+  "police_report_number": null,
+  "estimated_amount": 84720.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

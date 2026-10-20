@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-12",
+    "incident_location": "8964 Francis St, Springfield, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, SC, at 8964 Francis St on 2026-01-12. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Elizabeth Taylor"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-12",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "40320.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "26880.00"
+      }
+    ],
+    "line_items_sum": "67200.00",
+    "stated_total": "67200"
+  }
+}

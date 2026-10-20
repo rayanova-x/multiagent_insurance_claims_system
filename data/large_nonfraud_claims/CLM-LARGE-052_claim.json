@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-052",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Martinez",
+  "claimant_email": "claimant.628189@example.com",
+  "claimant_phone": "555-410-7820",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-29",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbrook, NC, at 2199 Texas Drive on 2026-01-29. Severity assessed as minor damage.",
+  "incident_location": "2199 Texas Drive, Northbrook, NC",
+  "police_report_number": null,
+  "estimated_amount": 28800.0,
+  "vehicle_year": 2024,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Fusion",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

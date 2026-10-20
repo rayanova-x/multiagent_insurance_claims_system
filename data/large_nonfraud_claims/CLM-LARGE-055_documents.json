@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-30",
+    "incident_location": "1454 5th Ridge, Columbus, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 1454 5th Ridge on 2026-01-30. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Patricia Jones",
+      "David Thompson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "David Thompson",
+    "driver_license_number": "26233338",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-30",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30954.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20636.00"
+      }
+    ],
+    "line_items_sum": "51590.00",
+    "stated_total": "51590"
+  }
+}

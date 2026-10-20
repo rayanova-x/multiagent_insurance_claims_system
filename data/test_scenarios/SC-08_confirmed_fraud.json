@@ -1,0 +1,27 @@
+{
+  "claim_id": "SC-08",
+  "_scenario_note": "Branch 8: fraud_risk_level CONFIRMED -> auto_reject, never reaches the consistency coordinator. Narrative written to plausibly trigger fraud_crew's CONFIRMED classification: an explicit admission combined with a classic staged-accident pattern (sudden hard brake with no road hazard, policy purchased immediately before the claim).",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_email": "claimant@example.com",
+  "claimant_phone": "555-010-1000",
+  "claimant_dob": "1988-04-12",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_location": "400 Market Street, Columbus, OH",
+  "police_report_number": "PR-2026-55821",
+  "vehicle_year": 2021,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Accord",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "claimant_name": "Trent Buckley",
+  "estimated_amount": 22000.0,
+  "incident_description": "I'll be honest, I saw an opportunity when the car behind me was following close, so I hit the brakes hard for no real reason and let them rear-end me on purpose. I need the payout."
+}

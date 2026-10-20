@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-051",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "David Wilson",
+  "claimant_email": "claimant.491809@example.com",
+  "claimant_phone": "555-395-5887",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-08",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, VA, at 2087 Apache Ave on 2026-01-08. Severity assessed as total loss.",
+  "incident_location": "2087 Apache Ave, Springfield, VA",
+  "police_report_number": "VAPD-20260108-1809",
+  "estimated_amount": 64240.0,
+  "vehicle_year": 2026,
+  "vehicle_make": "BMW",
+  "vehicle_model": "3 Series",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": true,
+  "type_dispute_reason": "Claimant believes this should be classified as auto_theft instead, since the vehicle was later found abandoned.",
+  "_selection_tag": "disputed_incident_type",
+  "_fraud_reported_ground_truth": false,
+  "_note": "type_disputed_by_claimant=True - should route to mandatory human review"
+}

@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-31",
+    "incident_location": "5994 5th Ave, Northbend, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbend, WV, at 5994 5th Ave on 2026-01-31. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Linda Thompson",
+      "Robert Moore"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Robert Moore",
+    "driver_license_number": "31434787",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-31",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "7632.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "5088.00"
+      }
+    ],
+    "line_items_sum": "12720.00",
+    "stated_total": "12720"
+  }
+}

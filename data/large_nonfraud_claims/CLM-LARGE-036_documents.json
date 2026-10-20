@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20260112-9584",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-12",
+    "incident_location": "3567 4th Drive, Hillsdale, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Hillsdale, WV, at 3567 4th Drive on 2026-01-12. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Barbara Jones"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-12",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "23646.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "15764.00"
+      }
+    ],
+    "line_items_sum": "39410.00",
+    "stated_total": "39410"
+  }
+}

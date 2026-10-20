@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-043",
+  "policy_number": "POL-AUTO-HIGHDED-US",
+  "claimant_name": "Jennifer Miller",
+  "claimant_email": "claimant.080055@example.com",
+  "claimant_phone": "555-883-1123",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-16",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NC, at 2003 Maple Hwy on 2026-02-16. Severity assessed as total loss.",
+  "incident_location": "2003 Maple Hwy, Riverwood, NC",
+  "police_report_number": null,
+  "estimated_amount": 18000.0,
+  "vehicle_year": 2020,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A3",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "deductible_exceeds_damage",
+  "_fraud_reported_ground_truth": false,
+  "_note": "POL-AUTO-HIGHDED-US's $15,000 deductible exceeds this claim's real vehicle_claim"
+}

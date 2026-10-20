@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-100",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Miller",
+  "claimant_email": "claimant.252986@example.com",
+  "claimant_phone": "555-563-7337",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-28",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 2 vehicles in Hillsdale, NY, at 1815 Cherokee Drive on 2026-01-28. Severity assessed as total loss.",
+  "incident_location": "1815 Cherokee Drive, Hillsdale, NY",
+  "police_report_number": "NYPD-20260128-2986",
+  "estimated_amount": 86060.0,
+  "vehicle_year": 2013,
+  "vehicle_make": "Volkswagen",
+  "vehicle_model": "Passat",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

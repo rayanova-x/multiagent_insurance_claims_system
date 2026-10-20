@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-004",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Mary Jones",
+  "claimant_email": "claimant.087635@example.com",
+  "claimant_phone": "555-499-8273",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-30",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, WV, at 4872 Rock Ridge on 2026-01-30. Severity assessed as total loss.",
+  "incident_location": "4872 Rock Ridge, Arlington, WV",
+  "police_report_number": "WVPD-20260130-7635",
+  "estimated_amount": 27700.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Toyota",
+  "vehicle_model": "Camry",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

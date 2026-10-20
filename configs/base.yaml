@@ -1,0 +1,194 @@
+###############################################################
+# Smart Claims Processor - Base Configuration
+#
+# Country + LLM provider are set in .env (COUNTRY, LLM_PROVIDER).
+# Country-specific overrides live in configs/countries/{code}.yaml
+###############################################################
+
+# LLM Configuration
+# Provider + country are read from .env (LLM_PROVIDER, COUNTRY).
+# This file only holds model IDs, tunables, and per-provider details.
+llm:
+  temperature: 0.1
+  max_tokens: 8192
+  timeout_seconds: 60             # per-request timeout passed to the provider client
+  retry_attempts: 3               # provider SDK retries with exponential backoff (rate limits, 5xx, timeouts)
+  # If a call still fails after its retries, src/llm.py replays the SAME call
+  # on fallback_model (call-level fallback via LangChain with_fallbacks).
+  providers:
+    gemini:
+      # Both primary and fallback deliberately set to real 500-RPD-quota
+      # models (confirmed directly from this account's AI Studio dashboard,
+      # 2026-10-20 - gemini-3.6-flash measured at only 20 RPD on this
+      # account, both gemini-3.5-flash-lite and gemini-3.1-flash-lite at
+      # 500 RPD). Previously gemini-3.6-flash was primary (20 RPD) with
+      # gemini-3.5-flash-lite as its only fallback - a single quota-
+      # exhausted call had nowhere higher-headroom to fall back to. Still
+      # overridable per-run via LLM_MODEL/JUDGE_MODEL env vars (see
+      # src/config.py:get_llm_config) without editing this file - e.g. to
+      # test against gemini-3.6-flash's reasoning quality specifically,
+      # quota permitting. check the provider's deprecation page before
+      # each release.
+      model: gemini-3.5-flash-lite
+      fallback_model: gemini-3.1-flash-lite
+      judge_model: gemini-3.5-flash-lite     # LLM-as-judge evaluator model
+      api_key_env: GOOGLE_API_KEY
+    groq:
+      model: llama-3.3-70b-versatile    # 70b for reliable structured output
+      fallback_model: llama-3.1-8b-instant
+      judge_model: llama-3.3-70b-versatile
+      api_key_env: GROQ_API_KEY
+
+# Agent Configuration
+# Only tunables that code reads live here. Per-agent HITL confidence
+# thresholds are in `confidence_gates` below; country-specific rules
+# (required documents, depreciation, payout caps) are in configs/countries/.
+agents:
+  intake:
+    required_fields:                # missing any of these = invalid claim, no LLM call
+      - claim_id
+      - policy_number
+      - incident_date
+      - incident_type
+      - estimated_amount
+
+  fraud_crew:
+    max_iterations: 3               # CrewAI max_iter per crew agent (tool-use rounds)
+    max_rpm: 10                     # CrewAI request-per-minute cap for the whole crew
+    # Composite fraud score = weighted blend of three independent signals.
+    # narrative = 1 - the Consistency Validator's validation_score. If the
+    # crew's narrative can't be parsed, its weight is spread over the other two.
+    signal_weights:
+      pattern: 0.45
+      anomaly: 0.20
+      narrative: 0.35
+    pattern_saturation: 2.5         # sum of matched rule weights that counts as "certain" (score 1.0)
+    fraud_threshold: 0.65           # composite >= this = HIGH risk (below it, >= hitl.triggers.fraud_score = MEDIUM)
+    # Auto-reject is for EVIDENCE, not suspicion. It needs a high composite
+    # score AND the narrative validator judging the story fabricated AND the
+    # claimant's own words stating an intent to deceive. A suspicious story
+    # (new policy, no police report, keys left in the car) scores almost as
+    # high on narrative risk as a confession, so without the admission check
+    # a merely suspicious claim was auto-rejected in live testing. Suspicion
+    # goes to a human.
+    auto_reject_threshold: 0.75
+    auto_reject_min_narrative_risk: 0.90
+    auto_reject_requires_admission: true
+
+  consistency_coordinator:
+    # Checks damage_assessor/policy_checker/fraud_crew's finished, isolated
+    # outputs for 2 specific cross-branch conflict types (see ConflictType
+    # in src/models/schemas.py) - never re-adjudicates a branch's own
+    # judgment, only whether the branches agree with each other.
+    max_retries: 2                  # per MATERIAL conflict, before forcing HITL regardless of resolution
+
+# Human-In-The-Loop Configuration
+hitl:
+  enabled: true
+  triggers:
+    min_amount: 10000               # Default; overridden per country (US: $10K, India: Rs5L)
+    fraud_score: 0.45               # Composite fraud score >= 0.45 pauses for human review (MEDIUM+)
+    first_claim_high_value: 5000    # First-time claimant + amount >= $5K
+    repeat_claims_window_days: 365  # Review if >2 claims in 365 days
+    inconsistent_documents: true    # Always trigger if docs conflict
+  priority_weights:
+    amount: 0.30
+    fraud_score: 0.35
+    confidence: 0.20
+    repeat_claimant: 0.15
+  sla_hours:
+    critical: 4                     # Priority score >= 80
+    high: 24                        # Priority score 60-79
+    normal: 72                      # Priority score < 60
+  api:
+    host: "0.0.0.0"
+    port: 8001
+
+# Guardrails Configuration
+guardrails:
+  # Enforced before every agent by src/guardrails/manager.py:guard_node.
+  # Calibrated from live runs (Gemini, 2026-09): a full normal claim used
+  # ~40K tokens (the CrewAI crew is ~30K of that), ~$0.14 and ~170s of active
+  # time. A fraud review that is approved and resumed runs the crew plus five
+  # more agents. Limits sit at roughly 3x a normal claim so a breach means
+  # something is wrong (a loop, a runaway tool call), not a busy claim.
+  max_agent_calls: 25
+  max_tokens_per_claim: 150000
+  max_cost_usd: 0.50
+  max_execution_seconds: 600        # ACTIVE agent time; time paused for a reviewer does not count
+  max_loop_iterations: 10
+  min_output_confidence: 0.60
+  hallucination_check: true
+  pii_masking: true                 # Mask PII before sending to LLM
+
+# Security Configuration
+security:
+  # PII field lists and regexes are per country: configs/countries/<code>.yaml -> pii
+  audit_log:
+    enabled: true
+    path: "./data/audit_logs/"
+    retention_days: 2555            # 7 years; src/security/audit_log.py:enforce_retention() deletes older daily files
+    include_agent_inputs: true
+    include_agent_outputs: true
+    hash_algorithm: "sha256"
+
+# Evaluation Configuration
+evaluation:
+  enabled: true
+  # Judge model: llm.providers.<provider>.judge_model (see src/llm.py:get_judge_llm).
+  dimensions:
+    - accuracy                      # Is the settlement amount correct?
+    - completeness                  # Were all policy clauses checked?
+    - fairness                      # Is the decision consistent with similar claims?
+    - safety                        # Were guardrails followed?
+    - transparency                  # Is the reasoning clear and traceable?
+  min_score_to_release: 0.70       # Below this triggers re-evaluation
+  batch_eval_sample_rate: 0.10     # Evaluate 10% of auto-processed claims
+
+# Confidence thresholds - NEVER gate/bypass HITL by themselves (a confident
+# hallucination scores high exactly where a gate matters most). Two uses:
+#   1. guard_node() post-check (src/guardrails/manager.py) - soft warning only,
+#      logged to guardrails_violations and the audit trail for the judge to see.
+#   2. HITL priority-score "confidence" component (src/hitl/checkpoint.py) -
+#      once a claim is ALREADY queued for human review by a property-based
+#      trigger (amount, fraud_score, missing docs, repeat claimant, appeal),
+#      low confidence here pushes it higher in the reviewer's queue. It cannot
+#      add a claim to the queue on its own.
+confidence_gates:
+  enabled: true
+  default_threshold: 0.60
+  # Below this, the confidence priority-component grows toward 1.0 (see
+  # priority_confidence_floor below, which reuses this same per_agent table).
+  per_agent:
+    intake_agent: 0.55
+    fraud_crew: 0.50
+    damage_assessor: 0.60
+    policy_checker: 0.60
+    settlement_calculator: 0.65
+  # Average-confidence floor used only in the HITL priority-score formula
+  # (hitl.priority_weights.confidence) - how far below this average
+  # confidence must fall before it meaningfully raises a claim's priority.
+  # Renamed from the old hitl.triggers.low_confidence: it never triggers
+  # review by itself, only reorders an already-triggered queue.
+  priority_confidence_floor: 0.65
+
+# Pipeline Configuration
+pipeline:
+  parallel_specialists: false       # Claims are sequential (CrewAI handles parallelism internally)
+  fast_mode:
+    enabled: true
+    max_amount: 500                 # Claims under $500 with clean history = fast mode
+    skip_agents:
+      - fraud_crew
+      - damage_assessor
+  enable_appeal_workflow: true
+  appeal_window_days: 30
+
+# Output Configuration
+output:
+  include_reasoning: true
+  include_agent_traces: true
+  include_cost_breakdown: true
+  format: json                      # json | text | both
+  save_to_db: true
+  db_path: "./data/claims.db"

@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-29",
+    "incident_location": "9573 Weaver Ave, Hillsdale, WV",
+    "narrative": "Multi-vehicle Collision involving 4 vehicles in Hillsdale, WV, at 9573 Weaver Ave on 2026-01-29. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Richard Garcia",
+      "Michael Miller"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Michael Miller",
+    "driver_license_number": "18966741",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-29",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "25248.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16832.00"
+      }
+    ],
+    "line_items_sum": "42080.00",
+    "stated_total": "42080"
+  }
+}

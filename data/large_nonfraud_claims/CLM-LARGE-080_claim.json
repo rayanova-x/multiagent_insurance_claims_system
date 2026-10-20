@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-080",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Lee",
+  "claimant_email": "claimant.210887@example.com",
+  "claimant_phone": "555-156-7717",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-23",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 7684 Francis Ridge on 2026-02-23. Severity assessed as minor damage.",
+  "incident_location": "7684 Francis Ridge, Columbus, WV",
+  "police_report_number": "WVPD-20260223-0887",
+  "estimated_amount": 61380.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

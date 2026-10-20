@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-01-02",
+    "incident_location": "8973 Washington St, Arlington, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, SC, at 8973 Washington St on 2026-01-02. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Michael Thompson",
+      "Patricia Lee"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Patricia Lee",
+    "driver_license_number": "80955009",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-02",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30768.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20512.00"
+      }
+    ],
+    "line_items_sum": "51280.00",
+    "stated_total": "51280"
+  }
+}

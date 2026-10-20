@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-022",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Miller",
+  "claimant_email": "claimant.895015@example.com",
+  "claimant_phone": "555-962-2338",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-10",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, OH, at 6956 Maple Drive on 2026-01-10. Severity assessed as major damage.",
+  "incident_location": "6956 Maple Drive, Arlington, OH",
+  "police_report_number": null,
+  "estimated_amount": 63400.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Chevrolet",
+  "vehicle_model": "Tahoe",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

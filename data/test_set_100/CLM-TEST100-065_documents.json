@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-02-03",
+    "incident_location": "2275 Best Lane, Northbend, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 2275 Best Lane on 2026-02-03. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Susan Lee"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-03",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "16800.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "11200.00"
+      }
+    ],
+    "line_items_sum": "28000.00",
+    "stated_total": "28000"
+  }
+}

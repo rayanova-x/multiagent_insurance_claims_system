@@ -1,0 +1,24 @@
+{
+  "police_report": {
+    "report_number": "CPD-2026-55412",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "Single-vehicle incident. Claimant clipped a mailbox while pulling into a driveway.",
+    "fault_determination": "No third party at fault - single-vehicle incident",
+    "citations_issued": [],
+    "parties_involved": ["Claimant"]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Front quarter panel repair and paint", "amount": "3200.00"},
+      {"description": "Dent removal", "amount": "1300.00"},
+      {"description": "Labor", "amount": "800.00"}
+    ],
+    "line_items_sum": "5300.00",
+    "stated_total": "5300"
+  }
+}

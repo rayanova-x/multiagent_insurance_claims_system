@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-084",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Wilson",
+  "claimant_email": "claimant.845279@example.com",
+  "claimant_phone": "555-496-0185",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-23",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, PA, at 9153 3rd Hwy on 2026-02-23. Severity assessed as major damage.",
+  "incident_location": "9153 3rd Hwy, Hillsdale, PA",
+  "police_report_number": "PAPD-20260223-5279",
+  "estimated_amount": 48100.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Volkswagen",
+  "vehicle_model": "Jetta",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: other_driver_info"
+}

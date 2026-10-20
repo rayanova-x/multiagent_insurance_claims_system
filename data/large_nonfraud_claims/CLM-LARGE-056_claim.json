@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-056",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Lee",
+  "claimant_email": "claimant.616453@example.com",
+  "claimant_phone": "555-903-4142",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-03-01",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 2 vehicles in Hillsdale, VA, at 5622 Best Ridge on 2026-03-01. Severity assessed as major damage.",
+  "incident_location": "5622 Best Ridge, Hillsdale, VA",
+  "police_report_number": null,
+  "estimated_amount": 57720.0,
+  "vehicle_year": 2018,
+  "vehicle_make": "Saab",
+  "vehicle_model": "93",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

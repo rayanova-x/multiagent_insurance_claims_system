@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-01-22",
+    "incident_location": "9034 Weaver Ridge, Arlington, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, NY, at 9034 Weaver Ridge on 2026-01-22. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Patricia Williams",
+      "Michael Brown"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Michael Brown",
+    "driver_license_number": "09305614",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2025,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "33888.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "22592.00"
+      }
+    ],
+    "line_items_sum": "56480.00",
+    "stated_total": "56480"
+  }
+}

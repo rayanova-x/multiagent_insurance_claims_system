@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": "VAPD-20260108-4442",
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-08",
+    "incident_location": "2087 Apache Ave, Springfield, VA",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, VA, at 2087 Apache Ave on 2026-01-08. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Garcia"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-08",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "24528.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16352.00"
+      }
+    ],
+    "line_items_sum": "40880.00",
+    "stated_total": "40880"
+  }
+}

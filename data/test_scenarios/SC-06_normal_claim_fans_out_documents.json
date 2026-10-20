@@ -1,0 +1,34 @@
+{
+  "police_report": {
+    "report_number": "CPD-2026-55201",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "Rear-end collision at a stop sign. Vehicle 2 failed to brake in time and struck Vehicle 1 from behind.",
+    "fault_determination": "Vehicle 2 driver cited for following too closely",
+    "citations_issued": ["Following too closely"],
+    "parties_involved": ["Claimant", "Other driver"]
+  },
+  "other_driver_info": {
+    "driver_name": "Dale Whitfield",
+    "driver_license_number": "OH48812203",
+    "insurer_name": "Meridian Mutual",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "Fusion",
+    "vehicle_year": 2020,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Rear bumper cover replacement", "amount": "2450.00"},
+      {"description": "Trunk lid repair and paint", "amount": "1850.00"},
+      {"description": "Tail light assembly", "amount": "1200.00"},
+      {"description": "Labor", "amount": "1300.00"}
+    ],
+    "line_items_sum": "6800.00",
+    "stated_total": "6800"
+  }
+}

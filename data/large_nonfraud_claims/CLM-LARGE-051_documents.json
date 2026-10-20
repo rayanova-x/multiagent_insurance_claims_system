@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20260219-8705",
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-02-19",
+    "incident_location": "7773 Tree Hwy, Northbend, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 7773 Tree Hwy on 2026-02-19. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Smith"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-19",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "22176.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "14784.00"
+      }
+    ],
+    "line_items_sum": "36960.00",
+    "stated_total": "36960"
+  }
+}

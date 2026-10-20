@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-072",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Lee",
+  "claimant_email": "claimant.854912@example.com",
+  "claimant_phone": "555-440-1561",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-01",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, WV, at 6315 2nd Lane on 2026-02-01. Severity assessed as total loss.",
+  "incident_location": "6315 2nd Lane, Springfield, WV",
+  "police_report_number": "WVPD-20260201-4912",
+  "estimated_amount": 45630.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "Accura",
+  "vehicle_model": "MDX",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

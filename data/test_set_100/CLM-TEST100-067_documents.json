@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-09",
+    "incident_location": "7740 MLK St, Columbus, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Columbus, WV, at 7740 MLK St on 2026-01-09. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Linda Smith"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-09",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "17280.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "11520.00"
+      }
+    ],
+    "line_items_sum": "28800.00",
+    "stated_total": "28800"
+  }
+}

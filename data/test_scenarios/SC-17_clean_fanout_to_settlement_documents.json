@@ -1,0 +1,25 @@
+{
+  "police_report": {
+    "report_number": "CPD-2026-55340",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "Single-vehicle incident. Vehicle slid on ice and struck a guardrail.",
+    "fault_determination": "No third party at fault - weather-related single-vehicle incident",
+    "citations_issued": [],
+    "parties_involved": ["Claimant"]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Front driver-side fender replacement", "amount": "1650.00"},
+      {"description": "Headlight assembly", "amount": "950.00"},
+      {"description": "Paint and blend", "amount": "1100.00"},
+      {"description": "Labor", "amount": "800.00"}
+    ],
+    "line_items_sum": "4500.00",
+    "stated_total": "4500"
+  }
+}

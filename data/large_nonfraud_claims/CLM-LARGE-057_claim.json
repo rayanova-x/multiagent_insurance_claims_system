@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-057",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Barbara Anderson",
+  "claimant_email": "claimant.358752@example.com",
+  "claimant_phone": "555-016-5388",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-26",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, SC, at 8118 Elm Ridge on 2026-02-26. Severity assessed as minor damage.",
+  "incident_location": "8118 Elm Ridge, Hillsdale, SC",
+  "police_report_number": null,
+  "estimated_amount": 51260.0,
+  "vehicle_year": 2013,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

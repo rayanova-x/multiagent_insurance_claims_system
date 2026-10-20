@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-13",
+    "incident_location": "5846 Weaver Drive, Springfield, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, NY, at 5846 Weaver Drive on 2026-01-13. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Jessica Jones",
+      "Robert Johnson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Robert Johnson",
+    "driver_license_number": "42040015",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2026,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-13",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30030.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20020.00"
+      }
+    ],
+    "line_items_sum": "50050.00",
+    "stated_total": "50050"
+  }
+}

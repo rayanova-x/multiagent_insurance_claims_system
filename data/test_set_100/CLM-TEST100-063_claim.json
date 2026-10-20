@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-063",
+  "policy_number": "POL-DOES-NOT-EXIST-999",
+  "claimant_name": "Jennifer Thompson",
+  "claimant_email": "claimant.174842@example.com",
+  "claimant_phone": "555-977-0527",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, SC, at 8381 Solo Hwy on 2026-02-22. Severity assessed as minor damage.",
+  "incident_location": "8381 Solo Hwy, Hillsdale, SC",
+  "police_report_number": null,
+  "estimated_amount": 69300.0,
+  "vehicle_year": 2011,
+  "vehicle_make": "Volkswagen",
+  "vehicle_model": "Passat",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "invalid_policy_number",
+  "_fraud_reported_ground_truth": false,
+  "_note": "policy_number does not exist in the system - is_valid=False at intake"
+}

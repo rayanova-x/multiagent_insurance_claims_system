@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-029",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Rodriguez",
+  "claimant_email": "claimant.591496@example.com",
+  "claimant_phone": "555-086-7831",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-28",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, WV, at 9038 2nd Lane on 2026-02-28. Severity assessed as major damage.",
+  "incident_location": "9038 2nd Lane, Riverwood, WV",
+  "police_report_number": null,
+  "estimated_amount": 67140.0,
+  "vehicle_year": 2017,
+  "vehicle_make": "Ford",
+  "vehicle_model": "F150",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

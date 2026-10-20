@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-18",
+    "incident_location": "4687 5th Drive, Columbus, SC",
+    "narrative": "Multi-vehicle Collision involving 4 vehicles in Columbus, SC, at 4687 5th Drive on 2026-01-18. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "John Johnson",
+      "William Davis"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Davis",
+    "driver_license_number": "14842610",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-18",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30240.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20160.00"
+      }
+    ],
+    "line_items_sum": "50400.00",
+    "stated_total": "50400"
+  }
+}

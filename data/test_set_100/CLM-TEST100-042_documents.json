@@ -1,0 +1,18 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-01-10",
+    "incident_location": "5783 Oak Ave, Northbrook, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 5783 Oak Ave on 2026-01-10. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Lee"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": null
+}

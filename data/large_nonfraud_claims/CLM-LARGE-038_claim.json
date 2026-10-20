@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-038",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Wilson",
+  "claimant_email": "claimant.784599@example.com",
+  "claimant_phone": "555-226-0991",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-10",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 5783 Oak Ave on 2026-01-10. Severity assessed as major damage.",
+  "incident_location": "5783 Oak Ave, Northbrook, WV",
+  "police_report_number": null,
+  "estimated_amount": 68530.0,
+  "vehicle_year": 2008,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

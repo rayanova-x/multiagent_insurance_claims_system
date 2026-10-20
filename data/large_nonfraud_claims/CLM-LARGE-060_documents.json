@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-01-05",
+    "incident_location": "7551 Britain Lane, Arlington, NC",
+    "narrative": "Multi-vehicle Collision involving 4 vehicles in Arlington, NC, at 7551 Britain Lane on 2026-01-05. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Barbara Miller",
+      "Patricia Williams"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Patricia Williams",
+    "driver_license_number": "30148701",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-05",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30852.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20568.00"
+      }
+    ],
+    "line_items_sum": "51420.00",
+    "stated_total": "51420"
+  }
+}

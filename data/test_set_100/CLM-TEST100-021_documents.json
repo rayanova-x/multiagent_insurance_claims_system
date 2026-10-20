@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-18",
+    "incident_location": "4687 5th Drive, Columbus, SC",
+    "narrative": "Multi-vehicle Collision involving 4 vehicles in Columbus, SC, at 4687 5th Drive on 2026-01-18. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "William Rodriguez",
+      "William Garcia"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Garcia",
+    "driver_license_number": "31927437",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2021,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-18",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30240.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20160.00"
+      }
+    ],
+    "line_items_sum": "50400.00",
+    "stated_total": "50400"
+  }
+}

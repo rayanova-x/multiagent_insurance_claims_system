@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-064",
+  "policy_number": "POL-DOES-NOT-EXIST-999",
+  "claimant_name": "Linda Anderson",
+  "claimant_email": "claimant.029730@example.com",
+  "claimant_phone": "555-145-2905",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-05",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 4 vehicles in Arlington, NC, at 7551 Britain Lane on 2026-01-05. Severity assessed as total loss.",
+  "incident_location": "7551 Britain Lane, Arlington, NC",
+  "police_report_number": null,
+  "estimated_amount": 77130.0,
+  "vehicle_year": 2006,
+  "vehicle_make": "Accura",
+  "vehicle_model": "MDX",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "invalid_policy_number",
+  "_fraud_reported_ground_truth": false,
+  "_note": "policy_number does not exist in the system - is_valid=False at intake"
+}

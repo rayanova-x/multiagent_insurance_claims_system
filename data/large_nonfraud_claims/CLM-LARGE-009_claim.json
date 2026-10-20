@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-009",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Anderson",
+  "claimant_email": "claimant.665467@example.com",
+  "claimant_phone": "555-364-9394",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 5074 3rd St on 2026-02-22. Severity assessed as major damage.",
+  "incident_location": "5074 3rd St, Riverwood, NY",
+  "police_report_number": "NYPD-20260222-5467",
+  "estimated_amount": 52110.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Maxima",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

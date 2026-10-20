@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-066",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Susan Johnson",
+  "claimant_email": "claimant.455863@example.com",
+  "claimant_phone": "555-276-2829",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 5061 Francis Ave on 2026-01-24. Severity assessed as total loss.",
+  "incident_location": "5061 Francis Ave, Northbend, WV",
+  "police_report_number": null,
+  "estimated_amount": 46800.0,
+  "vehicle_year": 2013,
+  "vehicle_make": "Jeep",
+  "vehicle_model": "Wrangler",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

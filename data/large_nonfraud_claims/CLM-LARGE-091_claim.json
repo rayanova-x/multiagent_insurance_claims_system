@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-091",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Wilson",
+  "claimant_email": "claimant.665034@example.com",
+  "claimant_phone": "555-883-7058",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-11",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, SC, at 6955 Pine Drive on 2026-01-11. Severity assessed as total loss.",
+  "incident_location": "6955 Pine Drive, Arlington, SC",
+  "police_report_number": null,
+  "estimated_amount": 55500.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "C300",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: repair_estimate"
+}

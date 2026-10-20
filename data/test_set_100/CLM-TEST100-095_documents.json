@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-16",
+    "incident_location": "8281 Lincoln Lane, Springfield, NY",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, NY, at 8281 Lincoln Lane on 2026-02-16. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Wilson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-16",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31008.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20672.00"
+      }
+    ],
+    "line_items_sum": "51680.00",
+    "stated_total": "51680"
+  }
+}

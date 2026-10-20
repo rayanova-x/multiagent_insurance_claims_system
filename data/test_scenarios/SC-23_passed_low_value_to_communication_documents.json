@@ -1,0 +1,23 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": null,
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "Minor fender bender in a parking garage. No police report filed - low-severity, no injuries.",
+    "fault_determination": "No third party at fault - single-vehicle parking incident",
+    "citations_issued": [],
+    "parties_involved": ["Claimant"]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Rear bumper dent repair and paint touch-up", "amount": "900.00"},
+      {"description": "Labor", "amount": "300.00"}
+    ],
+    "line_items_sum": "1200.00",
+    "stated_total": "1200"
+  }
+}

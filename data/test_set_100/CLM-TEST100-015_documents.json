@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2015-01-19",
+    "incident_location": "3842 Solo Ridge, Northbrook, NY",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbrook, NY, at 3842 Solo Ridge on 2015-01-19. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "James Davis"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2015-01-19",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31824.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "21216.00"
+      }
+    ],
+    "line_items_sum": "53040.00",
+    "stated_total": "53040"
+  }
+}

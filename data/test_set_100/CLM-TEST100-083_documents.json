@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-01-19",
+    "incident_location": "2204 Washington Lane, Northbrook, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 2204 Washington Lane on 2026-01-19. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "John Brown"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-19",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "22704.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "15136.00"
+      }
+    ],
+    "line_items_sum": "37840.00",
+    "stated_total": "37840"
+  }
+}

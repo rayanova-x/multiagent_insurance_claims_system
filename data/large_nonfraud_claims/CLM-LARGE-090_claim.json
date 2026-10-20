@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-090",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jennifer Lee",
+  "claimant_email": "claimant.084131@example.com",
+  "claimant_phone": "555-900-3199",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-13",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, SC, at 2500 Tree St on 2026-02-13. Severity assessed as minor damage.",
+  "incident_location": "2500 Tree St, Springfield, SC",
+  "police_report_number": null,
+  "estimated_amount": 50490.0,
+  "vehicle_year": 2012,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Maxima",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: other_driver_info"
+}

@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-02-17",
+    "incident_location": "2804 Best St, Northbrook, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbrook, WV, at 2804 Best St on 2026-02-17. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Richard Martinez",
+      "Jessica Johnson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jessica Johnson",
+    "driver_license_number": "37077955",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-17",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "22806.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "15204.00"
+      }
+    ],
+    "line_items_sum": "38010.00",
+    "stated_total": "38010"
+  }
+}

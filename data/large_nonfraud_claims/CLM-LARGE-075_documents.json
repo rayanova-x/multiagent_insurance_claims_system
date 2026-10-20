@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-02-27",
+    "incident_location": "8586 1st Ridge, Hillsdale, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NC, at 8586 1st Ridge on 2026-02-27. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "William Jones",
+      "James Martinez"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "James Martinez",
+    "driver_license_number": "40218475",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2020,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-27",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "19224.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "12816.00"
+      }
+    ],
+    "line_items_sum": "32040.00",
+    "stated_total": "32040"
+  }
+}

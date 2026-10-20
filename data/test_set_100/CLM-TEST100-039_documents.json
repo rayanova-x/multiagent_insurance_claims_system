@@ -1,0 +1,28 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-11",
+    "incident_location": "7459 Flute St, Springfield, OH",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, OH, at 7459 Flute St on 2026-02-11. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Michael Miller",
+      "Mary Williams"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Mary Williams",
+    "driver_license_number": "91085391",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": null
+}

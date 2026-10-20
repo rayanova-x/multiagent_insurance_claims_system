@@ -1,0 +1,16 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-14",
+    "incident_location": "1699 Oak Drive, Springfield, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, SC, at 1699 Oak Drive on 2026-02-14. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Richard Wilson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": null
+}

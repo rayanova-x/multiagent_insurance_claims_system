@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-02-27",
+    "incident_location": "4905 Francis Ave, Northbend, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbend, NY, at 4905 Francis Ave on 2026-02-27. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Susan Miller",
+      "Patricia Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Patricia Smith",
+    "driver_license_number": "99427133",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-27",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "26880.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17920.00"
+      }
+    ],
+    "line_items_sum": "44800.00",
+    "stated_total": "44800"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-049",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Davis",
+  "claimant_email": "claimant.915322@example.com",
+  "claimant_phone": "555-809-8321",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-02",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbrook, NY, at 7477 MLK Drive on 2026-02-02. Severity assessed as major damage.",
+  "incident_location": "7477 MLK Drive, Northbrook, NY",
+  "police_report_number": null,
+  "estimated_amount": 58300.0,
+  "vehicle_year": 2018,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": true,
+  "type_dispute_reason": "Claimant believes this should be classified as auto_theft instead, since the vehicle was later found abandoned.",
+  "_selection_tag": "disputed_incident_type",
+  "_fraud_reported_ground_truth": false,
+  "_note": "type_disputed_by_claimant=True - should route to mandatory human review"
+}

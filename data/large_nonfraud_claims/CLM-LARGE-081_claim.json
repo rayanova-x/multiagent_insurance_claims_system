@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-081",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Susan Miller",
+  "claimant_email": "claimant.519059@example.com",
+  "claimant_phone": "555-192-8577",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-27",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbend, NY, at 4905 Francis Ave on 2026-02-27. Severity assessed as minor damage.",
+  "incident_location": "4905 Francis Ave, Northbend, NY",
+  "police_report_number": null,
+  "estimated_amount": 64000.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Saab",
+  "vehicle_model": "95",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

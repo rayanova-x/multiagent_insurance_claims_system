@@ -1,0 +1,31 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-03",
+    "incident_location": "4862 Lincoln Hwy, Columbus, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Columbus, WV, at 4862 Lincoln Hwy on 2026-01-03. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Susan Taylor"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-03",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "16800.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "11200.00"
+      }
+    ],
+    "line_items_sum": "28000.00",
+    "stated_total": "28000"
+  }
+}

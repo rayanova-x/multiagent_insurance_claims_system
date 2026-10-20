@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-006",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Davis",
+  "claimant_email": "claimant.561838@example.com",
+  "claimant_phone": "555-988-8604",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, SC, at 6655 5th Drive on 2026-01-22. Severity assessed as total loss.",
+  "incident_location": "6655 5th Drive, Northbend, SC",
+  "police_report_number": null,
+  "estimated_amount": 56520.0,
+  "vehicle_year": 2011,
+  "vehicle_make": "Saab",
+  "vehicle_model": "95",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-088",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Robert Taylor",
+  "claimant_email": "claimant.092304@example.com",
+  "claimant_phone": "555-285-0157",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-18",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, VA, at 4053 Sky Lane on 2026-02-18. Severity assessed as major damage.",
+  "incident_location": "4053 Sky Lane, Riverwood, VA",
+  "police_report_number": "VAPD-20260218-2304",
+  "estimated_amount": 51100.0,
+  "vehicle_year": 2017,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A3",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: repair_estimate"
+}

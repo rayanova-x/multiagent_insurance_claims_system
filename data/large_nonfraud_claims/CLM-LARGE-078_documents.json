@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-02-14",
+    "incident_location": "3770 Flute Drive, Springfield, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, WV, at 3770 Flute Drive on 2026-02-14. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jessica Garcia",
+      "Barbara Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Barbara Smith",
+    "driver_license_number": "61889818",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2025,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-14",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31296.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20864.00"
+      }
+    ],
+    "line_items_sum": "52160.00",
+    "stated_total": "52160"
+  }
+}

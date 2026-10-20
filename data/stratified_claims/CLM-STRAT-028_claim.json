@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-028",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Martinez",
+  "claimant_email": "claimant.463536@example.com",
+  "claimant_phone": "555-796-1651",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-09",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, OH, at 3418 Texas Lane on 2026-01-09. Severity assessed as major damage.",
+  "incident_location": "3418 Texas Lane, Arlington, OH",
+  "police_report_number": "OHPD-20260109-3536",
+  "estimated_amount": 71500.0,
+  "vehicle_year": 2017,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

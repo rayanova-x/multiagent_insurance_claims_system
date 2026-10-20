@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-078",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Garcia",
+  "claimant_email": "claimant.210994@example.com",
+  "claimant_phone": "555-937-4228",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-14",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, WV, at 3770 Flute Drive on 2026-02-14. Severity assessed as total loss.",
+  "incident_location": "3770 Flute Drive, Springfield, WV",
+  "police_report_number": null,
+  "estimated_amount": 78240.0,
+  "vehicle_year": 2024,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

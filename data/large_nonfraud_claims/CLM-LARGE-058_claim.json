@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-058",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Martinez",
+  "claimant_email": "claimant.915469@example.com",
+  "claimant_phone": "555-559-4328",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-20",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, NY, at 1628 Best Drive on 2026-02-20. Severity assessed as minor damage.",
+  "incident_location": "1628 Best Drive, Arlington, NY",
+  "police_report_number": null,
+  "estimated_amount": 72820.0,
+  "vehicle_year": 2021,
+  "vehicle_make": "BMW",
+  "vehicle_model": "3 Series",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

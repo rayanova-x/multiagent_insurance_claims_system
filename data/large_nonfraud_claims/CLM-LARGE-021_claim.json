@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-021",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Taylor",
+  "claimant_email": "claimant.524298@example.com",
+  "claimant_phone": "555-688-0770",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-21",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 3930 Embaracadero St on 2026-01-21. Severity assessed as major damage.",
+  "incident_location": "3930 Embaracadero St, Hillsdale, NY",
+  "police_report_number": null,
+  "estimated_amount": 62300.0,
+  "vehicle_year": 2018,
+  "vehicle_make": "Jeep",
+  "vehicle_model": "Wrangler",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

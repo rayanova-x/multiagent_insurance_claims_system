@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-028",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Rodriguez",
+  "claimant_email": "claimant.318914@example.com",
+  "claimant_phone": "555-568-8286",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-01",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, WV, at 6011 Britain St on 2026-01-01. Severity assessed as total loss.",
+  "incident_location": "6011 Britain St, Springfield, WV",
+  "police_report_number": null,
+  "estimated_amount": 76600.0,
+  "vehicle_year": 2011,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "C300",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

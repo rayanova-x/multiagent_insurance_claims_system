@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-034",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "John Lee",
+  "claimant_email": "claimant.396971@example.com",
+  "claimant_phone": "555-029-9759",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-01",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 5719 2nd Lane on 2026-01-01. Severity assessed as major damage.",
+  "incident_location": "5719 2nd Lane, Northbrook, WV",
+  "police_report_number": null,
+  "estimated_amount": 97080.0,
+  "vehicle_year": 2012,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_fraud",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

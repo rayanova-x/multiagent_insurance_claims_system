@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-02-10",
+    "incident_location": "6660 MLK Drive, Arlington, NC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Arlington, NC, at 6660 MLK Drive on 2026-02-10. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jessica Williams"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-10",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "23856.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "15904.00"
+      }
+    ],
+    "line_items_sum": "39760.00",
+    "stated_total": "39760"
+  }
+}

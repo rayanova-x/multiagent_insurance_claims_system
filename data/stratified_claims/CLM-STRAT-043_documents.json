@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-02-16",
+    "incident_location": "2003 Maple Hwy, Riverwood, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NC, at 2003 Maple Hwy on 2026-02-16. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Miller",
+      "Joseph Taylor"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Joseph Taylor",
+    "driver_license_number": "24385733",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-16",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "8100.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "5400.00"
+      }
+    ],
+    "line_items_sum": "13500.00",
+    "stated_total": "13500"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-041",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "James Davis",
+  "claimant_email": "claimant.167779@example.com",
+  "claimant_phone": "555-598-7532",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-02",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, WV, at 8538 Texas Lane on 2026-02-02. Severity assessed as minor damage.",
+  "incident_location": "8538 Texas Lane, Hillsdale, WV",
+  "police_report_number": null,
+  "estimated_amount": 33930.0,
+  "vehicle_year": 2009,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X6",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "missing_doc_repair_estimate",
+  "_fraud_reported_ground_truth": false,
+  "_note": "repair_estimate omitted - should trigger requires_physical_inspection"
+}

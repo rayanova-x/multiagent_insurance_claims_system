@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-065",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "James Taylor",
+  "claimant_email": "claimant.715750@example.com",
+  "claimant_phone": "555-121-5528",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, NC, at 2808 Elm St on 2026-02-22. Severity assessed as major damage.",
+  "incident_location": "2808 Elm St, Arlington, NC",
+  "police_report_number": null,
+  "estimated_amount": 51000.0,
+  "vehicle_year": 2024,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

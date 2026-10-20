@@ -1,0 +1,18 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-01-11",
+    "incident_location": "6955 Pine Drive, Arlington, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Arlington, SC, at 6955 Pine Drive on 2026-01-11. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jessica Wilson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": null
+}

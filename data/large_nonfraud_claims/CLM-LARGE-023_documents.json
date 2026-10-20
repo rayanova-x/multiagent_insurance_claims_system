@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-16",
+    "incident_location": "3221 Solo Ridge, Springfield, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, SC, at 3221 Solo Ridge on 2026-01-16. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Jessica Moore",
+      "Barbara Garcia"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Barbara Garcia",
+    "driver_license_number": "45032875",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-16",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "24108.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16072.00"
+      }
+    ],
+    "line_items_sum": "40180.00",
+    "stated_total": "40180"
+  }
+}

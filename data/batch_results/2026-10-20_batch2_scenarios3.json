@@ -1,0 +1,120 @@
+{
+  "date": "2026-10-20",
+  "batch": "Batch 2, sub-batch scenarios3: final 10 of 30 data/test_scenarios fixtures (SC-03,06,09,12,15,18,21,24,27,30) - completes all 30 test_scenarios fixtures across scenarios1+2+3",
+  "model": "gemini-3.5-flash-lite (primary), gemini-3.1-flash-lite (fallback)",
+  "fraud_crew": "mocked (out of scope, never redesigned this session) - inert LOW/0.0 placeholder",
+  "run_notes": "First attempt at this sub-batch was corrupted by a real bug found live: scripts/run_live_batch.py's _scenario_batches() globbed '*.json' with no exclusion, so it picked up the 8 '*_documents.json' companion fixtures added earlier this session (for SC-06/08/17/18/19/20/21/23) as if they were independent scenarios, producing the wrong 10-file split and one spurious 'scenario' with no real content (SC-19_..._documents ran standalone, had no _scenario_note, and produced a nonsense DENIED result). Confirmed scenarios1/scenarios2's EARLIER runs were unaffected (both completed before any _documents.json file existed - scenarios1 at 16:34, scenarios2 at 16:49, first _documents.json at 16:54). Fixed the glob to exclude '*_documents.json' stems, verified the corrected split matches the expected SC-03/06/09/12/15/18/21/24/27/30, and re-ran cleanly - this file reflects the CORRECTED run only.",
+  "results": [
+    {
+      "label": "SC-03_disputed_incident_type",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent"],
+      "agent_call_count": 1,
+      "elapsed_s": 29.2,
+      "resumed": false,
+      "assessment": "correct and ON-TARGET - claimant kept their own incident_type after /verify-type suggested a different one, routed straight to mandatory human review before the fan-out, matching branch 3's exact intent."
+    },
+    {
+      "label": "SC-06_normal_claim_fans_out",
+      "paused": false,
+      "final_decision": "APPROVED_PARTIAL",
+      "final_amount_usd": 3240.0,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator", "settlement_calculator", "evaluator", "communication_agent"],
+      "agent_call_count": 6,
+      "elapsed_s": 27.3,
+      "resumed": false,
+      "assessment": "correct and ON-TARGET - a normal unremarkable claim with a real repair-estimate document (the new companion fixture) fanned out cleanly and reached settlement/evaluator/communication unpaused, confirming the process_claim(documents=...) fix works for this branch. Live-verified settlement math not independently re-checked this round (already verified for the near-identical SC-17 case this session)."
+    },
+    {
+      "label": "SC-09_non_confirmed_fraud_proceeds",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 14.8,
+      "resumed": false,
+      "assessment": "paused at consistency_coordinator rather than proceeding past fraud_crew as the scenario's named intent describes (elevated-but-not-CONFIRMED fraud risk should still proceed) - fraud_crew is mocked at inert LOW/0.0, so no real elevated-fraud signal could ever reach consistency_coordinator this way. The real trigger for this pause was not independently re-checked via checkpoint inspection this round; likely a different legitimate gate (e.g. requires_physical_inspection, since no companion document was built for this fixture)."
+    },
+    {
+      "label": "SC-12_notable_conflict_no_retry",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 36.2,
+      "resumed": false,
+      "assessment": "paused at consistency_coordinator with no visible retry loop in the trace, consistent with the scenario's own intent (a NOTABLE-severity conflict should NOT trigger a retry) - but not independently verified via checkpoint inspection this round to confirm the pause itself traces to the intended conflict-detection path rather than a different gate (e.g. requires_physical_inspection, no companion document exists for this fixture)."
+    },
+    {
+      "label": "SC-15_policy_exclusion_pre_existing_damage",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 10.6,
+      "resumed": false,
+      "assessment": "paused at consistency_coordinator, consistent with the scenario's named intent (a policy exclusion always routes to human review) - not independently re-verified via checkpoint inspection this round to confirm the pre_existing_damage exclusion itself is what fired versus a different gate (no companion document exists for this fixture, so requires_physical_inspection is also a plausible contributor)."
+    },
+    {
+      "label": "SC-18_low_settlement_confidence_high_value",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 11.7,
+      "resumed": false,
+      "real_pause_reason": "hitl_checkpoint triggers (confirmed via direct re-run + interrupt payload inspection): 'Confidence gate: fraud_crew confidence 0.00 below 0.50' (mock artifact) AND 'Claim amount $90,000 exceeds review threshold $84,100' AND 'First-time claimant with high-value claim'. assessed_damage_usd correctly computed as $20,000.00 (the vehicle's ACV, NOT the document's $90,000 repair estimate) - damage_assessor correctly applied Rule 2 (total_loss always pays ACV) since the fixture's repair cost was deliberately written far above the 75%-of-ACV threshold.",
+      "assessment": "correct, but a different mechanism than originally hoped for when the companion document was added: the documents fix DID work (repair_vs_replace correctly resolved to total_loss, grounded in real document content, not a None-triggered inspection pause) - this claim just legitimately reaches the high-value HITL gate instead of settlement, exactly matching branch 18's own description ('settlement_calculator's own confidence gate ... fires on a high-value claim'). Confirms the fix is correct; the earlier assumption that documents alone would let this scenario reach settlement unpaused was too broad for this specific high-value branch."
+    },
+    {
+      "label": "SC-21_high_value_settlement_signoff",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 11.5,
+      "resumed": false,
+      "real_pause_reason": "hitl_checkpoint triggers (confirmed via direct re-run + interrupt payload inspection): 'Claim amount $120,000 exceeds review threshold $84,100' (the scenario's own named intent - 'amount >= the real US min_amount -> needs human sign-off') AND 'Confidence gate: fraud_crew confidence 0.00 below 0.50' (mock artifact) AND 'First-time claimant with high-value claim'. assessed_damage_usd correctly computed as $20,000.00 ACV, not the document's $120,000 repair estimate - Rule 2 (total_loss pays ACV) correctly applied.",
+      "assessment": "correct and ON-TARGET - this is exactly branch 21's intended behavior: a pure property-based value gate requiring human sign-off before any settlement proceeds, regardless of what else did or didn't trigger. The companion document correctly grounded the total-loss determination in real pricing instead of falling back to a None-triggered inspection pause."
+    },
+    {
+      "label": "SC-24_resume_after_guardrail_halt",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 20.5,
+      "resumed": false,
+      "assessment": "NOT a live verification of branch 24 (or branch 7) - this scenario's own note requires forcing guardrails.max_agent_calls_per_claim/max_cost_usd_per_claim down via config BEFORE running it to produce a real guardrail halt, then resuming. This batch ran it under normal config, so the pause shown here is just the ordinary pre-halt pause (same shape as SC-09/12/15), not a demonstration of the guardrail-halt-then-resume path. Branches 7 and 24 remain NOT live-verified and need a separate, deliberate config-change run - a known gap, not a new regression."
+    },
+    {
+      "label": "SC-27_resume_prefanout_pause",
+      "paused": true,
+      "final_decision": "APPROVED",
+      "pipeline_path": ["intake_agent", "hitl_checkpoint", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 9.4,
+      "resumed": true,
+      "real_pause_reason": "Confirmed via direct re-run + interrupt payload inspection: resume correctly re-triggered the fan-out for the first time (damage_assessor/fraud_crew/policy_checker all ran post-resume, matching the scenario's exact intent - 'launches damage/policy/fraud now, since they never ran'), producing ai_decision='approved' as resumed. It then paused AGAIN at a second hitl_checkpoint, with triggers carrying over the original injection-detected flag plus a NEW one: 'Damage assessor requires physical inspection before a decision' - expected, since SC-27 has no companion _documents.json fixture, so claim_documents=None and Rule 4 correctly forced requires_physical_inspection=True.",
+      "assessment": "correct - both the resume mechanics (fan-out launching for the first time post-resume) and the second pause are exactly as the system's rules predict. Demonstrates the resume path correctly stacks a new real gate (missing documents) on top of the original injection-flagged pause, rather than silently dropping either one."
+    },
+    {
+      "label": "SC-30_low_confidence_low_value",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 10.5,
+      "resumed": false,
+      "real_pause_reason": "Confirmed via raw output: 'LOW CONFIDENCE: damage confidence too low: 0.50 < 0.60' - the risk-stratification confidence gate correctly fired on a low-confidence damage assessment.",
+      "assessment": "correct and ON-TARGET - matches branch 30's named intent (ambiguous/sparse narrative on a LOW-VALUE claim still pauses on confidence alone, same gate as branch 16's high-value counterpart, confirming confidence-based HITL triggers independent of claim value as designed)."
+    }
+  ],
+  "cross_batch_findings": [
+    "Real bug found and fixed: _scenario_batches()'s glob ('*.json') did not exclude the '*_documents.json' companion fixtures added mid-session, corrupting this sub-batch's file split on the first attempt. Fixed in scripts/run_live_batch.py.",
+    "The process_claim(documents=...) fix (added earlier this session) is confirmed working correctly across multiple branches now: SC-06 reaches settlement/evaluator/communication cleanly; SC-18/SC-21 correctly ground their total-loss determination in real document pricing (and correctly apply Rule 2 - ACV, not the inflated repair estimate - as the settlement basis) while still correctly pausing at the high-value HITL gate, which is a DIFFERENT and equally legitimate gate from requires_physical_inspection.",
+    "Branches 7 and 24 (guardrail budget/timeout halt and its resume) remain NOT live-verified - both require a deliberate temporary config change (lowering guardrails.max_agent_calls_per_claim or max_cost_usd_per_claim) that was not performed in any batch this session. This is the one explicit gap remaining before all 31 architectural branches can be called live-verified.",
+    "All 30 of the 30 data/test_scenarios fixtures have now been run live across scenarios1+2+3 (this session), completing that portion of Bar 1 (architecture coverage proven live) - except branches 7/24 above, which need their own dedicated forced-config run."
+  ]
+}

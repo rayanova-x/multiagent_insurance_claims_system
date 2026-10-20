@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-070",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Brown",
+  "claimant_email": "claimant.108084@example.com",
+  "claimant_phone": "555-325-5022",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-21",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, VA, at 8080 Oak Lane on 2026-02-21. Severity assessed as total loss.",
+  "incident_location": "8080 Oak Lane, Springfield, VA",
+  "police_report_number": "VAPD-20260221-8084",
+  "estimated_amount": 73560.0,
+  "vehicle_year": 2006,
+  "vehicle_make": "BMW",
+  "vehicle_model": "X5",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

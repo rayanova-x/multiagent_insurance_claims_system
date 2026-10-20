@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-036",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "James Jones",
+  "claimant_email": "claimant.433283@example.com",
+  "claimant_phone": "555-827-9742",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-28",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, SC, at 4866 4th Hwy on 2026-02-28. Severity assessed as major damage. The vehicle is a 2009 model with significant cosmetic wear from age, but the repair shop confirms the newly claimed damage is isolated to this incident, not an old area.",
+  "incident_location": "4866 4th Hwy, Columbus, SC",
+  "police_report_number": null,
+  "estimated_amount": 56430.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Honda",
+  "vehicle_model": "CRV",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_pre_existing_damage_near_miss",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Superficially similar to pre_existing_damage but matches policy_checker.py's own 'does NOT apply to' negative criteria - should NOT be flagged"
+}

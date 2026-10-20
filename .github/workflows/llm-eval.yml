@@ -1,0 +1,105 @@
+name: LLM Evaluation (manual)
+
+# Separate from ci.yml on purpose: this workflow makes REAL LLM calls
+# (evaluation/run_eval.py against data/sample_claims, and
+# evaluation/validate_judges.py against the judge golden set), so it costs
+# real API quota and cannot run on every push without exhausting the
+# provider's free-tier daily limit (confirmed: 20 requests/day on
+# gemini-3.6-flash - see project memory / CLAUDE.md rebuild-status log).
+# Triggered manually (workflow_dispatch) rather than on a schedule, until
+# quota headroom is confirmed stable enough for a recurring run.
+#
+# Needs GOOGLE_API_KEY (or GROQ_API_KEY) as a repo secret before this can
+# run for real - add it under Settings -> Secrets and variables -> Actions.
+
+on:
+  workflow_dispatch:
+    inputs:
+      run_eval:
+        description: "Run evaluation/run_eval.py (batch claim evaluation)"
+        type: boolean
+        default: true
+      validate_judges:
+        description: "Run evaluation/validate_judges.py (judge golden-set validation)"
+        type: boolean
+        default: true
+      regression_check:
+        description: "Run evaluation/regression_check.py (model-swap regression gate)"
+        type: boolean
+        default: true
+
+jobs:
+  llm-eval:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run batch claim evaluation
+        if: ${{ inputs.run_eval }}
+        env:
+          LLM_PROVIDER: gemini
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          COUNTRY: us
+        run: python evaluation/run_eval.py --claims-dir data/sample_claims
+
+      - name: Validate LLM-as-judge calls against the golden set
+        if: ${{ inputs.validate_judges }}
+        env:
+          LLM_PROVIDER: gemini
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          COUNTRY: us
+        run: python evaluation/validate_judges.py --json-out judge_validation_results.json
+
+      - name: Upload judge validation results
+        if: ${{ inputs.validate_judges }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: judge-validation-results
+          path: judge_validation_results.json
+
+      # Model-swap regression gate (baswe.ai field guide ss2.5/ss6.5): compares
+      # this run's score against the last baseline recorded under a DIFFERENT
+      # model/config fingerprint (see src/provenance.py's run_identity/
+      # config_fingerprint - already wired into every agent call). The
+      # history file (evaluation/eval_history.jsonl) must persist ACROSS
+      # workflow runs for a baseline to ever be found - a GitHub Actions
+      # runner is ephemeral, so this downloads the history committed to the
+      # repo, lets the script append to it, then commits the updated file
+      # back. This is a deliberate, minimal choice over a separate database
+      # or cache action: the history is small, append-only, and benefits
+      # from being reviewable in normal PR diffs like any other versioned
+      # eval artifact (field guide ss7.6: "treat eval sets as versioned
+      # artifacts in the repo").
+      - name: Run model-swap regression check
+        if: ${{ inputs.regression_check }}
+        id: regression
+        continue-on-error: true
+        env:
+          LLM_PROVIDER: gemini
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          COUNTRY: us
+        run: python evaluation/regression_check.py --claims-dir data/sample_claims
+
+      - name: Commit updated eval history
+        if: ${{ inputs.regression_check }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add evaluation/eval_history.jsonl
+          git diff --staged --quiet || git commit -m "Record eval history from regression check run"
+          git push
+
+      - name: Fail the job if a regression was detected
+        if: ${{ inputs.regression_check && steps.regression.outcome == 'failure' }}
+        run: |
+          echo "Model-swap regression check failed - see the 'Run model-swap regression check' step output above."
+          exit 1

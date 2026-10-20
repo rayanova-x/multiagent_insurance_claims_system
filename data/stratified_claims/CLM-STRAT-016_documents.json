@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-02-24",
+    "incident_location": "6092 5th Ave, Arlington, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, NY, at 6092 5th Ave on 2026-02-24. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Anderson",
+      "Jennifer Jones"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jennifer Jones",
+    "driver_license_number": "68160040",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-24",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "13902.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "9268.00"
+      }
+    ],
+    "line_items_sum": "23170.00",
+    "stated_total": "23170"
+  }
+}

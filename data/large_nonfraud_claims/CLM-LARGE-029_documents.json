@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260103-4624",
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-01-03",
+    "incident_location": "5104 Francis Drive, Riverwood, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 5104 Francis Drive on 2026-01-03. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Linda Williams",
+      "Richard Anderson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Richard Anderson",
+    "driver_license_number": "59753414",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-03",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "34356.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "22904.00"
+      }
+    ],
+    "line_items_sum": "57260.00",
+    "stated_total": "57260"
+  }
+}

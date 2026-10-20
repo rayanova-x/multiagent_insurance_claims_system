@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": "CPD-2026-56102",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "High-speed highway collision. Vehicle sustained catastrophic damage; fault clearly assigned to the other driver with no dispute.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": ["Claimant", "Other driver"]
+  },
+  "other_driver_info": {
+    "driver_name": "Gerald Oduya",
+    "driver_license_number": "OH77213098",
+    "insurer_name": "Vantage Mutual",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Silverado",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Frame and structural assessment - total loss indicated", "amount": "60000.00"},
+      {"description": "Full vehicle teardown inspection", "amount": "25000.00"},
+      {"description": "Diagnostics and labor", "amount": "35000.00"}
+    ],
+    "line_items_sum": "120000.00",
+    "stated_total": "120000"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-093",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Taylor",
+  "claimant_email": "claimant.759433@example.com",
+  "claimant_phone": "555-792-8604",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-06",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, NY, at 3656 Solo Ave on 2026-01-06. Severity assessed as major damage.",
+  "incident_location": "3656 Solo Ave, Northbend, NY",
+  "police_report_number": null,
+  "estimated_amount": 54900.0,
+  "vehicle_year": 2024,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "C300",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "conflict_notable_no_retry",
+  "_fraud_reported_ground_truth": false,
+  "_note": "real row's 'Major Damage' severity on a single-vehicle claim - plausible but not guaranteed notable-conflict trigger"
+}

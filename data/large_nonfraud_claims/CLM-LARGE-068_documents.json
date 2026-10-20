@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-07",
+    "incident_location": "7709 Rock Lane, Springfield, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, SC, at 7709 Rock Lane on 2026-01-07. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Jennifer Lee",
+      "Jessica Davis"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jessica Davis",
+    "driver_license_number": "51145104",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2021,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-07",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31440.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20960.00"
+      }
+    ],
+    "line_items_sum": "52400.00",
+    "stated_total": "52400"
+  }
+}

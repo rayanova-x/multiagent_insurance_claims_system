@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20260223-0887",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-02-23",
+    "incident_location": "7684 Francis Ridge, Columbus, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 7684 Francis Ridge on 2026-02-23. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Elizabeth Lee",
+      "Jennifer Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jennifer Smith",
+    "driver_license_number": "17400156",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-02-23",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "26784.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17856.00"
+      }
+    ],
+    "line_items_sum": "44640.00",
+    "stated_total": "44640"
+  }
+}

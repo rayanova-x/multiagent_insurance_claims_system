@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260124-3351",
+    "jurisdiction": "Riverwood Police Department",
+    "incident_date": "2026-01-24",
+    "incident_location": "9760 Solo Lane, Riverwood, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 9760 Solo Lane on 2026-01-24. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Elizabeth Moore",
+      "Patricia Brown"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Patricia Brown",
+    "driver_license_number": "11493852",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-24",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "12870.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "8580.00"
+      }
+    ],
+    "line_items_sum": "21450.00",
+    "stated_total": "21450"
+  }
+}

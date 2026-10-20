@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-086",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "James Thompson",
+  "claimant_email": "claimant.695754@example.com",
+  "claimant_phone": "555-855-2788",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-07",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Hillsdale, OH, at 9706 MLK Lane on 2026-01-07. Severity assessed as minor damage.",
+  "incident_location": "9706 MLK Lane, Hillsdale, OH",
+  "police_report_number": "OHPD-20260107-5754",
+  "estimated_amount": 77040.0,
+  "vehicle_year": 2009,
+  "vehicle_make": "Honda",
+  "vehicle_model": "Civic",
+  "documents": [
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: police_report"
+}

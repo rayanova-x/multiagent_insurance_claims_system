@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-047",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Mary Moore",
+  "claimant_email": "claimant.517561@example.com",
+  "claimant_phone": "555-355-0365",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2015-01-06",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, NY, at 6723 Best Drive on 2015-01-06. Severity assessed as minor damage.",
+  "incident_location": "6723 Best Drive, Arlington, NY",
+  "police_report_number": null,
+  "estimated_amount": 78900.0,
+  "vehicle_year": 1995,
+  "vehicle_make": "Chevrolet",
+  "vehicle_model": "Silverado",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "lapsed_policy",
+  "_fraud_reported_ground_truth": false,
+  "_note": "incident_date intentionally NOT shifted into the policy's coverage window"
+}

@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-074",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Susan Smith",
+  "claimant_email": "claimant.928428@example.com",
+  "claimant_phone": "555-111-4215",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-22",
+  "incident_type": "auto_collision",
+  "incident_description": "There was a collision. The vehicle was damaged. Not sure of the exact details.",
+  "incident_location": "9034 Weaver Ridge, Arlington, NY",
+  "police_report_number": null,
+  "estimated_amount": 84720.0,
+  "vehicle_year": 2010,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "low_confidence_high_value",
+  "_fraud_reported_ground_truth": false,
+  "_note": "deliberately vague narrative on a high-value claim - confidence gate should fire"
+}

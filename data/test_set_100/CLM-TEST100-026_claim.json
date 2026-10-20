@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-026",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Martinez",
+  "claimant_email": "claimant.640395@example.com",
+  "claimant_phone": "555-824-5018",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-03",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Columbus, WV, at 4862 Lincoln Hwy on 2026-01-03. Severity assessed as minor damage. Claimant was operating the vehicle for a delivery service at the time of the incident.",
+  "incident_location": "4862 Lincoln Hwy, Columbus, WV",
+  "police_report_number": null,
+  "estimated_amount": 40000.0,
+  "vehicle_year": 2021,
+  "vehicle_make": "BMW",
+  "vehicle_model": "M5",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_commercial_use",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Narrative states the real commercial_use trigger fact per policy_checker.py's own criteria"
+}

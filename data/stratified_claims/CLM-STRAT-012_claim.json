@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-012",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Joseph Anderson",
+  "claimant_email": "claimant.228439@example.com",
+  "claimant_phone": "555-634-5989",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-10",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, SC, at 8957 Weaver Drive on 2026-02-10. Severity assessed as total loss.",
+  "incident_location": "8957 Weaver Drive, Arlington, SC",
+  "police_report_number": null,
+  "estimated_amount": 37840.0,
+  "vehicle_year": 2007,
+  "vehicle_make": "Accura",
+  "vehicle_model": "RSX",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

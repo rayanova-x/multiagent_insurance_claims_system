@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-021",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "John Martinez",
+  "claimant_email": "claimant.574054@example.com",
+  "claimant_phone": "555-611-1648",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-25",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Columbus, SC, at 9935 4th Drive on 2026-01-25. Severity assessed as major damage.",
+  "incident_location": "9935 4th Drive, Columbus, SC",
+  "police_report_number": "SCPD-20260125-4054",
+  "estimated_amount": 71610.0,
+  "vehicle_year": 2015,
+  "vehicle_make": "Saab",
+  "vehicle_model": "92x",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

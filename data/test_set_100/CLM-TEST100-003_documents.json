@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": "VAPD-20260227-3462",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-02-27",
+    "incident_location": "3525 3rd Hwy, Columbus, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, VA, at 3525 3rd Hwy on 2026-02-27. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Williams",
+      "Elizabeth Thompson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Elizabeth Thompson",
+    "driver_license_number": "80801168",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2023,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-27",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "19698.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13132.00"
+      }
+    ],
+    "line_items_sum": "32830.00",
+    "stated_total": "32830"
+  }
+}

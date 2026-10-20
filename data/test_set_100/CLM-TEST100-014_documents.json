@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20150106-9050",
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2015-01-06",
+    "incident_location": "4546 Tree St, Northbend, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 4546 Tree St on 2015-01-06. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "William Martinez"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2015-01-06",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "33984.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "22656.00"
+      }
+    ],
+    "line_items_sum": "56640.00",
+    "stated_total": "56640"
+  }
+}

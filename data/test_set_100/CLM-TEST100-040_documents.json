@@ -1,0 +1,16 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20260112-2728",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-12",
+    "incident_location": "3567 4th Drive, Hillsdale, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Hillsdale, WV, at 3567 4th Drive on 2026-01-12. Severity assessed as minor damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Michael Anderson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": null
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-046",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Rodriguez",
+  "claimant_email": "claimant.689139@example.com",
+  "claimant_phone": "555-367-1215",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-30",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, SC, at 9489 3rd St on 2026-01-30. Severity assessed as minor damage.",
+  "incident_location": "9489 3rd St, Columbus, SC",
+  "police_report_number": null,
+  "estimated_amount": 68400.0,
+  "vehicle_year": 2018,
+  "vehicle_make": "Ford",
+  "vehicle_model": "F150",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

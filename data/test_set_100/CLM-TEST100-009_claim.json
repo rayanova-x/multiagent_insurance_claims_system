@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-009",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Barbara Johnson",
+  "claimant_email": "claimant.608733@example.com",
+  "claimant_phone": "555-865-8740",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-15",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbrook, SC, at 2100 Francis Drive on 2026-02-15. Severity assessed as minor damage.",
+  "incident_location": "2100 Francis Drive, Northbrook, SC",
+  "police_report_number": null,
+  "estimated_amount": 91650.0,
+  "vehicle_year": 2022,
+  "vehicle_make": "Accura",
+  "vehicle_model": "TL",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

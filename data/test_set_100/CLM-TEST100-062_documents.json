@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-02-20",
+    "incident_location": "1628 Best Drive, Arlington, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, NY, at 1628 Best Drive on 2026-02-20. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Barbara Williams",
+      "Richard Miller"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Richard Miller",
+    "driver_license_number": "38359559",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-02-20",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31776.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "21184.00"
+      }
+    ],
+    "line_items_sum": "52960.00",
+    "stated_total": "52960"
+  }
+}

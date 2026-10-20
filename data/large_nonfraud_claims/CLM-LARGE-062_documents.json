@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260217-0993",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-02-17",
+    "incident_location": "1598 3rd Drive, Hillsdale, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 1598 3rd Drive on 2026-02-17. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Patricia Lee",
+      "John Taylor"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "John Taylor",
+    "driver_license_number": "95352346",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-17",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "13860.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "9240.00"
+      }
+    ],
+    "line_items_sum": "23100.00",
+    "stated_total": "23100"
+  }
+}

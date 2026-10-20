@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-042",
+  "policy_number": "POL-AUTO-HIGHDED-US",
+  "claimant_name": "Linda Thompson",
+  "claimant_email": "claimant.431614@example.com",
+  "claimant_phone": "555-498-5390",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-31",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Northbend, WV, at 5994 5th Ave on 2026-01-31. Severity assessed as total loss.",
+  "incident_location": "5994 5th Ave, Northbend, WV",
+  "police_report_number": null,
+  "estimated_amount": 19080.0,
+  "vehicle_year": 2006,
+  "vehicle_make": "Saab",
+  "vehicle_model": "93",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "deductible_exceeds_damage",
+  "_fraud_reported_ground_truth": false,
+  "_note": "POL-AUTO-HIGHDED-US's $15,000 deductible exceeds this claim's real vehicle_claim"
+}

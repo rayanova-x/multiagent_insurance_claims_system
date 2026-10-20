@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-24",
+    "incident_location": "5061 Francis Ave, Northbend, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 5061 Francis Ave on 2026-01-24. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jessica Garcia"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-24",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "19656.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13104.00"
+      }
+    ],
+    "line_items_sum": "32760.00",
+    "stated_total": "32760"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-006",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Mary Smith",
+  "claimant_email": "claimant.778768@example.com",
+  "claimant_phone": "555-159-2666",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2015-01-30",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, WV, at 4872 Rock Ridge on 2015-01-30. Severity assessed as total loss.",
+  "incident_location": "4872 Rock Ridge, Arlington, WV",
+  "police_report_number": "WVPD-20150130-8768",
+  "estimated_amount": 27700.0,
+  "vehicle_year": 2012,
+  "vehicle_make": "Toyota",
+  "vehicle_model": "Camry",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "lapsed_policy",
+  "_fraud_reported_ground_truth": false,
+  "_note": "incident_date intentionally NOT shifted into the policy's coverage window"
+}

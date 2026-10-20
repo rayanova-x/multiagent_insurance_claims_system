@@ -1,0 +1,418 @@
+{
+  "total_claims": 35,
+  "correct": 34,
+  "completion_rate": 0.971,
+  "by_tag": {
+    "clean": {
+      "correct": 20,
+      "total": 20
+    },
+    "high_value_clean": {
+      "correct": 4,
+      "total": 4
+    },
+    "missing_document": {
+      "correct": 4,
+      "total": 5
+    },
+    "deductible_exceeds_damage": {
+      "correct": 2,
+      "total": 2
+    },
+    "policy_exclusion": {
+      "correct": 2,
+      "total": 2
+    },
+    "lapsed_policy": {
+      "correct": 2,
+      "total": 2
+    }
+  },
+  "results": [
+    {
+      "claim": "CLM-STRAT-001",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=5220.0",
+      "elapsed_s": 85.0,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-002",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=17420.0",
+      "elapsed_s": 50.2,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-003",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_inspection",
+      "correct": false,
+      "detail": "triggers=['Damage assessor requires physical inspection before a decision', 'First-time claimant with high-value claim ($51,590)']",
+      "elapsed_s": 18.5,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-004",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=17420.0",
+      "elapsed_s": 39.1,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-005",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=550.0",
+      "elapsed_s": 72.0,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-006",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=1600.0",
+      "elapsed_s": 39.2,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-007",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=17420.0",
+      "elapsed_s": 56.4,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-008",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=34500.0",
+      "elapsed_s": 66.8,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-009",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=34500.0",
+      "elapsed_s": 59.2,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-010",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=27500.0",
+      "elapsed_s": 68.1,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-011",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=12300.0",
+      "elapsed_s": 56.9,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-012",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=550.0",
+      "elapsed_s": 62.4,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-013",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=3400.0",
+      "elapsed_s": 67.1,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-014",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=11100.0",
+      "elapsed_s": 81.3,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-015",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=3400.0",
+      "elapsed_s": 59.0,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-016",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=6130.0",
+      "elapsed_s": 77.2,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-017",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=34500.0",
+      "elapsed_s": 77.0,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-018",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=550.0",
+      "elapsed_s": 62.0,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-019",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=5220.0",
+      "elapsed_s": 78.2,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-020",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=10500.0",
+      "elapsed_s": 58.5,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-031",
+      "tag": "high_value_clean",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Confidence gate: fraud_crew confidence 0.00 below 0.50', 'Claim amount $87,010 exceeds review threshold $84,100', 'First-time claimant with high-value claim ($87,010)']",
+      "elapsed_s": 37.6,
+      "expected_corrected": "paused_for_review",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-032",
+      "tag": "high_value_clean",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Confidence gate: fraud_crew confidence 0.00 below 0.50', 'Claim amount $114,920 exceeds review threshold $84,100', 'First-time claimant with high-value claim ($114,920)']",
+      "elapsed_s": 52.1,
+      "expected_corrected": "paused_for_review",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-033",
+      "tag": "high_value_clean",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Confidence gate: fraud_crew confidence 0.00 below 0.50', 'Claim amount $91,650 exceeds review threshold $84,100', 'First-time claimant with high-value claim ($91,650)']",
+      "elapsed_s": 123.4,
+      "expected_corrected": "paused_for_review",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-036",
+      "tag": "high_value_clean",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Confidence gate: fraud_crew confidence 0.00 below 0.50', 'Claim amount $89,400 exceeds review threshold $84,100', 'First-time claimant with high-value claim ($89,400)']",
+      "elapsed_s": 82.9,
+      "expected_corrected": "paused_for_review",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-037",
+      "tag": "missing_document",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_inspection",
+      "correct": false,
+      "detail": "triggers=['Damage assessor requires physical inspection before a decision', 'First-time claimant with high-value claim ($51,660)', 'Intake flags: Missing documents: police_report, Claim amount exceeds policy limit']",
+      "elapsed_s": 77.2,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-038",
+      "tag": "missing_document",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Evaluator quality gate failed (score 0.33 < 0.70)', 'First-time claimant with high-value claim ($51,120)', 'Intake flags: Missing documents: other_driver_info']",
+      "elapsed_s": 160.1,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": false
+    },
+    {
+      "claim": "CLM-STRAT-039",
+      "tag": "missing_document",
+      "expected": "paused_for_inspection",
+      "actual": "paused_for_inspection",
+      "correct": true,
+      "detail": "triggers=['Damage assessor requires physical inspection before a decision', 'First-time claimant with high-value claim ($56,400)', 'Intake flags: Missing documents: repair_estimate, Claim amount exceeds policy limit']",
+      "elapsed_s": 73.0,
+      "expected_corrected": "paused_for_inspection",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-040",
+      "tag": "missing_document",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=1600.0",
+      "elapsed_s": 141.7,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-041",
+      "tag": "missing_document",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved, amount=27500.0",
+      "elapsed_s": 205.7,
+      "expected_corrected": "settled_not_denied",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-042",
+      "tag": "deductible_exceeds_damage",
+      "expected": "denied_or_zero_settlement",
+      "actual": "denied_or_zero_settlement",
+      "correct": true,
+      "detail": "decision=denied, amount=0.0",
+      "elapsed_s": 194.3,
+      "expected_corrected": "denied_or_zero_settlement",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-043",
+      "tag": "deductible_exceeds_damage",
+      "expected": "denied_or_zero_settlement",
+      "actual": "paused_for_inspection",
+      "correct": false,
+      "detail": "triggers=['Damage assessor requires physical inspection before a decision', 'First-time claimant with high-value claim ($18,000)']",
+      "elapsed_s": 123.1,
+      "expected_corrected": "denied_or_zero_settlement",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-044",
+      "tag": "policy_exclusion",
+      "expected": "paused_for_review",
+      "actual": "paused_for_review",
+      "correct": true,
+      "detail": "triggers=['Policy exclusions/compliance concerns: racing', 'First-time claimant with high-value claim ($76,600)', 'Intake flags: Policy exclusion: racing, Claim amount exceeds policy limit']",
+      "elapsed_s": 86.3,
+      "expected_corrected": "paused_for_review",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-045",
+      "tag": "policy_exclusion",
+      "expected": "paused_for_review",
+      "actual": "paused_for_review",
+      "correct": true,
+      "detail": "triggers=['Policy exclusions/compliance concerns: commercial_use', 'First-time claimant with high-value claim ($81,800)', 'Intake flags: Potential commercial use exclusion violation, Claim amount exceeds policy limit']",
+      "elapsed_s": 88.2,
+      "expected_corrected": "paused_for_review",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-046",
+      "tag": "lapsed_policy",
+      "expected": "denied_at_intake",
+      "actual": "denied_at_intake",
+      "correct": true,
+      "detail": "decision=denied, amount=0.0",
+      "elapsed_s": 57.9,
+      "expected_corrected": "denied_at_intake",
+      "correct_corrected": true
+    },
+    {
+      "claim": "CLM-STRAT-047",
+      "tag": "lapsed_policy",
+      "expected": "denied_at_intake",
+      "actual": "denied_at_intake",
+      "correct": true,
+      "detail": "decision=denied, amount=0.0",
+      "elapsed_s": 30.5,
+      "expected_corrected": "denied_at_intake",
+      "correct_corrected": true
+    }
+  ]
+}

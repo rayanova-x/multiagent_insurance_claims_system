@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-032",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "William Johnson",
+  "claimant_email": "claimant.219308@example.com",
+  "claimant_phone": "555-709-5800",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-15",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, SC, at 5971 5th Hwy on 2026-02-15. Severity assessed as major damage.",
+  "incident_location": "5971 5th Hwy, Springfield, SC",
+  "police_report_number": "SCPD-20260215-9308",
+  "estimated_amount": 114920.0,
+  "vehicle_year": 2017,
+  "vehicle_make": "Audi",
+  "vehicle_model": "A3",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

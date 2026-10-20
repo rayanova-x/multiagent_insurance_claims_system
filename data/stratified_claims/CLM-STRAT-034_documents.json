@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-01-01",
+    "incident_location": "5719 2nd Lane, Northbrook, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 5719 2nd Lane on 2026-01-01. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "John Lee"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "38832.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "25888.00"
+      }
+    ],
+    "line_items_sum": "64720.00",
+    "stated_total": "64720"
+  }
+}

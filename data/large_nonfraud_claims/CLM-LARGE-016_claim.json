@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-016",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Barbara Moore",
+  "claimant_email": "claimant.562129@example.com",
+  "claimant_phone": "555-668-1219",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-08",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, SC, at 3220 Rock Drive on 2026-01-08. Severity assessed as minor damage.",
+  "incident_location": "3220 Rock Drive, Northbend, SC",
+  "police_report_number": "SCPD-20260108-2129",
+  "estimated_amount": 69840.0,
+  "vehicle_year": 2020,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "Neon",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

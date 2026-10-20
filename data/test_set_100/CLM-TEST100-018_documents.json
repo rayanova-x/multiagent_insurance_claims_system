@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2015-02-10",
+    "incident_location": "8957 Weaver Drive, Arlington, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, SC, at 8957 Weaver Drive on 2015-02-10. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "James Lee",
+      "Robert Jones"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Robert Jones",
+    "driver_license_number": "57104975",
+    "insurer_name": "Crestline Auto Insurance",
+    "policy_number": null,
+    "vehicle_make": "Chevrolet",
+    "vehicle_model": "Malibu",
+    "vehicle_year": 2011,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2015-02-10",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "19866.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "13244.00"
+      }
+    ],
+    "line_items_sum": "33110.00",
+    "stated_total": "33110"
+  }
+}

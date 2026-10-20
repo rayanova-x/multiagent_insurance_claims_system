@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-004",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Garcia",
+  "claimant_email": "claimant.388758@example.com",
+  "claimant_phone": "555-956-3673",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-13",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, NY, at 5846 Weaver Drive on 2026-01-13. Severity assessed as minor damage. Claimant was operating the vehicle for a delivery service at the time of the incident.",
+  "incident_location": "5846 Weaver Drive, Springfield, NY",
+  "police_report_number": null,
+  "estimated_amount": 78650.0,
+  "vehicle_year": 2023,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "policy_exclusion",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Incident description deliberately implies the 'commercial_use' exclusion"
+}

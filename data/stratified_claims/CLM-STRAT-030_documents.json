@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": "WVPD-20260124-5859",
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-24",
+    "incident_location": "3104 Sky Drive, Springfield, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Springfield, WV, at 3104 Sky Drive on 2026-01-24. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "William Davis"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Summit Body Shop",
+    "estimate_date": "2026-01-24",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "22302.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "14868.00"
+      }
+    ],
+    "line_items_sum": "37170.00",
+    "stated_total": "37170"
+  }
+}

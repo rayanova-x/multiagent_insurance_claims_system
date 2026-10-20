@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-13",
+    "incident_location": "5846 Weaver Drive, Springfield, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, NY, at 5846 Weaver Drive on 2026-01-13. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Jessica Garcia",
+      "Susan Williams"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Susan Williams",
+    "driver_license_number": "30942592",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-13",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "30030.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20020.00"
+      }
+    ],
+    "line_items_sum": "50050.00",
+    "stated_total": "50050"
+  }
+}

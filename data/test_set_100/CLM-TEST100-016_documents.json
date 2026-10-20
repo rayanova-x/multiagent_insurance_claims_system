@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2015-02-22",
+    "incident_location": "8101 3rd Ridge, Columbus, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, VA, at 8101 3rd Ridge on 2015-02-22. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Elizabeth Lee",
+      "Linda Taylor"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Linda Taylor",
+    "driver_license_number": "88158538",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2007,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2015-02-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "28992.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "19328.00"
+      }
+    ],
+    "line_items_sum": "48320.00",
+    "stated_total": "48320"
+  }
+}

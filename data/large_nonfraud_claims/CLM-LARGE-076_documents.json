@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-08",
+    "incident_location": "1388 Embaracadero Hwy, Columbus, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, WV, at 1388 Embaracadero Hwy on 2026-01-08. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jennifer Davis",
+      "William Lee"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Lee",
+    "driver_license_number": "94247500",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-08",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "25296.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16864.00"
+      }
+    ],
+    "line_items_sum": "42160.00",
+    "stated_total": "42160"
+  }
+}

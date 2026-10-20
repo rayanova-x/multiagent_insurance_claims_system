@@ -1,0 +1,32 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-02-19",
+    "incident_location": "3087 Oak Hwy, Arlington, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Arlington, NC, at 3087 Oak Hwy on 2026-02-19. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Robert Johnson",
+      "John Johnson"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-19",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "18288.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "12192.00"
+      }
+    ],
+    "line_items_sum": "30480.00",
+    "stated_total": "30480"
+  }
+}

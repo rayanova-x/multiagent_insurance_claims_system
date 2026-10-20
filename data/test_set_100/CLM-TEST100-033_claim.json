@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-033",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "John Miller",
+  "claimant_email": "claimant.323547@example.com",
+  "claimant_phone": "555-302-0118",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-03",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, NY, at 5104 Francis Drive on 2026-01-03. Severity assessed as minor damage. Claimant's repair shop notes the damaged panel already had unrepaired dents and scraped paint from a prior incident, visible underneath the new damage.",
+  "incident_location": "5104 Francis Drive, Riverwood, NY",
+  "police_report_number": "NYPD-20260103-3547",
+  "estimated_amount": 81800.0,
+  "vehicle_year": 2009,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_pre_existing_damage",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Narrative states the real pre_existing_damage trigger fact per policy_checker.py's own criteria"
+}

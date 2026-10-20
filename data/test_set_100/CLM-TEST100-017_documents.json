@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2015-01-01",
+    "incident_location": "5380 Pine St, Columbus, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, NY, at 5380 Pine St on 2015-01-01. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "John Brown",
+      "William Martinez"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "William Martinez",
+    "driver_license_number": "70502589",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2009,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2015-01-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "25152.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16768.00"
+      }
+    ],
+    "line_items_sum": "41920.00",
+    "stated_total": "41920"
+  }
+}

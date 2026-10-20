@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-013",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Davis",
+  "claimant_email": "claimant.858851@example.com",
+  "claimant_phone": "555-141-4333",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Riverwood, VA, at 2502 Apache Hwy on 2026-02-24. Severity assessed as minor damage.",
+  "incident_location": "2502 Apache Hwy, Riverwood, VA",
+  "police_report_number": null,
+  "estimated_amount": 77880.0,
+  "vehicle_year": 2016,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

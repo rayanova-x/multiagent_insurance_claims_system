@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-01-09",
+    "incident_location": "9798 Sky Ridge, Northbrook, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbrook, SC, at 9798 Sky Ridge on 2026-01-09. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Richard Miller",
+      "James Martinez"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "James Martinez",
+    "driver_license_number": "86486333",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2021,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-09",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "25002.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16668.00"
+      }
+    ],
+    "line_items_sum": "41670.00",
+    "stated_total": "41670"
+  }
+}

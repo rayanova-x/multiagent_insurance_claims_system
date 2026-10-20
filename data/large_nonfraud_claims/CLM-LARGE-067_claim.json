@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-067",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "David Williams",
+  "claimant_email": "claimant.572318@example.com",
+  "claimant_phone": "555-888-7864",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-09",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 4965 MLK Drive on 2026-02-09. Severity assessed as minor damage.",
+  "incident_location": "4965 MLK Drive, Northbend, WV",
+  "police_report_number": null,
+  "estimated_amount": 78120.0,
+  "vehicle_year": 2017,
+  "vehicle_make": "BMW",
+  "vehicle_model": "3 Series",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

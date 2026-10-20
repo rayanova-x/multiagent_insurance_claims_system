@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-016",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Elizabeth Lee",
+  "claimant_email": "claimant.689794@example.com",
+  "claimant_phone": "555-233-5265",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2015-02-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, VA, at 8101 3rd Ridge on 2015-02-22. Severity assessed as major damage.",
+  "incident_location": "8101 3rd Ridge, Columbus, VA",
+  "police_report_number": null,
+  "estimated_amount": 60400.0,
+  "vehicle_year": 2014,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "lapsed_policy",
+  "_fraud_reported_ground_truth": false,
+  "_note": "incident_date intentionally NOT shifted into the policy's coverage window"
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-019",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "David Johnson",
+  "claimant_email": "claimant.036024@example.com",
+  "claimant_phone": "555-007-6965",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-24",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Riverwood, VA, at 2502 Apache Hwy on 2026-02-24. Severity assessed as minor damage. Claimant states the vehicles were racing on a closed stretch of road when the collision occurred.",
+  "incident_location": "2502 Apache Hwy, Riverwood, VA",
+  "police_report_number": null,
+  "estimated_amount": 77880.0,
+  "vehicle_year": 2016,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_racing",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Narrative states the real racing trigger fact per policy_checker.py's own criteria"
+}

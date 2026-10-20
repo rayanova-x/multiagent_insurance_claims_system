@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-02-22",
+    "incident_location": "7121 Francis Lane, Columbus, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, NY, at 7121 Francis Lane on 2026-02-22. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Jessica Garcia",
+      "Linda Anderson"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Linda Anderson",
+    "driver_license_number": "87327202",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-02-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "13860.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "9240.00"
+      }
+    ],
+    "line_items_sum": "23100.00",
+    "stated_total": "23100"
+  }
+}

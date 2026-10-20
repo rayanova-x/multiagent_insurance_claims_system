@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-02-12",
+    "incident_location": "4154 Lincoln Hwy, Northbend, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbend, SC, at 4154 Lincoln Hwy on 2026-02-12. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Robert Martinez",
+      "Joseph Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Joseph Smith",
+    "driver_license_number": "15740446",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-12",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "42066.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "28044.00"
+      }
+    ],
+    "line_items_sum": "70110.00",
+    "stated_total": "70110"
+  }
+}

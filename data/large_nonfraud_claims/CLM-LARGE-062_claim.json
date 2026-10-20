@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-062",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Patricia Lee",
+  "claimant_email": "claimant.640993@example.com",
+  "claimant_phone": "555-603-1944",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-17",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 1598 3rd Drive on 2026-02-17. Severity assessed as total loss.",
+  "incident_location": "1598 3rd Drive, Hillsdale, NY",
+  "police_report_number": "NYPD-20260217-0993",
+  "estimated_amount": 36300.0,
+  "vehicle_year": 2024,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

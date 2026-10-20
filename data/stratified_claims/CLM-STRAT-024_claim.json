@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-024",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Martinez",
+  "claimant_email": "claimant.700054@example.com",
+  "claimant_phone": "555-211-9707",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-15",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Springfield, SC, at 6851 3rd Drive on 2026-01-15. Severity assessed as total loss.",
+  "incident_location": "6851 3rd Drive, Springfield, SC",
+  "police_report_number": "SCPD-20260115-0054",
+  "estimated_amount": 46200.0,
+  "vehicle_year": 2014,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "Neon",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

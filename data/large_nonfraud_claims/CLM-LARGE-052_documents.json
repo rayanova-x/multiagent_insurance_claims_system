@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbrook Police Department",
+    "incident_date": "2026-01-29",
+    "incident_location": "2199 Texas Drive, Northbrook, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbrook, NC, at 2199 Texas Drive on 2026-01-29. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "Patricia Martinez",
+      "Barbara Miller"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Barbara Miller",
+    "driver_license_number": "15084006",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-29",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "15120.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "10080.00"
+      }
+    ],
+    "line_items_sum": "25200.00",
+    "stated_total": "25200"
+  }
+}

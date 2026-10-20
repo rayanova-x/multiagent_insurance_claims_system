@@ -1,0 +1,29 @@
+{
+  "claim_id": "CLM-TEST100-030",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "John Thompson",
+  "claimant_email": "claimant.171809@example.com",
+  "claimant_phone": "555-130-4978",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-21",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, NY, at 4234 Cherokee Lane on 2026-02-21. Severity assessed as total loss. Claimant was giving a coworker a ride home after their shift, with no payment involved, when the collision occurred.",
+  "incident_location": "4234 Cherokee Lane, Arlington, NY",
+  "police_report_number": null,
+  "estimated_amount": 55120.0,
+  "vehicle_year": 2013,
+  "vehicle_make": "Accura",
+  "vehicle_model": "MDX",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_commercial_use_near_miss",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Superficially similar to commercial_use but matches policy_checker.py's own 'does NOT apply to' negative criteria - should NOT be flagged"
+}

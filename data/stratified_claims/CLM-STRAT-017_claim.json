@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-017",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Susan Moore",
+  "claimant_email": "claimant.881586@example.com",
+  "claimant_phone": "555-221-8000",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-09",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, NY, at 8353 Britain Ridge on 2026-01-09. Severity assessed as major damage.",
+  "incident_location": "8353 Britain Ridge, Hillsdale, NY",
+  "police_report_number": null,
+  "estimated_amount": 77110.0,
+  "vehicle_year": 2026,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Impreza",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-014",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "William Martinez",
+  "claimant_email": "claimant.179050@example.com",
+  "claimant_phone": "555-903-7809",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2015-01-06",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, WV, at 4546 Tree St on 2015-01-06. Severity assessed as total loss.",
+  "incident_location": "4546 Tree St, Northbend, WV",
+  "police_report_number": "WVPD-20150106-9050",
+  "estimated_amount": 77880.0,
+  "vehicle_year": 2015,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "lapsed_policy",
+  "_fraud_reported_ground_truth": false,
+  "_note": "incident_date intentionally NOT shifted into the policy's coverage window"
+}

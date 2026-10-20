@@ -1,0 +1,26 @@
+{
+  "claim_id": "CLM-LARGE-089",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Robert Martinez",
+  "claimant_email": "claimant.743930@example.com",
+  "claimant_phone": "555-873-0273",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-06",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbend, NY, at 3656 Solo Ave on 2026-01-06. Severity assessed as major damage.",
+  "incident_location": "3656 Solo Ave, Northbend, NY",
+  "police_report_number": null,
+  "estimated_amount": 54900.0,
+  "vehicle_year": 2024,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "C300",
+  "documents": [
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "missing_document",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Missing: police_report"
+}

@@ -1,0 +1,126 @@
+{
+  "date": "2026-10-20",
+  "batch": "Batch 2, sub-batch scenarios1: 10 of 30 data/test_scenarios fixtures (SC-01,04,07,10,13,16,19,22,25,28 - interleaved by index for representative stratification)",
+  "model": "gemini-3.5-flash-lite (primary), gemini-3.1-flash-lite (fallback)",
+  "fraud_crew": "mocked (out of scope, never redesigned this session) - inert LOW/0.0 placeholder",
+  "real_quota_spent": {
+    "total_claims": 10,
+    "resumed_claims": 2,
+    "note": "Run was interrupted once mid-SC-28 by a genuine system-level 'fork: resource temporarily unavailable' error (too many overlapping background shells this session, not a code/quota/pipeline bug). The background process actually continued and completed all 10 claims correctly on its own despite stdout appearing frozen for a long stretch - a run_in_background output-capture lag, confirmed directly against the real checkpoint DB, not a real hang. A separate foreground retry of SC-28 alone was also run (redundant but harmless, used a different claim_id)."
+  },
+  "results": [
+    {
+      "label": "SC-01_invalid_claim_lapsed_policy",
+      "paused": false,
+      "final_decision": "DENIED",
+      "final_amount_usd": 0.0,
+      "pipeline_path": ["intake_agent", "communication_agent"],
+      "agent_call_count": 1,
+      "elapsed_s": 26.0,
+      "resumed": false,
+      "assessment": "correct - policy_number does not exist, intake denies as designed"
+    },
+    {
+      "label": "SC-04_intake_confidence_gate_inert",
+      "paused": false,
+      "final_decision": "DENIED",
+      "final_amount_usd": 0.0,
+      "pipeline_path": ["intake_agent", "settlement_calculator", "evaluator", "communication_agent"],
+      "agent_call_count": 2,
+      "elapsed_s": 14.4,
+      "resumed": false,
+      "assessment": "fast-mode claim; denied at settlement (deductible likely exceeded the small claim amount, same pattern as Batch 1's path_e_fast_mode_small_claim) - not independently re-verified this round but consistent with known behavior"
+    },
+    {
+      "label": "SC-07_guardrail_budget_halt",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 12.4,
+      "resumed": false,
+      "real_pause_reason": "damage_assessor.requires_physical_inspection=True (confirmed via checkpoint inspection)",
+      "assessment": "correct - known document-upload gap, same pattern as Batch 1's paused claims. Did NOT test the scenario's own intended guardrail-budget-halt trigger (that requires a config change to force, not exercised this round)"
+    },
+    {
+      "label": "SC-10_conflict_severity_mismatch_retries",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 11.7,
+      "resumed": false,
+      "assessment": "paused at consistency_coordinator without a visible retry loop in the trace (no second damage_assessor/consistency_coordinator cycle) - the intended MATERIAL severity-mismatch retry was NOT clearly observed this round; real pause reason not independently verified via checkpoint inspection for this specific claim. Worth a closer look in a future run."
+    },
+    {
+      "label": "SC-13_fraud_score_review_threshold",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 11.8,
+      "resumed": false,
+      "real_pause_reason": "policy_checker.compliance_flags=['Possible delayed filing or vague timeline provided by claimant requiring verification'] AND damage_assessor.requires_physical_inspection=True (confirmed via checkpoint inspection)",
+      "assessment": "correctly paused, though via a different real trigger (compliance flag + inspection) than the scenario's named intent (fraud score threshold) - fraud_score was 0.0 (mocked), so the real fraud-score gate this scenario meant to test never actually fired. The pause is still legitimate, just not testing what the fixture name implies while fraud_crew is mocked."
+    },
+    {
+      "label": "SC-16_low_confidence_high_value",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 14.7,
+      "resumed": false,
+      "real_pause_reason": "fraud_crew confidence=0.0 (mocked) combined with the claim's real $95,000 amount, above the $84,100 high-impact threshold - the risk-stratified confidence gate correctly fired (confirmed via checkpoint inspection: damage/policy confidence were both 0.95, only the mocked fraud confidence was low)",
+      "assessment": "correct and genuinely confirms the risk-stratified confidence gate design works as intended - the SAME inert fraud mock did NOT pause Batch 1's lower-value claims, only this high-value one, exactly matching the gate's real logic"
+    },
+    {
+      "label": "SC-19_normal_settlement_to_evaluator",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 23.9,
+      "resumed": false,
+      "real_pause_reason": "damage_assessor.requires_physical_inspection=True (confirmed via checkpoint inspection)",
+      "assessment": "correct, known document-upload gap - this scenario's own note only describes what happens AFTER settlement is reached ('proceeds to evaluator as usual'), not a guarantee nothing pauses before settlement, so this is not a contradiction of its intent, just never reaching the part of the pipeline it meant to test"
+    },
+    {
+      "label": "SC-22_evaluation_skipped_sampling",
+      "paused": true,
+      "final_decision": null,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"],
+      "agent_call_count": 4,
+      "elapsed_s": 13.1,
+      "resumed": false,
+      "real_pause_reason": "damage_assessor.requires_physical_inspection=True (confirmed via checkpoint inspection)",
+      "assessment": "correct, known document-upload gap - same as SC-19, never reached far enough to test the evaluator-sampling behavior this scenario intended"
+    },
+    {
+      "label": "SC-25_resume_reviewer_denies",
+      "paused": false,
+      "final_decision": "DENIED",
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator", "hitl_checkpoint", "communication_agent"],
+      "agent_call_count": 4,
+      "elapsed_s": 15.2,
+      "resumed": true,
+      "assessment": "correct - paused for human review (pre_existing_damage exclusion as designed), resumed with decision=denied, went straight to communication as the scenario intended. First real resume_claim() call verified live this round."
+    },
+    {
+      "label": "SC-28_resume_fanout_pause",
+      "paused": false,
+      "final_decision": "APPROVED_PARTIAL",
+      "final_amount_usd": 10500.0,
+      "pipeline_path": ["intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator", "hitl_checkpoint", "settlement_calculator", "evaluator", "communication_agent"],
+      "agent_call_count": 6,
+      "elapsed_s": 42.6,
+      "resumed": true,
+      "assessment": "correct and genuinely interesting - resumed into settlement/evaluator as intended (fan-out NOT re-run after resume, confirmed by the trace never repeating damage/policy/fraud), reached APPROVED_PARTIAL ($10,500), and the evaluator's own quality gate separately flagged it (score=0.67 < 0.70 threshold) - a real, legitimate SECOND-stage quality concern distinct from the resume test itself, not a bug."
+    }
+  ],
+  "cross_claim_findings": [
+    "6 of 10 claims paused at or before consistency_coordinator - 3 of those 6 traced to the same known root cause (damage_assessor.requires_physical_inspection=True, caused by the pre-existing gap that claim_documents stays None since real file upload/extraction doesn't exist yet). This is expected to recur across most/all of the 30 test_scenarios fixtures for the same structural reason, not a new bug per claim.",
+    "SC-16's pause is a genuine, positive confirmation of the risk-stratified confidence gate design: the exact same inert fraud_crew mock (confidence=0.0) did NOT pause lower-value claims in Batch 1, but DID correctly pause this high-value ($95,000) one - proving the gate's amount-stratification logic works as designed, live.",
+    "SC-13's pause came from a different real trigger (compliance flag) than its name implies (fraud score threshold), because fraud_crew is mocked this round and can never produce a real elevated fraud score. This is an expected, known limitation of testing WITH fraud_crew mocked, not a bug - any scenario specifically designed to test fraud_crew's own scoring behavior cannot be fully exercised until fraud_crew itself is live (out of scope this session)."
+  ]
+}

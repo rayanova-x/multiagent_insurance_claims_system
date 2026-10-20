@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-01-27",
+    "incident_location": "7466 MLK Ridge, Columbus, NC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Columbus, NC, at 7466 MLK Ridge on 2026-01-27. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Robert Davis",
+      "Michael Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Michael Smith",
+    "driver_license_number": "28155207",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-27",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "26922.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17948.00"
+      }
+    ],
+    "line_items_sum": "44870.00",
+    "stated_total": "44870"
+  }
+}

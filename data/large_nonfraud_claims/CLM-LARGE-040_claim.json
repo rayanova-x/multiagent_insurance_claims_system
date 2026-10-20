@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-040",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Mary Brown",
+  "claimant_email": "claimant.120963@example.com",
+  "claimant_phone": "555-725-2262",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-23",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Riverwood, SC, at 7923 Elm Ave on 2026-02-23. Severity assessed as minor damage.",
+  "incident_location": "7923 Elm Ave, Riverwood, SC",
+  "police_report_number": "SCPD-20260223-0963",
+  "estimated_amount": 57120.0,
+  "vehicle_year": 2013,
+  "vehicle_make": "Mercedes",
+  "vehicle_model": "C300",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

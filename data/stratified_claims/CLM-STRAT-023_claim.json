@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-023",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Michael Thompson",
+  "claimant_email": "claimant.952980@example.com",
+  "claimant_phone": "555-139-2251",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-02",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Arlington, SC, at 8973 Washington St on 2026-01-02. Severity assessed as major damage.",
+  "incident_location": "8973 Washington St, Arlington, SC",
+  "police_report_number": null,
+  "estimated_amount": 64100.0,
+  "vehicle_year": 2014,
+  "vehicle_make": "Saab",
+  "vehicle_model": "95",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "fraud_flagged",
+  "_fraud_reported_ground_truth": true,
+  "_note": ""
+}

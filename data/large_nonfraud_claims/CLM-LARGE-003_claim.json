@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-003",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Garcia",
+  "claimant_email": "claimant.573596@example.com",
+  "claimant_phone": "555-892-3039",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-02-22",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Columbus, NY, at 7121 Francis Lane on 2026-02-22. Severity assessed as minor damage. Claimant states the vehicles were racing on a closed stretch of road when the collision occurred.",
+  "incident_location": "7121 Francis Lane, Columbus, NY",
+  "police_report_number": null,
+  "estimated_amount": 34650.0,
+  "vehicle_year": 2018,
+  "vehicle_make": "Dodge",
+  "vehicle_model": "RAM",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "policy_exclusion",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Incident description deliberately implies the 'racing' exclusion"
+}

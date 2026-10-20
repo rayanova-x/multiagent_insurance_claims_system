@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "NYPD-20260114-5088",
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-01-14",
+    "incident_location": "2078 3rd Ave, Springfield, NY",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, NY, at 2078 3rd Ave on 2026-01-14. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "James Jones",
+      "Jennifer Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Jennifer Smith",
+    "driver_license_number": "14881704",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2018,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-01-14",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "40230.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "26820.00"
+      }
+    ],
+    "line_items_sum": "67050.00",
+    "stated_total": "67050"
+  }
+}

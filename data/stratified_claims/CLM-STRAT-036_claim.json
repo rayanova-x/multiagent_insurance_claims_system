@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-STRAT-036",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Jessica Garcia",
+  "claimant_email": "claimant.533097@example.com",
+  "claimant_phone": "555-965-3680",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-14",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Springfield, NY, at 2078 3rd Ave on 2026-01-14. Severity assessed as minor damage.",
+  "incident_location": "2078 3rd Ave, Springfield, NY",
+  "police_report_number": "NYPD-20260114-3097",
+  "estimated_amount": 89400.0,
+  "vehicle_year": 2009,
+  "vehicle_make": "Suburu",
+  "vehicle_model": "Legacy",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "high_value_clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

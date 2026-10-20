@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-034",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Linda Williams",
+  "claimant_email": "claimant.776120@example.com",
+  "claimant_phone": "555-166-4368",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-06",
+  "incident_type": "auto_collision",
+  "incident_description": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, VA, at 2299 1st St on 2026-01-06. Severity assessed as minor damage.",
+  "incident_location": "2299 1st St, Hillsdale, VA",
+  "police_report_number": null,
+  "estimated_amount": 62920.0,
+  "vehicle_year": 2011,
+  "vehicle_make": "Ford",
+  "vehicle_model": "Escape",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

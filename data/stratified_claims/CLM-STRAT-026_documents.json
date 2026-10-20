@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": "SCPD-20260111-1522",
+    "jurisdiction": "Hillsdale Police Department",
+    "incident_date": "2026-01-11",
+    "incident_location": "2526 Embaracadero Ave, Hillsdale, SC",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Hillsdale, SC, at 2526 Embaracadero Ave on 2026-01-11. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "David Johnson",
+      "Barbara Williams"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Barbara Williams",
+    "driver_license_number": "79308563",
+    "insurer_name": "Harbor Insurance",
+    "policy_number": null,
+    "vehicle_make": "Ford",
+    "vehicle_model": "F-150",
+    "vehicle_year": 2026,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-11",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "28608.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "19072.00"
+      }
+    ],
+    "line_items_sum": "47680.00",
+    "stated_total": "47680"
+  }
+}

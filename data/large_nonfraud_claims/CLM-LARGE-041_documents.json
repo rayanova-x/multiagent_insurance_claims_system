@@ -1,0 +1,41 @@
+{
+  "police_report": {
+    "report_number": "VAPD-20260301-5360",
+    "jurisdiction": "Springfield Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "4755 Best Lane, Springfield, VA",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Springfield, VA, at 4755 Best Lane on 2026-03-01. Severity assessed as minor damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [],
+    "parties_involved": [
+      "David Taylor",
+      "Barbara Smith"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Barbara Smith",
+    "driver_license_number": "47636714",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2019,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-03-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "17172.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "11448.00"
+      }
+    ],
+    "line_items_sum": "28620.00",
+    "stated_total": "28620"
+  }
+}

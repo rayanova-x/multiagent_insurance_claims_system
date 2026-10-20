@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "7428 Sky Hwy, Columbus, WV",
+    "narrative": "Multi-vehicle Collision involving 2 vehicles in Columbus, WV, at 7428 Sky Hwy on 2026-03-01. Severity assessed as major damage.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Patricia Jones",
+      "John Lee"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "John Lee",
+    "driver_license_number": "41020785",
+    "insurer_name": "SafeCo",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "Civic",
+    "vehicle_year": 2026,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Main St Auto Body",
+    "estimate_date": "2026-03-01",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31164.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "20776.00"
+      }
+    ],
+    "line_items_sum": "51940.00",
+    "stated_total": "51940"
+  }
+}

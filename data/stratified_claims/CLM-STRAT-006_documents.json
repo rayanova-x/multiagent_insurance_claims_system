@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-22",
+    "incident_location": "6655 5th Drive, Northbend, SC",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Northbend, SC, at 6655 5th Drive on 2026-01-22. Severity assessed as total loss.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Jessica Rodriguez"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Lakeside Auto Repair",
+    "estimate_date": "2026-01-22",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "25434.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "16956.00"
+      }
+    ],
+    "line_items_sum": "42390.00",
+    "stated_total": "42390"
+  }
+}

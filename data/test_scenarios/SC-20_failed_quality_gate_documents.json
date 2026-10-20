@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": "CPD-2026-55988",
+    "jurisdiction": "Columbus Police Department",
+    "incident_date": "2026-03-01",
+    "incident_location": "400 Market Street, Columbus, OH",
+    "narrative": "Intersection collision. Both drivers dispute fault; no independent witnesses identified at the scene.",
+    "fault_determination": "Disputed - both parties claim the other ran the signal",
+    "citations_issued": [],
+    "parties_involved": ["Claimant", "Other driver"]
+  },
+  "other_driver_info": {
+    "driver_name": "Melinda Ruiz",
+    "driver_license_number": "OH39210487",
+    "insurer_name": "Crestline Insurance",
+    "policy_number": null,
+    "vehicle_make": "Honda",
+    "vehicle_model": "CR-V",
+    "vehicle_year": 2022,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Market Street Collision Center",
+    "estimate_date": "2026-03-02",
+    "line_items": [
+      {"description": "Front-end collision repair", "amount": "4100.00"},
+      {"description": "Bumper and grille replacement", "amount": "1900.00"},
+      {"description": "Labor", "amount": "1200.00"}
+    ],
+    "line_items_sum": "7200.00",
+    "stated_total": "7200"
+  }
+}

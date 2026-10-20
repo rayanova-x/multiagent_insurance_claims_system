@@ -1,0 +1,27 @@
+{
+  "claim_id": "CLM-LARGE-073",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Richard Miller",
+  "claimant_email": "claimant.046261@example.com",
+  "claimant_phone": "555-010-3476",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-19",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Northbrook, WV, at 2204 Washington Lane on 2026-01-19. Severity assessed as minor damage.",
+  "incident_location": "2204 Washington Lane, Northbrook, WV",
+  "police_report_number": null,
+  "estimated_amount": 47300.0,
+  "vehicle_year": 2025,
+  "vehicle_make": "Nissan",
+  "vehicle_model": "Pathfinder",
+  "documents": [
+    "police_report.pdf",
+    "other_driver_info.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "_selection_tag": "clean",
+  "_fraud_reported_ground_truth": false,
+  "_note": ""
+}

@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-096",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "David Lee",
+  "claimant_email": "claimant.574152@example.com",
+  "claimant_phone": "555-268-4685",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-26",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Riverwood, SC, at 2201 4th Lane on 2026-01-26. Severity assessed as major damage.",
+  "incident_location": "2201 4th Lane, Riverwood, SC",
+  "police_report_number": "SCPD-20260126-4152",
+  "estimated_amount": 53500.0,
+  "vehicle_year": 2026,
+  "vehicle_make": "Saab",
+  "vehicle_model": "92x",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "conflict_notable_no_retry",
+  "_fraud_reported_ground_truth": false,
+  "_note": "real row's 'Major Damage' severity on a single-vehicle claim - plausible but not guaranteed notable-conflict trigger"
+}

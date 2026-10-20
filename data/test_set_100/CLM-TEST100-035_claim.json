@@ -1,0 +1,28 @@
+{
+  "claim_id": "CLM-TEST100-035",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Robert Rodriguez",
+  "claimant_email": "claimant.597977@example.com",
+  "claimant_phone": "555-965-2094",
+  "claimant_dob": "1985-03-15",
+  "incident_date": "2026-01-06",
+  "incident_type": "auto_collision",
+  "incident_description": "Single Vehicle Collision involving a single vehicle in Arlington, NY, at 6723 Best Drive on 2026-01-06. Severity assessed as minor damage. The vehicle is a 2009 model with significant cosmetic wear from age, but the repair shop confirms the newly claimed damage is isolated to this incident, not an old area.",
+  "incident_location": "6723 Best Drive, Arlington, NY",
+  "police_report_number": null,
+  "estimated_amount": 78900.0,
+  "vehicle_year": 2006,
+  "vehicle_make": "Chevrolet",
+  "vehicle_model": "Silverado",
+  "documents": [
+    "police_report.pdf",
+    "repair_estimate.pdf"
+  ],
+  "is_appeal": false,
+  "original_claim_id": null,
+  "type_disputed_by_claimant": false,
+  "type_dispute_reason": null,
+  "_selection_tag": "exclusion_pre_existing_damage_near_miss",
+  "_fraud_reported_ground_truth": false,
+  "_note": "Superficially similar to pre_existing_damage but matches policy_checker.py's own 'does NOT apply to' negative criteria - should NOT be flagged"
+}

@@ -1,0 +1,43 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Northbend Police Department",
+    "incident_date": "2026-01-31",
+    "incident_location": "5994 5th Ave, Northbend, WV",
+    "narrative": "Multi-vehicle Collision involving 3 vehicles in Northbend, WV, at 5994 5th Ave on 2026-01-31. Severity assessed as total loss.",
+    "fault_determination": "Other driver cited as at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Robert Miller",
+      "Robert Rodriguez"
+    ]
+  },
+  "other_driver_info": {
+    "driver_name": "Robert Rodriguez",
+    "driver_license_number": "33040054",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2020,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-31",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "7632.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "5088.00"
+      }
+    ],
+    "line_items_sum": "12720.00",
+    "stated_total": "12720"
+  }
+}

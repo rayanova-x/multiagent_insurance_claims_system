@@ -1,0 +1,29 @@
+{
+  "police_report": null,
+  "other_driver_info": {
+    "driver_name": "Richard Lee",
+    "driver_license_number": "02475248",
+    "insurer_name": "Pinnacle Mutual",
+    "policy_number": null,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Corolla",
+    "vehicle_year": 2024,
+    "license_plate": null
+  },
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-02-23",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "25704.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "17136.00"
+      }
+    ],
+    "line_items_sum": "42840.00",
+    "stated_total": "42840"
+  }
+}

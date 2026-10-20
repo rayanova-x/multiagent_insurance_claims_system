@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-20",
+  "batch": "Batch 1: golden set + 5 US auto_collision sample_claims",
+  "model": "gemini-3.5-flash-lite (primary), gemini-3.1-flash-lite (fallback)",
+  "fraud_crew": "mocked (out of scope, never redesigned this session) - inert LOW/0.0 placeholder",
+  "real_quota_spent": {
+    "golden_set": 14,
+    "sample_claims_first_attempt_invalidated": 17,
+    "sample_claims_clean_rerun": 12,
+    "total": 43,
+    "note": "first sample_claims attempt was invalidated by a real checkpoint-collision bug (stale fixture claim_ids resumed weeks-old state from earlier scratch scripts this session) - fixed, then cleanly re-run. See CLAUDE.md rebuild-status log and project memory project-smart-claims-first-live-batch for full details."
+  },
+  "golden_set_results": {
+    "consistency_coordinator": {
+      "agreement": "4/6 (67%)",
+      "disagreements": [
+        {
+          "case": "CC-03",
+          "expected": {"has_conflicts": true, "conflict_type": "severity_mismatch", "severity": "material"},
+          "actual": {"has_conflicts": false},
+          "assessment": "Judge's real reasoning was defensible - damage_assessor's own hard rule (190% repair-to-ACV ratio) already explained and resolved the apparent conflict. Proxy label may have been too strict, not the judge miscalibrated."
+        },
+        {
+          "case": "CC-06",
+          "expected": {"has_conflicts": true, "conflict_type": "severity_mismatch", "severity": "notable"},
+          "actual": {"has_conflicts": false},
+          "assessment": "Similarly defensible - judge treated trivial wording differences as not rising to NOTABLE, arguably more conservative (fewer false positives) than the proxy label expected."
+        }
+      ]
+    },
+    "fairness": {"agreement": "4/4 (100%)", "disagreements": []},
+    "transparency": {
+      "agreement": "3/4 (75%)",
+      "disagreements": [
+        {
+          "case": "TRANS-04",
+          "expected": {"score": 0.4},
+          "actual": {"score": 0.0},
+          "assessment": "Genuine judge miscalibration - judge's own reasoning correctly identified 3/4 transparent steps plus one real unexplained gap, but still scored 0.0 (fully opaque) instead of reflecting partial transparency. The 'score collapse' failure mode flagged as a risk in the Nyckel calibration study this project reviewed earlier."
+        }
+      ]
+    },
+    "overall": "11/14 (79%)"
+  },
+  "sample_claims_results": [
+    {
+      "label": "auto_accident.json",
+      "paused": true,
+      "final_decision": null,
+      "reason": "damage_assessor requires_physical_inspection=True - real, always-firing property trigger. Root cause: no real repair-estimate document content exists behind the claim (known gap, claim_documents stays None since real file upload doesn't exist yet), and the assessed ratio landed near the 75% repair/total-loss threshold.",
+      "assessment": "correct pipeline behavior, not a bug"
+    },
+    {
+      "label": "lapsed_policy.json",
+      "paused": false,
+      "final_decision": "DENIED",
+      "reason": "expired policy, denied at intake as the fixture's own _test_note documents",
+      "assessment": "correct"
+    },
+    {
+      "label": "test_all_paths_us.json:path_a_normal_approved",
+      "paused": true,
+      "final_decision": null,
+      "reason": "damage_assessor requires_physical_inspection=True - same root cause as auto_accident.json",
+      "assessment": "correct pipeline behavior, not a bug"
+    },
+    {
+      "label": "test_all_paths_us.json:path_d_intake_failure_invalid_claim",
+      "paused": false,
+      "final_decision": "DENIED",
+      "reason": "incident_date predates policy start - the fixture's own _trigger note documents this as the intended test condition",
+      "assessment": "correct, intentional"
+    },
+    {
+      "label": "test_all_paths_us.json:path_e_fast_mode_small_claim",
+      "paused": false,
+      "final_decision": "DENIED",
+      "final_amount_usd": 0.0,
+      "reason": "$350 claim's $500 deductible genuinely exceeds the loss after depreciation - $0 payout is the mathematically correct outcome",
+      "assessment": "correct - fixture tested fast-mode ROUTING, not an approval guarantee"
+    }
+  ],
+  "bugs_found_and_fixed": [
+    {
+      "bug": "fraud_crew mock used the real error-fallback shape (fraud_score=0.50, MEDIUM) which sits exactly at the 0.45 HITL review threshold - would have paused every claim regardless of the rest of the pipeline's real conclusion",
+      "fix": "changed to an inert fraud_score=0.0/LOW placeholder, explicitly self-labeled as 'NOT ASSESSED' in its own summary text",
+      "caught": "before spending any real quota, via a mocked smoke test"
+    },
+    {
+      "bug": "process_claim() uses claim_id as the LangGraph checkpointer's thread_id by design - sample_claims fixtures with hardcoded claim_ids had already been run through the real checkpointer earlier this session via scratch scripts, so the first real run silently resumed stale state instead of starting fresh",
+      "fix": "scripts/run_live_batch.py now always suffixes claim_ids with a fresh UUID fragment",
+      "caught": "during the first real run - visible as intake_agent appearing twice in every trace and unexpected DENIED outcomes"
+    },
+    {
+      "bug": "data/sample_claims/auto_accident.json had a stale incident_date (2024-11-15) before its policy's real 2025-2027 coverage window",
+      "fix": "moved to 2026-02-15",
+      "caught": "during investigation of the checkpoint-collision bug, unrelated issue found in the same pass"
+    }
+  ]
+}

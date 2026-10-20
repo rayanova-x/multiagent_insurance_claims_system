@@ -1,0 +1,33 @@
+{
+  "police_report": {
+    "report_number": null,
+    "jurisdiction": "Arlington Police Department",
+    "incident_date": "2026-01-16",
+    "incident_location": "9105 Tree Lane, Arlington, WV",
+    "narrative": "Single Vehicle Collision involving a single vehicle in Arlington, WV, at 9105 Tree Lane on 2026-01-16. Severity assessed as major damage.",
+    "fault_determination": "Single-vehicle incident, no third party at fault",
+    "citations_issued": [
+      "Failure to maintain control"
+    ],
+    "parties_involved": [
+      "Elizabeth Moore"
+    ]
+  },
+  "other_driver_info": null,
+  "repair_estimate": {
+    "shop_name": "Precision Collision Center",
+    "estimate_date": "2026-01-16",
+    "line_items": [
+      {
+        "description": "Parts and materials",
+        "amount": "31776.00"
+      },
+      {
+        "description": "Labor",
+        "amount": "21184.00"
+      }
+    ],
+    "line_items_sum": "52960.00",
+    "stated_total": "52960"
+  }
+}
