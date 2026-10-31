@@ -43,18 +43,30 @@ async def lifespan(app: FastAPI):
     except Exception as e:
         logger.error("Audit retention sweep failed: %s", e)
 
-    # Seed fraud knowledge base into ChromaDB (idempotent)
-    try:
-        from src.memory.manager import memory
-        from src.tools.fraud_patterns import get_patterns
-        patterns = [
-            {"id": p["id"], "name": p["name"], "description": p["description"],
-             "risk_weight": p["risk_weight"]}
-            for p in get_patterns()
-        ]
-        memory.seed_fraud_knowledge(patterns)
-    except Exception as e:
-        logger.debug("Fraud knowledge seeding skipped: %s", e)
+    # Seed fraud knowledge base into ChromaDB (idempotent). Deferred to a
+    # background thread, not awaited here: it loads a real ~80MB
+    # sentence-transformer model on first use, which on a memory-constrained
+    # host (e.g. Render's free 512MB tier) can push the process over its
+    # limit before uvicorn ever binds a port, killing the whole deploy.
+    # Running it after startup lets the port open first; the embedding
+    # model still loads lazily on whichever request actually needs it
+    # (recall_similar_claims/store_claim_outcome), this just avoids forcing
+    # that load to happen synchronously during boot.
+    def _seed_fraud_knowledge_background() -> None:
+        try:
+            from src.memory.manager import memory
+            from src.tools.fraud_patterns import get_patterns
+            patterns = [
+                {"id": p["id"], "name": p["name"], "description": p["description"],
+                 "risk_weight": p["risk_weight"]}
+                for p in get_patterns()
+            ]
+            memory.seed_fraud_knowledge(patterns)
+        except Exception as e:
+            logger.debug("Fraud knowledge seeding skipped: %s", e)
+
+    import threading
+    threading.Thread(target=_seed_fraud_knowledge_background, daemon=True).start()
 
     logger.info(
         "Smart Claims API ready. Dev users: admin/admin123 (admin), "
