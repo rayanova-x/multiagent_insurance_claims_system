@@ -29,8 +29,23 @@ import re
 import time
 from typing import Any, Optional
 
-from crewai import Agent, Crew, Process, Task, LLM
-from crewai.tools import tool
+try:
+    from crewai import Agent, Crew, Process, Task, LLM
+    from crewai.tools import tool
+    _HAS_CREWAI = True
+except ImportError:
+    # crewai is optional: fraud_crew's CrewAI internals are out of scope for
+    # this rebuild (standing project decision) and crewai has no wheel for
+    # newer Python versions on some hosts (e.g. Render defaulting to Python
+    # 3.14). Without it, run_fraud_crew() always uses the mocked path below,
+    # same as MOCK_FRAUD_CREW=true - the real CrewAI code in this file
+    # simply never runs.
+    _HAS_CREWAI = False
+
+    def tool(*_args, **_kwargs):  # no-op decorator so @tool-decorated functions still define
+        def _decorator(fn):
+            return fn
+        return _decorator
 
 from src.config import get_agent_config, get_hitl_config
 from src.models.schemas import FraudAssessmentOutput, FraudRiskLevel
@@ -353,7 +368,7 @@ def run_fraud_crew(state: ClaimsState) -> dict:
     else to apply the mock. Never set this in a real deployment - it skips
     real fraud detection for every claim the server processes.
     """
-    if os.getenv("MOCK_FRAUD_CREW", "").lower() == "true":
+    if not _HAS_CREWAI or os.getenv("MOCK_FRAUD_CREW", "").lower() == "true":
         output = _mocked_fraud_output()
         return {
             "fraud_output": output,
@@ -369,7 +384,12 @@ def run_fraud_crew(state: ClaimsState) -> dict:
                 "flags": output.primary_concerns,
                 "findings": {},
                 "calls": None,
-                "calls_note": "Mocked (MOCK_FRAUD_CREW) - no real CrewAI call was made.",
+                "calls_note": (
+                    "Mocked (MOCK_FRAUD_CREW) - no real CrewAI call was made."
+                    if _HAS_CREWAI else
+                    "crewai is not installed in this deployment - fraud_crew's internals are out of "
+                    "scope for this rebuild, so no real call was attempted."
+                ),
             }],
             "agent_call_count": 0,
         }
