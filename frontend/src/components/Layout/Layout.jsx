@@ -6,18 +6,19 @@ import {
 } from '@mui/material';
 import {
   Dashboard, Description, Gavel, Security, Assessment, People, Settings, Logout,
-  AccountBalance, ReceiptLong, HowToVote, Analytics, FactCheck, Menu as MenuIcon,
+  AccountBalance, ReceiptLong, HowToVote, Analytics, FactCheck, Menu as MenuIcon, Timeline,
 } from '@mui/icons-material';
 import useAuthStore from '../../store/authStore';
 import useClaimsStore from '../../store/claimsStore';
+import PersonaSwitcher from './PersonaSwitcher';
 
 const DRAWER_WIDTH = 260;
 
 // Backend roles: user | reviewer | admin
 const ROLE_COLORS = {
-  user: '#3B82F6',      // blue - claimant
-  reviewer: '#F59E0B',  // amber - HITL approver
-  admin: '#EF4444',     // red - admin
+  user: '#2DA89D',      // teal (lighter, for contrast on the dark sidebar) - claimant
+  reviewer: '#F5B23A',  // amber - HITL approver
+  admin: '#E8737A',     // red - admin
 };
 
 const ROLE_LABELS = {
@@ -69,39 +70,41 @@ export default function Layout() {
     { path: '/settings', label: 'Settings', icon: <Settings />, show: true },
   ];
 
-  const roleColor = ROLE_COLORS[user?.role] || '#64748B';
+  const roleColor = ROLE_COLORS[user?.role] || 'rgba(244,242,234,0.6)';
 
+  // Sidebar is the one permanent dark element in the new light theme -
+  // #161616 bg, #f4f2ea text (see theme.js's sidebarBg/sidebarFg tokens).
   const drawer = (
-    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: '#0F172A' }}>
+    <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column', bgcolor: '#161616' }}>
       {/* Brand */}
       <Box sx={{ p: 2.5, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <AccountBalance sx={{ fontSize: 32, color: '#3B82F6' }} />
+        <AccountBalance sx={{ fontSize: 32, color: '#2DA89D' }} />
         <Box>
-          <Typography variant="subtitle1" fontWeight={700} color="#F1F5F9" lineHeight={1.2}>Smart Claims</Typography>
-          <Typography variant="caption" color="#64748B">Insurance AI</Typography>
+          <Typography variant="subtitle1" fontWeight={700} color="#f4f2ea" lineHeight={1.2}>Smart Claims</Typography>
+          <Typography variant="caption" color="rgba(244,242,234,0.6)">Insurance AI</Typography>
         </Box>
       </Box>
-      <Divider sx={{ borderColor: '#1E293B' }} />
+      <Divider sx={{ borderColor: '#333333' }} />
 
       {/* User info */}
       <Box sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 1.5 }}>
-        <Avatar sx={{ width: 36, height: 36, bgcolor: roleColor, fontSize: '0.9rem', fontWeight: 600 }}>
+        <Avatar sx={{ width: 36, height: 36, bgcolor: roleColor, color: '#161616', fontSize: '0.9rem', fontWeight: 600 }}>
           {user?.username?.[0]?.toUpperCase() || '?'}
         </Avatar>
         <Box sx={{ flex: 1, minWidth: 0 }}>
-          <Typography variant="body2" fontWeight={600} color="#F1F5F9" noWrap>{user?.username}</Typography>
+          <Typography variant="body2" fontWeight={600} color="#f4f2ea" noWrap>{user?.username}</Typography>
           <Chip label={ROLE_LABELS[user?.role] || user?.role} size="small"
-            sx={{ height: 20, fontSize: '0.7rem', fontWeight: 600, bgcolor: `${roleColor}20`, color: roleColor, border: `1px solid ${roleColor}40` }}
+            sx={{ height: 20, fontSize: '0.7rem', fontWeight: 600, bgcolor: `${roleColor}30`, color: roleColor, border: `1px solid ${roleColor}60` }}
           />
         </Box>
       </Box>
-      <Divider sx={{ borderColor: '#1E293B' }} />
+      <Divider sx={{ borderColor: '#333333' }} />
 
       {/* Nav items */}
       <List sx={{ flex: 1, px: 1, py: 1 }}>
         {navItems.filter((n) => n.show).map((item, i) =>
           item.divider ? (
-            <Divider key={i} sx={{ my: 1, borderColor: '#1E293B' }} />
+            <Divider key={i} sx={{ my: 1, borderColor: '#333333' }} />
           ) : (
             <Tooltip title={item.tooltip || ''} placement="right" arrow>
               <ListItemButton
@@ -110,47 +113,53 @@ export default function Layout() {
                 onClick={() => { navigate(item.path); setMobileOpen(false); }}
                 sx={{
                   borderRadius: 2, mb: 0.5, py: 1,
-                  '&.Mui-selected': { bgcolor: '#1E293B', '& .MuiListItemIcon-root': { color: '#3B82F6' }, '& .MuiListItemText-primary': { color: '#F1F5F9', fontWeight: 600 } },
-                  '&:hover': { bgcolor: '#1E293B80' },
+                  '&.Mui-selected': { bgcolor: '#262626', '& .MuiListItemIcon-root': { color: '#2DA89D' }, '& .MuiListItemText-primary': { color: '#f4f2ea', fontWeight: 600 } },
+                  '&:hover': { bgcolor: '#262626' },
                 }}
               >
-                <ListItemIcon sx={{ color: '#64748B', minWidth: 40 }}>
+                <ListItemIcon sx={{ color: 'rgba(244,242,234,0.55)', minWidth: 40 }}>
                   {item.badge ? <Badge badgeContent={item.badge} color="error">{item.icon}</Badge> : item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.label} sx={{ '& .MuiListItemText-primary': { fontSize: '0.875rem', color: '#94A3B8' } }} />
+                <ListItemText primary={item.label} sx={{ '& .MuiListItemText-primary': { fontSize: '0.875rem', color: 'rgba(244,242,234,0.75)' } }} />
               </ListItemButton>
             </Tooltip>
           )
         )}
       </List>
 
+      {/* Demo persona switcher */}
+      <Divider sx={{ borderColor: '#333333' }} />
+      <Box sx={{ py: 1.5 }}>
+        <PersonaSwitcher />
+      </Box>
+
       {/* Logout */}
-      <Divider sx={{ borderColor: '#1E293B' }} />
+      <Divider sx={{ borderColor: '#333333' }} />
       <ListItemButton onClick={handleLogout} sx={{ m: 1, borderRadius: 2, py: 1 }}>
-        <ListItemIcon sx={{ color: '#EF4444', minWidth: 40 }}><Logout /></ListItemIcon>
-        <ListItemText primary="Sign Out" sx={{ '& .MuiListItemText-primary': { color: '#EF4444', fontSize: '0.875rem', fontWeight: 500 } }} />
+        <ListItemIcon sx={{ color: '#E8737A', minWidth: 40 }}><Logout /></ListItemIcon>
+        <ListItemText primary="Sign Out" sx={{ '& .MuiListItemText-primary': { color: '#E8737A', fontSize: '0.875rem', fontWeight: 500 } }} />
       </ListItemButton>
     </Box>
   );
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#0F172A' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#F7F5EE' }}>
       {/* Mobile app bar */}
-      <AppBar position="fixed" sx={{ display: { md: 'none' }, bgcolor: '#0F172A', borderBottom: '1px solid #1E293B' }}>
+      <AppBar position="fixed" sx={{ display: { md: 'none' }, bgcolor: '#161616', borderBottom: '2px solid #161616' }}>
         <Toolbar>
-          <IconButton onClick={() => setMobileOpen(!mobileOpen)} sx={{ color: '#F1F5F9' }}><MenuIcon /></IconButton>
-          <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" sx={{ ml: 1 }}>Smart Claims</Typography>
+          <IconButton onClick={() => setMobileOpen(!mobileOpen)} sx={{ color: '#f4f2ea' }}><MenuIcon /></IconButton>
+          <Typography variant="subtitle1" fontWeight={600} color="#f4f2ea" sx={{ ml: 1 }}>Smart Claims</Typography>
         </Toolbar>
       </AppBar>
 
       {/* Drawer */}
       <Drawer variant="temporary" open={mobileOpen} onClose={() => setMobileOpen(false)}
-        sx={{ display: { xs: 'block', md: 'none' }, '& .MuiDrawer-paper': { width: DRAWER_WIDTH, bgcolor: '#0F172A', borderRight: '1px solid #1E293B' } }}
+        sx={{ display: { xs: 'block', md: 'none' }, '& .MuiDrawer-paper': { width: DRAWER_WIDTH, bgcolor: '#161616', borderRight: '2px solid #161616' } }}
       >
         {drawer}
       </Drawer>
       <Drawer variant="permanent"
-        sx={{ display: { xs: 'none', md: 'block' }, '& .MuiDrawer-paper': { width: DRAWER_WIDTH, bgcolor: '#0F172A', borderRight: '1px solid #1E293B' } }}
+        sx={{ display: { xs: 'none', md: 'block' }, '& .MuiDrawer-paper': { width: DRAWER_WIDTH, bgcolor: '#161616', borderRight: '2px solid #161616' } }}
       >
         {drawer}
       </Drawer>

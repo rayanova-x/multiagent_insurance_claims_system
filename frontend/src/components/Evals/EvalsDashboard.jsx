@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {
   Box, Paper, Typography, Grid, CircularProgress, Chip, Alert,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  LinearProgress, Divider,
+  LinearProgress, Divider, Button,
 } from '@mui/material';
-import { FactCheck, Gavel, CheckCircle, PauseCircle } from '@mui/icons-material';
+import { FactCheck, Gavel, CheckCircle, PauseCircle, PlayArrow, Science } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
 import { evalsAPI } from '../../services/api';
+import useCaseRunStore from '../../store/caseRunStore';
 
 // No demo-data fallback here, unlike AnalyticsDashboard - a fake "87%
 // passing" placeholder would defeat the entire point of this page, which
@@ -13,9 +15,14 @@ import { evalsAPI } from '../../services/api';
 // fails or no data exists yet, this page shows that honestly instead.
 
 export default function EvalsDashboard() {
+  const navigate = useNavigate();
+  const setPendingCase = useCaseRunStore((s) => s.setPendingCase);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [cases, setCases] = useState([]);
+  const [casesError, setCasesError] = useState(false);
+  const [runningCaseId, setRunningCaseId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +36,29 @@ export default function EvalsDashboard() {
       }
     };
     fetchData();
+
+    (async () => {
+      try {
+        const res = await evalsAPI.listCases();
+        setCases(res.data.cases || []);
+      } catch {
+        setCasesError(true);
+      }
+    })();
   }, []);
+
+  const runCase = async (caseItem) => {
+    setRunningCaseId(caseItem.id);
+    try {
+      const res = await evalsAPI.materializeCase(caseItem.id);
+      setPendingCase({ caseId: caseItem.id, source: res.data.source, ...res.data });
+      navigate('/submit-claim?case=' + encodeURIComponent(caseItem.id));
+    } catch (err) {
+      setCasesError(true);
+    } finally {
+      setRunningCaseId(null);
+    }
+  };
 
   if (loading) {
     return (
@@ -92,6 +121,52 @@ export default function EvalsDashboard() {
             </Box>
           </Grid>
         </Grid>
+      </Paper>
+
+      {/* ── Run any test case ────────────────────────────────────────────── */}
+      <Paper sx={{ p: 3, mb: 3 }}>
+        <Typography variant="h6" gutterBottom sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Science /> Test Cases
+        </Typography>
+        <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+          Golden-set scenarios and document-agent test cases. "Run this case" pre-fills a real claim
+          submission (and stages any PDFs) so you can watch it move through the real pipeline.
+        </Typography>
+        {casesError && <Alert severity="warning" sx={{ mb: 2 }}>Couldn't load the case list.</Alert>}
+        {cases.length > 0 && (
+          <TableContainer>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell>Case</TableCell>
+                  <TableCell>Source</TableCell>
+                  <TableCell>Description</TableCell>
+                  <TableCell align="right">Action</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {cases.map((c) => (
+                  <TableRow key={c.id}>
+                    <TableCell sx={{ fontWeight: 600 }}>{c.id}: {c.label}</TableCell>
+                    <TableCell>
+                      <Chip size="small" label={c.source === 'golden_set' ? 'Golden Set' : 'Document PDF'}
+                        color={c.source === 'golden_set' ? 'primary' : 'secondary'} variant="outlined" />
+                    </TableCell>
+                    <TableCell sx={{ maxWidth: 420 }}>
+                      <Typography variant="body2" color="text.secondary" noWrap title={c.description}>{c.description}</Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <Button size="small" variant="contained" startIcon={runningCaseId === c.id ? <CircularProgress size={14} /> : <PlayArrow />}
+                        disabled={runningCaseId === c.id} onClick={() => runCase(c)}>
+                        Run this case
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </Paper>
 
       {/* ── Judge calibration ────────────────────────────────────────────── */}

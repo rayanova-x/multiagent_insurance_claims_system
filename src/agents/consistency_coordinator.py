@@ -162,11 +162,13 @@ def run_consistency_coordinator(state: ClaimsState) -> dict:
     narrative-severity read), per the criteria in your instructions.
     """
 
+    raw_llm_output = None
     try:
         output = llm.invoke([
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=prompt),
         ])
+        raw_llm_output = output.model_dump(mode="json")
     except Exception as e:
         logger.error(f"[{claim_id}] Consistency coordinator LLM failed: {e}")
         # Fail toward caution but not toward blocking: an unreadable check
@@ -219,6 +221,7 @@ def run_consistency_coordinator(state: ClaimsState) -> dict:
                     for c in output.conflicts
                 ],
             },
+            "calls": [{"label": "consistency_check", "prompt": prompt, "raw_output": raw_llm_output}],
         }],
         "agent_call_count": 1,  # operator.add reducer sums this into the running total - see state.py
     }

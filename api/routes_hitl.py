@@ -3,11 +3,12 @@ from __future__ import annotations # for type hinting within the same file
 
 import json
 import logging
-import sqlite3
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
+from sqlalchemy import text
+from sqlalchemy.engine import Row
 
 logger = logging.getLogger(__name__)
 
@@ -34,17 +35,18 @@ class DecisionRequest(BaseModel):
     settlement_override_usd: float | None = Field(None, ge=0)
 
 
-def _row_to_summary(r: sqlite3.Row) -> dict:
+def _row_to_summary(r: Row) -> dict:
+    m = r._mapping
     return {
-        "ticket_id": r["ticket_id"],
-        "claim_id": r["claim_id"],
-        "priority": r["priority"],
-        "priority_score": r["priority_score"],
-        "status": r["status"],
-        "created_at": r["created_at"],
-        "sla_deadline": r["sla_deadline"],
-        "sla_breached": bool(r["sla_breached"]) if "sla_breached" in r.keys() else False,
-        "triggers": json.loads(r["triggers"]),
+        "ticket_id": m["ticket_id"],
+        "claim_id": m["claim_id"],
+        "priority": m["priority"],
+        "priority_score": m["priority_score"],
+        "status": m["status"],
+        "created_at": m["created_at"],
+        "sla_deadline": m["sla_deadline"],
+        "sla_breached": bool(m["sla_breached"]) if "sla_breached" in m.keys() else False,
+        "triggers": json.loads(m["triggers"]),
     }
 
 
@@ -59,9 +61,9 @@ def get_queue(status: str = "pending"):
     try:
         escalate_overdue_tickets(conn)
         rows = conn.execute(
-            "SELECT * FROM hitl_queue WHERE status = ? "
-            "ORDER BY COALESCE(sla_breached, 0) DESC, priority_score DESC, created_at ASC",
-            (status,),
+            text("SELECT * FROM hitl_queue WHERE status = :status "
+                 "ORDER BY COALESCE(sla_breached, 0) DESC, priority_score DESC, created_at ASC"),
+            {"status": status},
         ).fetchall()
     finally:
         conn.close()
@@ -70,26 +72,27 @@ def get_queue(status: str = "pending"):
 
 @router.get("/ticket/{ticket_id}")
 def get_ticket(ticket_id: str):
-    """Fetches detailed info for a specific HITL ticket, including the state snapshot at the time of 
+    """Fetches detailed info for a specific HITL ticket, including the state snapshot at the time of
     pause and the reviewer's decision/notes if resolved."""
-    
+
     conn = _get_db()
     try:
         row = conn.execute(
-            "SELECT * FROM hitl_queue WHERE ticket_id = ?", (ticket_id,)
+            text("SELECT * FROM hitl_queue WHERE ticket_id = :t"), {"t": ticket_id}
         ).fetchone()
     finally:
         conn.close()
     if not row:
         raise HTTPException(status_code=404, detail="Ticket not found")
+    m = row._mapping
     return {
         **_row_to_summary(row),
-        "review_brief": row["review_brief"],
-        "state_snapshot": json.loads(row["state_snapshot"]) if row["state_snapshot"] else {},
-        "resolved_at": row["resolved_at"],
-        "reviewer_id": row["reviewer_id"],
-        "human_decision": row["human_decision"],
-        "human_notes": row["human_notes"],
+        "review_brief": m["review_brief"],
+        "state_snapshot": json.loads(m["state_snapshot"]) if m["state_snapshot"] else {},
+        "resolved_at": m["resolved_at"],
+        "reviewer_id": m["reviewer_id"],
+        "human_decision": m["human_decision"],
+        "human_notes": m["human_notes"],
     }
 
 
@@ -125,24 +128,25 @@ def decide(
     conn = _get_db()
     try:
         row = conn.execute(
-            "SELECT claim_id, status FROM hitl_queue WHERE ticket_id = ?", (ticket_id,)
+            text("SELECT claim_id, status FROM hitl_queue WHERE ticket_id = :t"), {"t": ticket_id}
         ).fetchone()
         if not row:
             raise HTTPException(status_code=404, detail="Ticket not found")
-        if row["status"] == "resolved":
+        m = row._mapping
+        if m["status"] == "resolved":
             raise HTTPException(status_code=400, detail="Ticket already resolved")
-        claim_id = row["claim_id"]
+        claim_id = m["claim_id"]
         reviewer_label = user.username
         now = datetime.now(timezone.utc).isoformat()
         conn.execute(
-            """
+            text("""
             UPDATE hitl_queue
-            SET status = 'resolved', resolved_at = ?, reviewer_id = ?,
-                human_decision = ?, human_notes = ?, override_ai = ?
-            WHERE ticket_id = ?
-            """,
-            (now, reviewer_label, body.decision, notes,
-             1 if body.override_ai else 0, ticket_id),
+            SET status = 'resolved', resolved_at = :now, reviewer_id = :reviewer,
+                human_decision = :decision, human_notes = :notes, override_ai = :override_ai
+            WHERE ticket_id = :ticket_id
+            """),
+            {"now": now, "reviewer": reviewer_label, "decision": body.decision, "notes": notes,
+             "override_ai": 1 if body.override_ai else 0, "ticket_id": ticket_id},
         )
         conn.commit()
     finally:
@@ -192,20 +196,28 @@ def stats():
     """Returns summary stats about the HITL queue, e.g. how many pending tickets total/critical/high,
     how many are past their SLA, how many resolved today, etc."""
 
+    # "Today" computed in Python (UTC) rather than relying on either DB's
+    # own date function - DATE('now') is SQLite-only syntax, and comparing
+    # on the resolved_at string prefix works identically on both dialects
+    # since every resolved_at is written as an ISO-format string.
+    today_prefix = datetime.now(timezone.utc).date().isoformat()
+
     conn = _get_db()
     try:
         escalate_overdue_tickets(conn)
 
-        def one(q, *args):
-            return conn.execute(q, args).fetchone()[0]
+        def one(q, **params):
+            return conn.execute(text(q), params).fetchone()[0]
         pending = one("SELECT COUNT(*) FROM hitl_queue WHERE status='pending'")
         critical = one("SELECT COUNT(*) FROM hitl_queue WHERE status='pending' AND priority='critical'")
         high = one("SELECT COUNT(*) FROM hitl_queue WHERE status='pending' AND priority='high'")
         resolved_today = one(
-            "SELECT COUNT(*) FROM hitl_queue WHERE status='resolved' AND DATE(resolved_at)=DATE('now')"
+            "SELECT COUNT(*) FROM hitl_queue WHERE status='resolved' AND resolved_at LIKE :prefix",
+            prefix=f"{today_prefix}%",
         )
         overrides = one(
-            "SELECT COUNT(*) FROM hitl_queue WHERE override_ai=1 AND DATE(resolved_at)=DATE('now')"
+            "SELECT COUNT(*) FROM hitl_queue WHERE override_ai=1 AND resolved_at LIKE :prefix",
+            prefix=f"{today_prefix}%",
         )
         overdue = one(
             "SELECT COUNT(*) FROM hitl_queue WHERE status='pending' AND COALESCE(sla_breached, 0)=1"

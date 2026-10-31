@@ -1,0 +1,63 @@
+{
+  "_comment": "Manifest for the 7 data/test_pdfs/ document-agent test cases, mirroring README.md's table. Consumed by api/routes_evals.py's /cases and /cases/{id}/materialize endpoints to pre-fill SubmitClaim.jsx's form and pre-stage the case's PDF(s) via the real upload endpoints. All cases share one baseline claim (baseline_claim.json, policy POL-AUTO-TEST-US - a real seeded policy, no seeding needed).",
+  "claim": {
+    "policy_number": "POL-AUTO-TEST-US",
+    "claimant_name": "Alex Rivera",
+    "incident_date": "2026-06-10",
+    "incident_location": "4410 Birchwood Ave, Denver, CO",
+    "incident_type": "auto_collision",
+    "estimated_amount": 23100.0,
+    "vehicle_year": 2020,
+    "vehicle_make": "Toyota",
+    "vehicle_model": "Camry",
+    "incident_description": "Two-vehicle collision at intersection. Other driver ran red light and struck my vehicle. Took it to a repair shop for an estimate."
+  },
+  "cases": [
+    {
+      "id": "PDF-01",
+      "label": "Clean baseline",
+      "description": "All 3 documents extract cleanly, no verification findings.",
+      "files": {
+        "police_report": "case1_clean_police_report.pdf",
+        "other_driver_info": "case1_clean_other_driver_info.pdf",
+        "repair_estimate": "case1_clean_repair_estimate.pdf"
+      }
+    },
+    {
+      "id": "PDF-02",
+      "label": "Scanned repair estimate (OCR fallback)",
+      "description": "Image-only PDF, no text layer - tests Docling's OCR fallback path.",
+      "files": { "repair_estimate": "case2_scanned_repair_estimate.pdf" }
+    },
+    {
+      "id": "PDF-03",
+      "label": "Arithmetic mismatch",
+      "description": "Line items sum to $23,100 but the printed total says $28,500 - tests the line_items_sum vs stated_total check.",
+      "files": { "repair_estimate": "case3_arithmetic_mismatch_repair_estimate.pdf" }
+    },
+    {
+      "id": "PDF-04",
+      "label": "Wrong document in wrong slot",
+      "description": "A repair estimate uploaded into the police_report slot - tests classify-then-extract mismatch detection.",
+      "files": { "police_report": "case1_clean_repair_estimate.pdf" }
+    },
+    {
+      "id": "PDF-05",
+      "label": "Corrupt / unreadable file",
+      "description": "Not a valid PDF - tests the Docling-throws fallback, no crash.",
+      "files": { "repair_estimate": "case5_corrupt.pdf" }
+    },
+    {
+      "id": "PDF-06",
+      "label": "Plausibility mismatch",
+      "description": "Internally consistent $85,000 repair estimate, wildly higher than the claim's own $23,100 estimated_amount.",
+      "files": { "repair_estimate": "case6_plausibility_mismatch_repair_estimate.pdf" }
+    },
+    {
+      "id": "PDF-07",
+      "label": "Legitimately sparse (lump-sum)",
+      "description": "No itemized line items, just a lump-sum total - must NOT be flagged as a verification failure.",
+      "files": { "repair_estimate": "case7_sparse_repair_estimate.pdf" }
+    }
+  ]
+}

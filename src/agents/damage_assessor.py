@@ -315,7 +315,7 @@ def run_damage_assessor(state: ClaimsState) -> dict:
 
     # ── Pre-compute from tools (reduces LLM hallucination) ────────────────────
     asset_type = detect_asset_type(claim.get("incident_type", ""))
-    asset_age = calculate_asset_age(claim.get("vehicle_year"))
+    asset_age = calculate_asset_age(claim.get("vehicle_year"), claim.get("incident_date"))
     acv = None
     depreciation_info = None
     line_items_from_doc = _repair_estimate_line_items(state)
@@ -328,6 +328,7 @@ def run_damage_assessor(state: ClaimsState) -> dict:
                 year=int(claim["vehicle_year"]),
                 make=claim.get("vehicle_make", ""),
                 model=claim.get("vehicle_model", ""),
+                as_of=claim.get("incident_date"),
             )
             is_total_loss, tl_ratio = should_total_loss(estimated, acv)
             _, depreciation_amount = apply_depreciation(estimated, "auto", asset_age)
@@ -417,11 +418,16 @@ def run_damage_assessor(state: ClaimsState) -> dict:
     5. Confidence in your assessment
     """
 
+    raw_llm_output = None
     try:
         output = llm.invoke([
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=prompt),
         ])
+        # Captured BEFORE _enforce_hard_rules mutates output in place - the
+        # admin debug view can then show the LLM's real answer separately
+        # from whichever hard rule overrode it.
+        raw_llm_output = output.model_dump(mode="json")
         _enforce_hard_rules(output, depreciation_info, line_items_from_doc is not None, claim_id)
     except Exception as e:
         logger.error(f"[{claim_id}] Damage assessor LLM failed: {e}")
@@ -486,6 +492,7 @@ def run_damage_assessor(state: ClaimsState) -> dict:
                 "line_items_count": len(output.line_items),
                 "requires_inspection": output.requires_physical_inspection,
             },
+            "calls": [{"label": "damage_assessment", "prompt": prompt, "raw_output": raw_llm_output}],
         }],
         "agent_call_count": 1,  # operator.add reducer sums this into the running total - see state.py
         "consistency_retry_context": None,  # consumed - don't leak into a later, unrelated run

@@ -8,9 +8,9 @@ import { authAPI } from '../../services/api';
 
 // Must match backend roles: user | reviewer | admin
 const ROLE_COLORS = {
-  user: '#3B82F6',
-  reviewer: '#F59E0B',
-  admin: '#EF4444',
+  user: '#0F766E',
+  reviewer: '#8a5a00',
+  admin: '#a3242a',
 };
 
 const ROLE_LABELS = {
@@ -43,32 +43,32 @@ export default function Settings() {
     }
   };
 
-  const roleColor = ROLE_COLORS[user?.role] || '#64748B';
+  const roleColor = ROLE_COLORS[user?.role] || 'rgba(22,22,22,0.45)';
 
   return (
     <Box>
-      <Typography variant="h5" fontWeight={700} color="#F1F5F9" gutterBottom>
-        <SettingsIcon sx={{ mr: 1, verticalAlign: 'middle', color: '#94A3B8' }} />
+      <Typography variant="h5" fontWeight={700} color="#161616" gutterBottom>
+        <SettingsIcon sx={{ mr: 1, verticalAlign: 'middle', color: 'rgba(22,22,22,0.62)' }} />
         Account Settings
       </Typography>
 
       <Grid container spacing={3} sx={{ mt: 1 }}>
         {/* Profile */}
         <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-            <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" gutterBottom>Profile</Typography>
-            <Divider sx={{ borderColor: '#334155', mb: 2 }} />
+          <Paper sx={{ p: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+            <Typography variant="subtitle1" fontWeight={600} color="#161616" gutterBottom>Profile</Typography>
+            <Divider sx={{ borderColor: '#161616', mb: 2 }} />
             <Grid container spacing={2}>
               <Grid item xs={12}>
-                <Typography variant="caption" color="#64748B">Username</Typography>
-                <Typography color="#F1F5F9" fontWeight={600}>{user?.username}</Typography>
+                <Typography variant="caption" color="rgba(22,22,22,0.45)">Username</Typography>
+                <Typography color="#161616" fontWeight={600}>{user?.username}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="caption" color="#64748B">Email</Typography>
-                <Typography color="#94A3B8">{user?.email || 'Not set'}</Typography>
+                <Typography variant="caption" color="rgba(22,22,22,0.45)">Email</Typography>
+                <Typography color="rgba(22,22,22,0.62)">{user?.email || 'Not set'}</Typography>
               </Grid>
               <Grid item xs={12}>
-                <Typography variant="caption" color="#64748B">Role</Typography>
+                <Typography variant="caption" color="rgba(22,22,22,0.45)">Role</Typography>
                 <Box sx={{ mt: 0.5 }}>
                   <Chip label={ROLE_LABELS[user?.role] || user?.role} sx={{ bgcolor: `${roleColor}20`, color: roleColor, fontWeight: 600, border: `1px solid ${roleColor}40` }} />
                 </Box>
@@ -79,9 +79,9 @@ export default function Settings() {
 
         {/* Password */}
         <Grid item xs={12} md={6}>
-          <Paper sx={{ p: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-            <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" gutterBottom>Change Password</Typography>
-            <Divider sx={{ borderColor: '#334155', mb: 2 }} />
+          <Paper sx={{ p: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+            <Typography variant="subtitle1" fontWeight={600} color="#161616" gutterBottom>Change Password</Typography>
+            <Divider sx={{ borderColor: '#161616', mb: 2 }} />
             {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
             {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
             <TextField fullWidth label="Current Password" type="password" value={currentPass}
@@ -90,7 +90,7 @@ export default function Settings() {
               onChange={(e) => setNewPass(e.target.value)} sx={{ mb: 2 }} helperText="Minimum 6 characters" />
             <Button variant="contained" onClick={handlePasswordChange}
               disabled={!currentPass || newPass.length < 6 || loading}
-              sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
+              sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #0F766E, #0B5B54)' }}>
               {loading ? <CircularProgress size={20} /> : 'Update Password'}
             </Button>
           </Paper>
@@ -98,9 +98,9 @@ export default function Settings() {
 
         {/* Role Permissions Reference */}
         <Grid item xs={12}>
-          <Paper sx={{ p: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-            <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" gutterBottom>Role Permissions</Typography>
-            <Divider sx={{ borderColor: '#334155', mb: 2 }} />
+          <Paper sx={{ p: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+            <Typography variant="subtitle1" fontWeight={600} color="#161616" gutterBottom>Role Permissions</Typography>
+            <Divider sx={{ borderColor: '#161616', mb: 2 }} />
             <Grid container spacing={2}>
               {[
                 { role: 'user', label: 'Claimant', perms: ['Submit claims', 'View own claims', 'Track claim status', 'Submit appeals'] },
@@ -108,10 +108,10 @@ export default function Settings() {
                 { role: 'admin', label: 'Admin', perms: ['All reviewer permissions', 'User management', 'Switch LLM provider (Gemini/Groq)', 'Full system access'] },
               ].map((r) => (
                 <Grid item xs={12} md={4} key={r.role}>
-                  <Paper sx={{ p: 2, bgcolor: user?.role === r.role ? `${ROLE_COLORS[r.role]}10` : '#0F172A', borderRadius: 2, border: `1px solid ${user?.role === r.role ? ROLE_COLORS[r.role] : '#334155'}` }}>
+                  <Paper sx={{ p: 2, bgcolor: user?.role === r.role ? `${ROLE_COLORS[r.role]}10` : '#F7F5EE', borderRadius: 2, border: `1px solid ${user?.role === r.role ? ROLE_COLORS[r.role] : '#161616'}` }}>
                     <Chip label={r.label} size="small" sx={{ mb: 1, bgcolor: `${ROLE_COLORS[r.role]}20`, color: ROLE_COLORS[r.role], fontWeight: 600 }} />
                     {r.perms.map((p) => (
-                      <Typography key={p} variant="body2" color="#94A3B8" sx={{ fontSize: '0.8rem' }}>- {p}</Typography>
+                      <Typography key={p} variant="body2" color="rgba(22,22,22,0.62)" sx={{ fontSize: '0.8rem' }}>- {p}</Typography>
                     ))}
                   </Paper>
                 </Grid>

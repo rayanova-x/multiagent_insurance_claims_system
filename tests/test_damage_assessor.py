@@ -190,7 +190,7 @@ def test_line_items_is_empty_list_not_none_when_document_exists_with_no_items():
 
 def test_llm_failure_fallback_uses_acv_when_tool_data_already_says_total_loss(monkeypatch):
     monkeypatch.setattr(da, "detect_asset_type", lambda t: "auto")
-    monkeypatch.setattr(da, "calculate_asset_age", lambda y: 8)
+    monkeypatch.setattr(da, "calculate_asset_age", lambda y, as_of=None: 8)
     monkeypatch.setattr(da, "calculate_vehicle_acv", lambda **k: 13000.0)
     monkeypatch.setattr(da, "should_total_loss", lambda est, acv: (True, 1.777))
     monkeypatch.setattr(da, "apply_depreciation", lambda *a, **k: (0.0, 0.0))

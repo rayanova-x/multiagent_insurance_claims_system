@@ -9,7 +9,40 @@
       "Bash(curl http://localhost:*)",
       "Read",
       "Glob",
-      "Grep"
+      "Grep",
+      "mcp__claude_ai_Firecrawl__firecrawl_scrape",
+      "Bash(ls -la data/batch_results)",
+      "Bash(tasklist)",
+      "Bash(grep -n -A2 'default=str\\) + \"$' scripts/run_golden_set.py)",
+      "Bash(.venv/Scripts/python.exe -)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/ -q)",
+      "Bash(grep -E '^GOLD-|^PAIR-' __TRACKED_VAR__/golden_35.log)",
+      "Bash(.venv/Scripts/python.exe -c \"import api.main; from src.agents.graph import get_compiled_graph; print\\('api + graph import ok'\\)\")",
+      "Bash(curl -s http://localhost:8000/api/claims/demo-scenarios)",
+      "Bash(curl -s -X POST http://localhost:8000/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"claimant\",\"password\":\"claim123\"}')",
+      "Bash(powershell -Command 'Get-Process | Where-Object {$_.ProcessName -like '\\\\''*python*'\\\\'' -or $_.ProcessName -like '\\\\''*uvicorn*'\\\\''} | Select-Object Id, ProcessName')",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess\")",
+      "Bash(cat /tmp/uvicorn_restart.log 2>&1 | tail -40)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:8000/docs -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(date -u +\"%Y-%m-%dT%H:%M:%S\" *)",
+      "Bash(powershell -Command \"Get-NetTCPConnection -LocalPort 8000 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess -Unique\")",
+      "Bash(grep -rn \"sqlite3\\\\|sqlite:///\" --include=\"*.py\" src/ api/ scripts/)",
+      "Bash(docker --version)",
+      "Bash(.venv/Scripts/python.exe -c \"import sys; print\\(sys.executable\\); print\\(sys.path[:3]\\)\")",
+      "Bash(.venv/Scripts/python.exe -m pip show crewai pydantic langchain-core langgraph-checkpoint)",
+      "Bash(.venv/Scripts/python.exe -c ' *)",
+      "Bash(unset DATABASE_URL)",
+      "Bash(sleep 15 && tail -10 /tmp/uvicorn_supabase3.log && echo \"--- status ---\" && curl -s http://localhost:8000/docs -o /dev/null -w \"%{http_code}\\\\n\")",
+      "Bash(tail -30 /tmp/uvicorn_supabase3.log)",
+      "Bash(tail -40 /tmp/uvicorn_supabase4.log)",
+      "Bash(nslookup db.tbqxakzmirqauipgzuah.supabase.co)",
+      "Bash(ping -n 1 db.tbqxakzmirqauipgzuah.supabase.co)",
+      "Bash(tail -50 /tmp/uvicorn_supabase5.log)",
+      "Bash(grep -i \"^\\\\.env$\\\\|^\\\\.env\\\\b\" .gitignore)",
+      "Bash(git rm *)",
+      "Bash(git check-ignore *)",
+      "Bash(git add *)"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -35,8 +68,8 @@
           {
             "type": "command",
             "command": "bash .claude/hooks/check-env.sh",
-            "once": true,
-            "statusMessage": "Checking .env setup..."
+            "statusMessage": "Checking .env setup...",
+            "once": true
           }
         ]
       }

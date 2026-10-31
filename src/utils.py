@@ -30,12 +30,25 @@ def detect_asset_type(incident_type: str) -> str:
     return "auto" if any(k in it for k in _AUTO_KEYWORDS) else "property"
 
 
-def calculate_asset_age(vehicle_year: int | str | None) -> int:
-    """Return asset age in years from the vehicle year. Returns 0 if unknown."""
+def year_of(as_of) -> int:
+    """Calendar year of `as_of` (a date or ISO date string); today's year if absent or unparseable."""
+    from datetime import date
+    try:
+        return (as_of if isinstance(as_of, date) else date.fromisoformat(str(as_of))).year
+    except (TypeError, ValueError):
+        return date.today().year
+
+
+def calculate_asset_age(vehicle_year: int | str | None, as_of=None) -> int:
+    """Return asset age in years from the vehicle year. Returns 0 if unknown.
+
+    `as_of` is the date the age is measured at - callers pass the claim's incident date,
+    because the car's value at the time of loss is what is insured, not its value on the
+    day the claim happens to be processed. Defaults to today for callers with no incident.
+    """
     if not vehicle_year:
         return 0
-    from datetime import date
-    return date.today().year - int(vehicle_year)
+    return year_of(as_of) - int(vehicle_year)
 
 
 def recall_similar_claims(description: str, k: int = 3) -> str:

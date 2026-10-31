@@ -1,20 +1,32 @@
-"""SQLite persistence layer via SQLModel.
+"""Persistence layer via SQLModel.
 
-This module defines the database models and initializes 
-the SQLite database for the insurance claim processing API."""
+Users/claims/appeals. Uses Postgres when DATABASE_URL is set (Render injects
+this automatically when a Postgres instance is attached to the web service -
+Render's own disk is ephemeral, so SQLite would lose everything on every
+redeploy/restart). Falls back to a local SQLite file when DATABASE_URL is
+unset, so local dev needs no Postgres install."""
 
 from __future__ import annotations #For Python 3.10+ to allow forward references in type hints without quotes Ensure this is at the top of the file before any imports or code.
 
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
+from dotenv import load_dotenv
 from sqlmodel import Field, Session, SQLModel, create_engine
 
+load_dotenv()  # must run before reading DATABASE_URL below - don't rely on another module having loaded .env first
+
 _PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = _PROJECT_ROOT / "data" / "api.db"
-DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-engine = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False})
+DB_PATH = _PROJECT_ROOT / "data" / "api.db"  # SQLite fallback path only; unused when DATABASE_URL is set
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    engine = create_engine(DATABASE_URL)
+else:
+    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+    engine = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False})
 
 
 def _utcnow() -> str:
@@ -51,6 +63,9 @@ class Claim(SQLModel, table=True):
     documents: str = "[]"  # JSON list
     type_disputed_by_claimant: bool = False  # claimant kept their own incident_type after the verify-type check suggested a different one
     type_dispute_reason: Optional[str] = None  # claimant's own stated justification, shown to the HITL reviewer alongside the model's reasoning
+    document_disputes: str = "[]"  # JSON list of {"slot": ..., "reason": ...} - claimant kept a flagged document anyway, see upload_staging.py
+    upload_token: Optional[str] = None  # pre-claim upload session token (api/routes_claims.py's /upload-staging/{token}/{slot}), used once to claim staged files, not read again after
+    prebuilt_documents: Optional[str] = None  # JSON AutoCollisionDocuments dict - only set by the Evals tab's golden-set "Run this case" flow, see routes_evals.py
 
     status: str = "submitted"  # submitted | processing | completed | failed
     final_decision: Optional[str] = None
@@ -92,29 +107,35 @@ class Appeal(SQLModel, table=True):
 
 
 def _migrate_claim_columns() -> None:
-    """Add new columns to existing claim table if missing."""
-    import sqlite3
-    conn = sqlite3.connect(str(DB_PATH))
+    """Add new columns to existing claim table if missing.
+
+    Uses SQLAlchemy's own dialect-agnostic inspector instead of SQLite's
+    PRAGMA table_info, so this works unchanged against Postgres too - no
+    per-dialect branching needed."""
+    from sqlalchemy import inspect, text
+
     try:
-        existing = {row[1] for row in conn.execute("PRAGMA table_info(claim)").fetchall()}
-        migrations = [
-            ("denial_reasons", "TEXT DEFAULT '[]'"),
-            ("communication_message", "TEXT"),
-            ("appeal_instructions", "TEXT"),
-            ("agent_outputs", "TEXT"),
-            ("decided_by", "TEXT"),
-            ("decided_at", "TEXT"),
-            ("type_disputed_by_claimant", "BOOLEAN DEFAULT 0"),
-            ("type_dispute_reason", "TEXT"),
-        ]
+        existing = {col["name"] for col in inspect(engine).get_columns("claim")}
+    except Exception:
+        return  # table may not exist yet
+
+    migrations = [
+        ("denial_reasons", "TEXT DEFAULT '[]'"),
+        ("communication_message", "TEXT"),
+        ("appeal_instructions", "TEXT"),
+        ("agent_outputs", "TEXT"),
+        ("decided_by", "TEXT"),
+        ("decided_at", "TEXT"),
+        ("type_disputed_by_claimant", "BOOLEAN DEFAULT FALSE"),
+        ("type_dispute_reason", "TEXT"),
+        ("document_disputes", "TEXT DEFAULT '[]'"),
+        ("upload_token", "TEXT"),
+        ("prebuilt_documents", "TEXT"),
+    ]
+    with engine.begin() as conn:
         for col, typedef in migrations:
             if col not in existing:
-                conn.execute(f"ALTER TABLE claim ADD COLUMN {col} {typedef}")
-        conn.commit()
-    except Exception:
-        pass  # table may not exist yet
-    finally:
-        conn.close()
+                conn.execute(text(f"ALTER TABLE claim ADD COLUMN {col} {typedef}"))
 
 
 def init_db() -> None:

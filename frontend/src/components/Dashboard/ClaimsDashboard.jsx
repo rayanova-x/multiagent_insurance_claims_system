@@ -114,25 +114,25 @@ export default function ClaimsDashboard() {
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Box>
-          <Typography variant="h5" fontWeight={700} color="#F1F5F9">Claims Dashboard</Typography>
-          <Typography variant="body2" color="#94A3B8">Review and manage insurance claims</Typography>
+          <Typography variant="h5" fontWeight={700} color="#161616">Claims Dashboard</Typography>
+          <Typography variant="body2" color="rgba(22,22,22,0.62)">Review and manage insurance claims</Typography>
         </Box>
-        <Button startIcon={<Refresh />} onClick={fetchClaims} sx={{ color: '#94A3B8' }}>Refresh</Button>
+        <Button startIcon={<Refresh />} onClick={fetchClaims} sx={{ color: 'rgba(22,22,22,0.62)' }}>Refresh</Button>
       </Box>
 
       {/* Stats */}
       <Grid container spacing={2} sx={{ mb: 3 }}>
         {[
-          { label: 'Total Claims', value: stats.total, color: '#3B82F6' },
-          { label: 'Needs Review', value: stats.pending, color: '#F59E0B' },
-          { label: 'HITL Flagged', value: stats.hitl, color: '#EF4444' },
-          { label: 'Approved', value: stats.approved, color: '#10B981' },
-          { label: 'Denied', value: stats.denied, color: '#DC2626' },
+          { label: 'Total Claims', value: stats.total, color: '#0F766E' },
+          { label: 'Needs Review', value: stats.pending, color: '#8a5a00' },
+          { label: 'HITL Flagged', value: stats.hitl, color: '#a3242a' },
+          { label: 'Approved', value: stats.approved, color: '#1a7a4c' },
+          { label: 'Denied', value: stats.denied, color: '#a3242a' },
         ].map((s) => (
           <Grid item xs={6} md={2.4} key={s.label}>
-            <Paper sx={{ p: 2, bgcolor: '#1E293B', borderRadius: 2, border: '1px solid #334155', textAlign: 'center' }}>
+            <Paper sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 2, border: '1px solid #161616', textAlign: 'center' }}>
               <Typography variant="h4" fontWeight={700} sx={{ color: s.color }}>{s.value}</Typography>
-              <Typography variant="caption" color="#94A3B8">{s.label}</Typography>
+              <Typography variant="caption" color="rgba(22,22,22,0.62)">{s.label}</Typography>
             </Paper>
           </Grid>
         ))}
@@ -142,9 +142,9 @@ export default function ClaimsDashboard() {
       <TextField
         fullWidth placeholder="Search claims by ID, description, type..." value={search}
         onChange={(e) => setSearch(e.target.value)} sx={{ mb: 2 }}
-        InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ color: '#64748B' }} /></InputAdornment> }}
+        InputProps={{ startAdornment: <InputAdornment position="start"><Search sx={{ color: 'rgba(22,22,22,0.45)' }} /></InputAdornment> }}
       />
-      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2, '& .MuiTab-root': { color: '#94A3B8', fontWeight: 600, minWidth: 100 }, '& .Mui-selected': { color: '#3B82F6' } }}>
+      <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2, '& .MuiTab-root': { color: 'rgba(22,22,22,0.62)', fontWeight: 600, minWidth: 100 }, '& .Mui-selected': { color: '#0F766E' } }}>
         {TAB_LABELS.map((l, i) => (
           <Tab key={l} label={<Stack direction="row" spacing={0.5} alignItems="center">
             <span>{l}</span>
@@ -157,47 +157,33 @@ export default function ClaimsDashboard() {
       {loading ? (
         <Box sx={{ textAlign: 'center', py: 6 }}><CircularProgress /></Box>
       ) : (
-        <TableContainer component={Paper} sx={{ bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
+        <TableContainer component={Paper} sx={{ bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Claim ID</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Type</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Amount</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Fraud Score</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Status</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Settlement</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Actions</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Claim ID</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Type</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Amount</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Status</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Settlement</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {filtered.map((claim) => (
-                <TableRow key={claim.claim_id} hover sx={{ '&:hover': { bgcolor: '#1E293B80' } }}>
-                  <TableCell sx={{ color: '#F1F5F9', fontFamily: 'monospace', fontSize: '0.8rem' }}>{claim.claim_id}</TableCell>
-                  <TableCell sx={{ color: '#94A3B8', fontSize: '0.85rem' }}>{claim.incident_type?.replace(/_/g, ' ')}</TableCell>
-                  <TableCell sx={{ color: '#F1F5F9', fontWeight: 600 }}>{fmt(claim.estimated_amount)}</TableCell>
-                  <TableCell>
-                    {claim.fraud_score != null ? (
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        <LinearProgress
-                          variant="determinate" value={claim.fraud_score * 100}
-                          sx={{ width: 60, height: 6, borderRadius: 3, bgcolor: '#334155',
-                            '& .MuiLinearProgress-bar': { bgcolor: claim.fraud_score > 0.65 ? '#EF4444' : claim.fraud_score > 0.35 ? '#F59E0B' : '#10B981' }
-                          }}
-                        />
-                        <Typography variant="caption" color="#94A3B8">{(claim.fraud_score * 100).toFixed(0)}%</Typography>
-                      </Box>
-                    ) : '-'}
-                  </TableCell>
+                <TableRow key={claim.claim_id} hover sx={{ '&:hover': { bgcolor: '#EAF4F260' } }}>
+                  <TableCell sx={{ color: '#161616', fontFamily: 'monospace', fontSize: '0.8rem' }}>{claim.claim_id}</TableCell>
+                  <TableCell sx={{ color: 'rgba(22,22,22,0.62)', fontSize: '0.85rem' }}>{claim.incident_type?.replace(/_/g, ' ')}</TableCell>
+                  <TableCell sx={{ color: '#161616', fontWeight: 600 }}>{fmt(claim.estimated_amount)}</TableCell>
                   <TableCell>
                     <Chip label={claim.status?.replace(/_/g, ' ')} color={STATUS_COLORS[claim.status] || 'default'} size="small" sx={{ fontWeight: 600, fontSize: '0.75rem' }} />
                   </TableCell>
-                  <TableCell sx={{ color: '#10B981', fontWeight: 600, fontSize: '0.85rem' }}>
+                  <TableCell sx={{ color: '#1a7a4c', fontWeight: 600, fontSize: '0.85rem' }}>
                     {fmt(claim.settlement_amount)}
                   </TableCell>
                   <TableCell>
                     <Tooltip title="View Details">
-                      <IconButton size="small" sx={{ color: '#3B82F6' }} onClick={() => openDetail(claim.claim_id)}>
+                      <IconButton size="small" sx={{ color: '#0F766E' }} onClick={() => openDetail(claim.claim_id)}>
                         <Visibility fontSize="small" />
                       </IconButton>
                     </Tooltip>
@@ -206,7 +192,7 @@ export default function ClaimsDashboard() {
               ))}
               {filtered.length === 0 && (
                 <TableRow>
-                  <TableCell colSpan={7} sx={{ textAlign: 'center', py: 4, color: '#64748B' }}>
+                  <TableCell colSpan={7} sx={{ textAlign: 'center', py: 4, color: 'rgba(22,22,22,0.45)' }}>
                     No claims found{search ? ` matching "${search}"` : ''}
                   </TableCell>
                 </TableRow>
@@ -224,6 +210,7 @@ export default function ClaimsDashboard() {
         onClose={() => { setDetail(null); setActionMsg(null); }}
         onProcess={handleProcess}
         onGoToHITL={handleGoToHITL}
+        onGoToObservability={() => navigate(`/observability/${detail.claim_id}`)}
         onRefresh={refreshDetail}
       />
     </Box>
@@ -237,9 +224,9 @@ export default function ClaimsDashboard() {
 function Row({ label, value, mono, color }) {
   if (value === undefined || value === null || value === '') return null;
   return (
-    <Box sx={{ display: 'flex', py: 0.75, borderBottom: '1px solid #1E293B' }}>
-      <Typography variant="caption" sx={{ color: '#64748B', width: 200, textTransform: 'uppercase', letterSpacing: 0.4 }}>{label}</Typography>
-      <Typography variant="body2" sx={{ color: color || '#F1F5F9', fontFamily: mono ? 'monospace' : 'inherit', fontSize: mono ? '0.8rem' : '0.875rem', flex: 1, wordBreak: 'break-word' }}>
+    <Box sx={{ display: 'flex', py: 0.75, borderBottom: '1px solid #FFFFFF' }}>
+      <Typography variant="caption" sx={{ color: 'rgba(22,22,22,0.45)', width: 200, textTransform: 'uppercase', letterSpacing: 0.4 }}>{label}</Typography>
+      <Typography variant="body2" sx={{ color: color || '#161616', fontFamily: mono ? 'monospace' : 'inherit', fontSize: mono ? '0.8rem' : '0.875rem', flex: 1, wordBreak: 'break-word' }}>
         {value}
       </Typography>
     </Box>
@@ -248,7 +235,7 @@ function Row({ label, value, mono, color }) {
 
 function SectionTitle({ children }) {
   return (
-    <Typography variant="overline" sx={{ color: '#3B82F6', fontWeight: 700, letterSpacing: 1, mt: 2, display: 'block' }}>
+    <Typography variant="overline" sx={{ color: '#0F766E', fontWeight: 700, letterSpacing: 1, mt: 2, display: 'block' }}>
       {children}
     </Typography>
   );
@@ -296,22 +283,22 @@ function nextStepFor(claim) {
 
 // ── Agent names and icons ────────────────────────────────────────────────────
 const AGENT_DISPLAY = {
-  intake_agent: { label: 'Intake Validation', icon: '', color: '#3B82F6' },
-  fraud_crew: { label: 'Fraud Detection (CrewAI)', icon: '', color: '#EF4444' },
-  damage_assessor: { label: 'Damage Assessment', icon: '', color: '#F59E0B' },
-  policy_checker: { label: 'Policy Compliance', icon: '', color: '#8B5CF6' },
-  settlement_calculator: { label: 'Settlement Calculation', icon: '', color: '#10B981' },
-  evaluator: { label: 'Quality Evaluation (LLM Judge)', icon: '', color: '#06B6D4' },
-  communication_agent: { label: 'Communication', icon: '', color: '#64748B' },
-  auto_reject: { label: 'Auto Reject', icon: '', color: '#EF4444' },
-  hitl_checkpoint: { label: 'HITL Review', icon: '', color: '#F59E0B' },
+  intake_agent: { label: 'Intake Validation', icon: '', color: '#0F766E' },
+  fraud_crew: { label: 'Fraud Detection (CrewAI)', icon: '', color: '#a3242a' },
+  damage_assessor: { label: 'Damage Assessment', icon: '', color: '#8a5a00' },
+  policy_checker: { label: 'Policy Compliance', icon: '', color: '#7C5CBF' },
+  settlement_calculator: { label: 'Settlement Calculation', icon: '', color: '#1a7a4c' },
+  evaluator: { label: 'Quality Evaluation (LLM Judge)', icon: '', color: '#0F766E' },
+  communication_agent: { label: 'Communication', icon: '', color: 'rgba(22,22,22,0.45)' },
+  auto_reject: { label: 'Auto Reject', icon: '', color: '#a3242a' },
+  hitl_checkpoint: { label: 'HITL Review', icon: '', color: '#8a5a00' },
 };
 
 const confidenceColor = (c) => {
-  if (c == null) return '#64748B';
-  if (c >= 0.75) return '#10B981';
-  if (c >= 0.60) return '#F59E0B';
-  return '#EF4444';
+  if (c == null) return 'rgba(22,22,22,0.45)';
+  if (c >= 0.75) return '#1a7a4c';
+  if (c >= 0.60) return '#8a5a00';
+  return '#a3242a';
 };
 
 const confidenceLabel = (c) => {
@@ -323,7 +310,9 @@ const confidenceLabel = (c) => {
 
 function AgentTracePanel({ agentOutputs }) {
   const [expanded, setExpanded] = useState({});
-  const trace = agentOutputs?._trace || [];
+  // fraud_crew is mocked (MOCK_FRAUD_CREW) and out of scope for this
+  // rebuild's CrewAI internals - never shown in the trace.
+  const trace = (agentOutputs?._trace || []).filter((t) => t.agent !== 'fraud_crew');
 
   if (!trace.length) return null;
 
@@ -332,14 +321,14 @@ function AgentTracePanel({ agentOutputs }) {
   return (
     <Box sx={{ mt: 1 }}>
       {trace.map((entry, i) => {
-        const info = AGENT_DISPLAY[entry.agent] || { label: entry.agent, icon: '', color: '#64748B' };
+        const info = AGENT_DISPLAY[entry.agent] || { label: entry.agent, icon: '', color: 'rgba(22,22,22,0.45)' };
         const conf = entry.confidence;
         const isOpen = expanded[i];
         const confPct = conf != null ? `${(conf * 100).toFixed(0)}%` : null;
 
         return (
           <Paper key={i} sx={{
-            mb: 1, bgcolor: '#0F172A', border: `1px solid ${isOpen ? info.color + '60' : '#1E293B'}`,
+            mb: 1, bgcolor: '#F7F5EE', border: `1px solid ${isOpen ? info.color + '60' : '#FFFFFF'}`,
             borderRadius: 2, overflow: 'hidden', transition: 'border-color 0.2s',
           }}>
             {/* Header - always visible */}
@@ -347,17 +336,17 @@ function AgentTracePanel({ agentOutputs }) {
               onClick={() => toggle(i)}
               sx={{
                 display: 'flex', alignItems: 'center', gap: 1.5, px: 2, py: 1.5,
-                cursor: 'pointer', '&:hover': { bgcolor: '#1E293B40' },
+                cursor: 'pointer', '&:hover': { bgcolor: '#EAF4F230' },
               }}
             >
               <Typography sx={{ fontSize: '1.2rem', lineHeight: 1 }}>{info.icon}</Typography>
               <Box sx={{ flex: 1, minWidth: 0 }}>
-                <Typography variant="body2" fontWeight={700} color="#F1F5F9" noWrap>
+                <Typography variant="body2" fontWeight={700} color="#161616" noWrap>
                   {info.label}
                 </Typography>
                 {entry.decision && (
-                  <Typography variant="caption" color="#94A3B8">
-                    Decision: <span style={{ color: '#F1F5F9', fontWeight: 600 }}>{entry.decision}</span>
+                  <Typography variant="caption" color="rgba(22,22,22,0.62)">
+                    Decision: <span style={{ color: '#161616', fontWeight: 600 }}>{entry.decision}</span>
                   </Typography>
                 )}
               </Box>
@@ -370,7 +359,7 @@ function AgentTracePanel({ agentOutputs }) {
                   </Typography>
                   <LinearProgress variant="determinate" value={(conf || 0) * 100}
                     sx={{
-                      height: 4, borderRadius: 2, bgcolor: '#334155', mt: 0.5,
+                      height: 4, borderRadius: 2, bgcolor: 'rgba(22,22,22,0.15)', mt: 0.5,
                       '& .MuiLinearProgress-bar': { bgcolor: confidenceColor(conf), borderRadius: 2 },
                     }}
                   />
@@ -379,7 +368,7 @@ function AgentTracePanel({ agentOutputs }) {
 
               {/* Duration */}
               {entry.duration_ms != null && (
-                <Typography variant="caption" color="#64748B" sx={{ minWidth: 50, textAlign: 'right' }}>
+                <Typography variant="caption" color="rgba(22,22,22,0.45)" sx={{ minWidth: 50, textAlign: 'right' }}>
                   {entry.duration_ms > 1000 ? `${(entry.duration_ms / 1000).toFixed(1)}s` : `${entry.duration_ms}ms`}
                 </Typography>
               )}
@@ -387,20 +376,20 @@ function AgentTracePanel({ agentOutputs }) {
               {/* Flags count badge */}
               {entry.flags?.length > 0 && (
                 <Chip label={`${entry.flags.length} flag${entry.flags.length > 1 ? 's' : ''}`}
-                  size="small" sx={{ bgcolor: '#7F1D1D', color: '#FCA5A5', height: 20, fontSize: '0.7rem' }} />
+                  size="small" sx={{ bgcolor: '#a3242a', color: '#a3242a', height: 20, fontSize: '0.7rem' }} />
               )}
 
-              {isOpen ? <ExpandLess sx={{ color: '#64748B' }} /> : <ExpandMore sx={{ color: '#64748B' }} />}
+              {isOpen ? <ExpandLess sx={{ color: 'rgba(22,22,22,0.45)' }} /> : <ExpandMore sx={{ color: 'rgba(22,22,22,0.45)' }} />}
             </Box>
 
             {/* Expanded body */}
             {isOpen && (
-              <Box sx={{ px: 2, pb: 2, borderTop: '1px solid #1E293B' }}>
+              <Box sx={{ px: 2, pb: 2, borderTop: '1px solid #FFFFFF' }}>
                 {/* Reasoning */}
                 {entry.reasoning && (
                   <Box sx={{ mt: 1.5 }}>
-                    <Typography variant="caption" color="#64748B" fontWeight={600}>Reasoning</Typography>
-                    <Typography variant="body2" color="#CBD5E1" sx={{ mt: 0.5, whiteSpace: 'pre-line', fontSize: '0.85rem' }}>
+                    <Typography variant="caption" color="rgba(22,22,22,0.45)" fontWeight={600}>Reasoning</Typography>
+                    <Typography variant="body2" color="rgba(22,22,22,0.62)" sx={{ mt: 0.5, whiteSpace: 'pre-line', fontSize: '0.85rem' }}>
                       {entry.reasoning}
                     </Typography>
                   </Box>
@@ -409,11 +398,11 @@ function AgentTracePanel({ agentOutputs }) {
                 {/* Flags */}
                 {entry.flags?.length > 0 && (
                   <Box sx={{ mt: 1.5 }}>
-                    <Typography variant="caption" color="#64748B" fontWeight={600}>Flags</Typography>
+                    <Typography variant="caption" color="rgba(22,22,22,0.45)" fontWeight={600}>Flags</Typography>
                     <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mt: 0.5 }}>
                       {entry.flags.map((flag, j) => (
                         <Chip key={j} label={flag} size="small"
-                          sx={{ bgcolor: '#7F1D1D', color: '#FCA5A5', fontSize: '0.75rem', height: 22 }} />
+                          sx={{ bgcolor: '#a3242a', color: '#a3242a', fontSize: '0.75rem', height: 22 }} />
                       ))}
                     </Box>
                   </Box>
@@ -422,12 +411,12 @@ function AgentTracePanel({ agentOutputs }) {
                 {/* Key Findings */}
                 {entry.findings && (
                   <Box sx={{ mt: 1.5 }}>
-                    <Typography variant="caption" color="#64748B" fontWeight={600}>Key Findings</Typography>
+                    <Typography variant="caption" color="rgba(22,22,22,0.45)" fontWeight={600}>Key Findings</Typography>
                     <Box sx={{ mt: 0.5, display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '2px 12px' }}>
                       {Object.entries(entry.findings).map(([k, v]) => (
                         <React.Fragment key={k}>
-                          <Typography variant="caption" color="#64748B">{k.replace(/_/g, ' ')}</Typography>
-                          <Typography variant="caption" color="#F1F5F9" fontWeight={600}>
+                          <Typography variant="caption" color="rgba(22,22,22,0.45)">{k.replace(/_/g, ' ')}</Typography>
+                          <Typography variant="caption" color="#161616" fontWeight={600}>
                             {typeof v === 'boolean' ? (v ? 'Yes' : 'No') :
                              typeof v === 'number' ? (Number.isInteger(v) ? v : v.toLocaleString(undefined, { maximumFractionDigits: 2 })) :
                              Array.isArray(v) ? (v.length ? v.join(', ') : 'None') :
@@ -447,7 +436,7 @@ function AgentTracePanel({ agentOutputs }) {
   );
 }
 
-function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGoToHITL, onRefresh }) {
+function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGoToHITL, onGoToObservability, onRefresh }) {
   const open = !!claim;
   const money = fmt;
   const pct = (v) => (v == null ? '-' : `${(v * 100).toFixed(1)}%`);
@@ -457,15 +446,15 @@ function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGo
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth
-      PaperProps={{ sx: { bgcolor: '#0F172A', border: '1px solid #334155', borderRadius: 3 } }}>
-      <DialogTitle sx={{ color: '#F1F5F9', borderBottom: '1px solid #1E293B', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1.5 }}>
+      PaperProps={{ sx: { bgcolor: '#F7F5EE', border: '1px solid #161616', borderRadius: 3 } }}>
+      <DialogTitle sx={{ color: '#161616', borderBottom: '1px solid #FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pb: 1.5 }}>
         <Box>
           <Typography variant="h6" fontWeight={700}>Claim Details</Typography>
           {claim && !claim._loading && !claim._error && (
-            <Typography variant="caption" sx={{ color: '#64748B', fontFamily: 'monospace' }}>{claim.claim_id}</Typography>
+            <Typography variant="caption" sx={{ color: 'rgba(22,22,22,0.45)', fontFamily: 'monospace' }}>{claim.claim_id}</Typography>
           )}
         </Box>
-        <IconButton onClick={onClose} size="small" sx={{ color: '#94A3B8' }}><Close /></IconButton>
+        <IconButton onClick={onClose} size="small" sx={{ color: 'rgba(22,22,22,0.62)' }}><Close /></IconButton>
       </DialogTitle>
 
       <DialogContent sx={{ pt: 2 }}>
@@ -477,19 +466,19 @@ function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGo
           <>
             {/* Next-step banner - always tells the reviewer what to do */}
             {step && (
-              <Alert severity={step.severity} sx={{ mb: 2, bgcolor: '#1E293B', border: `1px solid ${step.severity === 'error' ? '#7F1D1D' : step.severity === 'warning' ? '#78350F' : '#1E3A5F'}`, '& .MuiAlert-message': { color: '#F1F5F9' } }}>
+              <Alert severity={step.severity} sx={{ mb: 2, bgcolor: '#FFFFFF', border: `1px solid ${step.severity === 'error' ? '#a3242a' : step.severity === 'warning' ? '#8a5a00' : '#0B5B54'}`, '& .MuiAlert-message': { color: '#161616' } }}>
                 <Typography variant="subtitle2" fontWeight={700}>{step.title}</Typography>
-                <Typography variant="body2" sx={{ color: '#CBD5E1', mt: 0.5 }}>{step.body}</Typography>
+                <Typography variant="body2" sx={{ color: 'rgba(22,22,22,0.62)', mt: 0.5 }}>{step.body}</Typography>
               </Alert>
             )}
             {!step && ['completed', 'approved', 'approved_partial', 'denied', 'auto_rejected'].includes(claim.status) && (
-              <Alert severity={['denied', 'auto_rejected'].includes(claim.status) ? 'error' : claim.status === 'approved_partial' ? 'warning' : 'success'} sx={{ mb: 2, bgcolor: '#1E293B', border: `1px solid ${['denied', 'auto_rejected'].includes(claim.status) ? '#7F1D1D' : '#064E3B'}`, '& .MuiAlert-message': { color: '#F1F5F9' } }}>
+              <Alert severity={['denied', 'auto_rejected'].includes(claim.status) ? 'error' : claim.status === 'approved_partial' ? 'warning' : 'success'} sx={{ mb: 2, bgcolor: '#FFFFFF', border: `1px solid ${['denied', 'auto_rejected'].includes(claim.status) ? '#a3242a' : '#1a7a4c'}`, '& .MuiAlert-message': { color: '#161616' } }}>
                 <Typography variant="subtitle2" fontWeight={700}>Claim complete</Typography>
-                <Typography variant="body2" sx={{ color: '#CBD5E1', mt: 0.5 }}>
+                <Typography variant="body2" sx={{ color: 'rgba(22,22,22,0.62)', mt: 0.5 }}>
                   Final decision: <strong>{(claim.final_decision || '').replace(/_/g, ' ')}</strong>. No further action needed.
                 </Typography>
                 {claim.denial_reasons?.length > 0 && (
-                  <Typography variant="body2" sx={{ color: '#FCA5A5', mt: 0.5 }}>
+                  <Typography variant="body2" sx={{ color: '#a3242a', mt: 0.5 }}>
                     Reasons: {claim.denial_reasons.join('; ')}
                   </Typography>
                 )}
@@ -510,27 +499,22 @@ function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGo
 
             <SectionTitle>Status</SectionTitle>
             <Row label="Status" value={<Chip label={(claim.status || '').replace(/_/g, ' ')} size="small" color={STATUS_COLORS[claim.status] || 'default'} sx={{ fontWeight: 600 }} />} />
-            <Row label="Final Decision" value={claim.final_decision?.replace(/_/g, ' ')} color="#F1F5F9" />
-            <Row label="Settlement Amount" value={money(claim.settlement_amount)} color="#10B981" />
+            <Row label="Final Decision" value={claim.final_decision?.replace(/_/g, ' ')} color="#161616" />
+            <Row label="Settlement Amount" value={money(claim.settlement_amount)} color="#1a7a4c" />
             {claim.denial_reasons?.length > 0 && (
-              <Row label="Denial Reasons" value={claim.denial_reasons.join('; ')} color="#EF4444" />
+              <Row label="Denial Reasons" value={claim.denial_reasons.join('; ')} color="#a3242a" />
             )}
-            <Row label="Decided By" value={claim.decided_by || (claim.hitl_required ? '-' : 'AI Agent')} color="#60A5FA" />
+            <Row label="Decided By" value={claim.decided_by || (claim.hitl_required ? '-' : 'AI Agent')} color="#2DA89D" />
             <Row label="Decision Date" value={claim.decided_at} mono />
             <Row label="Completed" value={claim.completed_at} mono />
 
             <SectionTitle>Agent Outputs</SectionTitle>
             <Row
-              label="Fraud Score"
-              value={claim.fraud_score != null ? `${pct(claim.fraud_score)}  ·  ${claim.fraud_risk_level || 'unknown'}` : '-'}
-              color={claim.fraud_score > 0.65 ? '#EF4444' : claim.fraud_score > 0.35 ? '#F59E0B' : '#10B981'}
-            />
-            <Row
               label="Evaluator Score"
               value={claim.evaluation_score != null ? pct(claim.evaluation_score) : '-'}
-              color={claim.evaluation_score >= 0.7 ? '#10B981' : '#F59E0B'}
+              color={claim.evaluation_score >= 0.7 ? '#1a7a4c' : '#8a5a00'}
             />
-            <Row label="HITL Required" value={claim.hitl_required ? 'Yes' : 'No'} color={claim.hitl_required ? '#F59E0B' : '#94A3B8'} />
+            <Row label="HITL Required" value={claim.hitl_required ? 'Yes' : 'No'} color={claim.hitl_required ? '#8a5a00' : 'rgba(22,22,22,0.62)'} />
             <Row label="HITL Ticket" value={claim.hitl_ticket_id} mono />
 
             <SectionTitle>Pipeline</SectionTitle>
@@ -547,7 +531,7 @@ function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGo
             {claim.agent_outputs?._trace?.length > 0 && (
               <>
                 <SectionTitle>Agent Trace</SectionTitle>
-                <Typography variant="caption" color="#64748B" sx={{ mb: 1, display: 'block' }}>
+                <Typography variant="caption" color="rgba(22,22,22,0.45)" sx={{ mb: 1, display: 'block' }}>
                   Click each agent to see its reasoning, confidence, findings, and flags.
                 </Typography>
                 <AgentTracePanel agentOutputs={claim.agent_outputs} />
@@ -558,7 +542,7 @@ function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGo
               <>
                 <SectionTitle>Errors</SectionTitle>
                 {errors.map((err, i) => (
-                  <Typography key={i} variant="body2" sx={{ color: '#EF4444', fontFamily: 'monospace', fontSize: '0.8rem', py: 0.5 }}>
+                  <Typography key={i} variant="body2" sx={{ color: '#a3242a', fontFamily: 'monospace', fontSize: '0.8rem', py: 0.5 }}>
                     · {err}
                   </Typography>
                 ))}
@@ -568,18 +552,23 @@ function ClaimDetailDialog({ claim, loading, actionMsg, onClose, onProcess, onGo
         ) : null}
       </DialogContent>
 
-      <DialogActions sx={{ borderTop: '1px solid #1E293B', px: 3, py: 2, gap: 1 }}>
-        <Button onClick={onClose} sx={{ color: '#94A3B8' }}>Close</Button>
+      <DialogActions sx={{ borderTop: '1px solid #FFFFFF', px: 3, py: 2, gap: 1 }}>
+        <Button onClick={onClose} sx={{ color: 'rgba(22,22,22,0.62)' }}>Close</Button>
+        {claim && !claim._loading && !claim._error && (
+          <Button onClick={onGoToObservability} variant="outlined" startIcon={<Psychology />} sx={{ color: '#0F766E', borderColor: '#0F766E' }}>
+            Full Observability Trace
+          </Button>
+        )}
         {step?.action === 'refresh' && (
           <Button onClick={onRefresh} variant="outlined" startIcon={<Refresh />}>Refresh</Button>
         )}
         {step?.action === 'process' && (
-          <Button onClick={onProcess} variant="contained" startIcon={<PlayArrow />} sx={{ bgcolor: '#3B82F6' }}>
+          <Button onClick={onProcess} variant="contained" startIcon={<PlayArrow />} sx={{ bgcolor: '#0F766E' }}>
             Process Now
           </Button>
         )}
         {step?.action === 'hitl' && (
-          <Button onClick={onGoToHITL} variant="contained" startIcon={<Gavel />} sx={{ bgcolor: '#F59E0B', '&:hover': { bgcolor: '#D97706' } }}>
+          <Button onClick={onGoToHITL} variant="contained" startIcon={<Gavel />} sx={{ bgcolor: '#8a5a00', '&:hover': { bgcolor: '#8a5a00' } }}>
             Open HITL Ticket
           </Button>
         )}

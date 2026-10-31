@@ -110,15 +110,29 @@ class ClaimsState(TypedDict):
     # ── Input ────────────────────────────────────────────────────────────
     claim: ClaimInput
     masked_claim: Optional[dict]        # PII-masked version sent to LLMs
+    # Raw per-slot uploaded file info (e.g. {"police_report": {"path": ...}}),
+    # set by the API layer before process_claim() is invoked - the INPUT
+    # document_agent (src/agents/document_agent.py) reads and turns into
+    # claim_documents below. None for claims with no real upload (e.g. every
+    # claim submitted through the API today - real upload plumbing doesn't
+    # exist yet) or for eval/test runs that pass claim_documents directly
+    # and skip document_agent's extraction step entirely.
+    uploaded_documents: Optional[dict]
     # Structured document fields (src/models/documents.py's AutoCollisionDocuments,
     # stored as a dict) when available - e.g. from data/stratified_claims/
-    # *_documents.json. None when no parsed document content exists for this
-    # claim (the real submission API does not produce this yet - only
-    # filenames; see CLAUDE.md "Document extraction"). Agents that can use
-    # document-derived figures (e.g. damage_assessor's repair-estimate
+    # *_documents.json, or produced by document_agent from uploaded_documents.
+    # None when no parsed document content exists for this claim. Agents that
+    # can use document-derived figures (e.g. damage_assessor's repair-estimate
     # stated_total) must fall back to claim-level fields when this is None,
     # never assume it is populated.
     claim_documents: Optional[dict]
+    # Code-detected problems with uploaded documents (src/models/documents.py's
+    # DocumentVerificationFinding, stored as dicts) - arithmetic mismatches,
+    # wrong-slot uploads, parse failures, implausible amounts. Plain Optional
+    # field (not Annotated/operator.add): document_agent runs once,
+    # sequentially, before the fan-out, so there's no concurrent-write risk
+    # the other accumulator fields in this file were built to handle.
+    document_verification_findings: Optional[list[dict]]
 
     # ── Intake ───────────────────────────────────────────────────────────
     intake_output: Optional[IntakeValidationOutput]
@@ -244,13 +258,24 @@ class ClaimsState(TypedDict):
     error_log: Annotated[list[str], operator.add]         # Append-only errors
 
 
-def initial_state(claim: ClaimInput, documents: Optional[dict] = None) -> ClaimsState:
+def initial_state(
+    claim: ClaimInput,
+    documents: Optional[dict] = None,
+    uploaded_documents: Optional[dict] = None,
+) -> ClaimsState:
     """Build a fresh state from a raw claim input.
 
     `documents` is the parsed AutoCollisionDocuments content (as a dict),
-    when available - optional, defaults to None so claims without parsed
-    document content (the normal case today - see claim_documents' field
-    comment) behave exactly as before this field was added.
+    when already available (e.g. eval/test runs) - optional, defaults to
+    None so claims without parsed document content (the normal case today -
+    see claim_documents' field comment) behave exactly as before this field
+    was added. When set, document_agent's own node is skipped by the graph
+    having nothing new to do (claim_documents is already populated).
+
+    `uploaded_documents` is raw per-slot upload info for document_agent to
+    extract FROM - mutually exclusive with `documents` in practice (a claim
+    either already has parsed content, or has raw uploads to parse), but
+    both are accepted independently since nothing here enforces that.
 
     Most fields start as None (TypedDict Optional fields). Only non-None
     defaults and required fields are listed explicitly.
@@ -258,6 +283,7 @@ def initial_state(claim: ClaimInput, documents: Optional[dict] = None) -> Claims
     state: dict = {
         "claim": claim,
         "claim_documents": documents,
+        "uploaded_documents": uploaded_documents,
         # Booleans that default to False
         "hitl_required": False,
         "human_override": False,

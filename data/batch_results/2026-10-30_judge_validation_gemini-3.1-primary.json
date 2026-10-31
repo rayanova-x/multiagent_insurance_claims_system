@@ -1,0 +1,237 @@
+{
+  "summary": {
+    "consistency_coordinator": {
+      "total_cases": 6,
+      "graded": 6,
+      "agreement": 5,
+      "agreement_rate": 0.8333333333333334,
+      "errors": 0
+    },
+    "fairness": {
+      "total_cases": 4,
+      "graded": 4,
+      "agreement": 4,
+      "agreement_rate": 1.0,
+      "errors": 0
+    },
+    "transparency": {
+      "total_cases": 4,
+      "graded": 4,
+      "agreement": 3,
+      "agreement_rate": 0.75,
+      "errors": 0
+    }
+  },
+  "results": [
+    {
+      "case_id": "CC-01",
+      "judge": "consistency_coordinator",
+      "correct": true,
+      "expected": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null
+      },
+      "actual": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null,
+        "raw_summary": "The findings from the damage assessor, policy checker, and fraud crew were reviewed for missed facts and severity mismatches. No contradictions were identified between the independent assessments.",
+        "raw_conflicts": []
+      }
+    },
+    {
+      "case_id": "CC-02",
+      "judge": "consistency_coordinator",
+      "correct": true,
+      "expected": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null
+      },
+      "actual": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null,
+        "raw_summary": "The damage assessor's conclusion of total loss is consistent with the fraud crew's narrative summary of a total-loss claim, and no specific facts were identified in the damage assessment that would trigger a policy exclusion.",
+        "raw_conflicts": []
+      }
+    },
+    {
+      "case_id": "CC-03",
+      "judge": "consistency_coordinator",
+      "correct": true,
+      "expected": {
+        "has_conflicts": true,
+        "conflict_type": "severity_mismatch",
+        "severity": "material"
+      },
+      "actual": {
+        "has_conflicts": true,
+        "conflict_type": "severity_mismatch",
+        "severity": "material",
+        "raw_summary": "A material severity mismatch was identified between the Damage Assessor's total loss conclusion and the Fraud Crew's characterization of the incident as minor.",
+        "raw_conflicts": [
+          {
+            "type": "severity_mismatch",
+            "severity": "material",
+            "description": "The Damage Assessor concluded a total_loss ($20,000.00) while the Fraud Crew's narrative-consistency review characterized the incident as a 'small bump, nothing serious at all'."
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "CC-04",
+      "judge": "consistency_coordinator",
+      "correct": true,
+      "expected": {
+        "has_conflicts": true,
+        "conflict_type": "missed_fact",
+        "severity": "material"
+      },
+      "actual": {
+        "has_conflicts": true,
+        "conflict_type": "missed_fact",
+        "severity": "material",
+        "raw_summary": "The Damage Assessor identified that the claimant was making a delivery, a fact that was not provided to the Policy Checker and could impact the coverage decision.",
+        "raw_conflicts": [
+          {
+            "type": "missed_fact",
+            "severity": "material",
+            "description": "The Damage Assessor noted the claimant was 'making a delivery at the time of the incident,' which was not available to the Policy Checker."
+          }
+        ]
+      }
+    },
+    {
+      "case_id": "CC-05",
+      "judge": "consistency_coordinator",
+      "correct": true,
+      "expected": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null
+      },
+      "actual": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null,
+        "raw_summary": "The findings from the damage assessor, policy checker, and fraud crew were reviewed for missed facts and severity mismatches. No contradictions were identified, as the damage assessor's total loss conclusion is consistent with the fraud crew's narrative assessment and no exclusionary facts were surfaced in the damage notes.",
+        "raw_conflicts": []
+      }
+    },
+    {
+      "case_id": "CC-06",
+      "judge": "consistency_coordinator",
+      "correct": false,
+      "expected": {
+        "has_conflicts": true,
+        "conflict_type": "severity_mismatch",
+        "severity": "notable"
+      },
+      "actual": {
+        "has_conflicts": false,
+        "conflict_type": null,
+        "severity": null,
+        "raw_summary": "The findings from the damage assessor, policy checker, and fraud crew were reviewed. No missed facts or severity mismatches were identified, as the assessments are consistent with each other.",
+        "raw_conflicts": []
+      }
+    },
+    {
+      "case_id": "FAIR-01",
+      "judge": "fairness",
+      "correct": true,
+      "expected": {
+        "score": 1.0
+      },
+      "actual": {
+        "score": 1.0,
+        "raw_reasoning": "The claim is straightforward with minor damage, low fraud risk, no exclusions, and an estimated damage well within policy limits. The payout correctly subtracts the deductible from the assessed damage. A competent and unbiased human adjuster would approve the claim and arrive at the same settlement amount."
+      }
+    },
+    {
+      "case_id": "FAIR-02",
+      "judge": "fairness",
+      "correct": true,
+      "expected": {
+        "score": 1.0
+      },
+      "actual": {
+        "score": 1.0,
+        "raw_reasoning": "The claim involves assessed damage of $19,080 and an explicitly stated policy deductible of $15,000. Subtracting the deductible from the damage amount results in $4,080. The adjuster applied the deductible correctly and approved the partial payment of $4,080, which is the exact and unbiased outcome any competent human adjuster would reach given these facts."
+      }
+    },
+    {
+      "case_id": "FAIR-03",
+      "judge": "fairness",
+      "correct": true,
+      "expected": {
+        "score": 1.0
+      },
+      "actual": {
+        "score": 1.0,
+        "raw_reasoning": "The claimant's own narrative explicitly admits to participating in a race at the time of the collision. Standard auto insurance policies contain unambiguous racing exclusions that void coverage for damage sustained while a vehicle is operated in a speed contest or race. A competent, unbiased human adjuster reviewing a claim with a self-incriminating narrative matching the policy exclusion criteria would undoubtedly deny coverage and issue a $0 settlement."
+      }
+    },
+    {
+      "case_id": "FAIR-04",
+      "judge": "fairness",
+      "correct": true,
+      "expected": {
+        "score": 0.1
+      },
+      "actual": {
+        "score": 0.0,
+        "raw_reasoning": "A competent and unbiased human adjuster would not reach this conclusion. The claim was flagged by the fraud branch with a high risk score of 0.78 due to an anomalously high amount and lack of witnesses, yet this red flag was completely ignored and never resolved prior to settlement. Furthermore, the decision approved an amount of $33,600, which contradicts the stated $46,200 estimated damage and fails to account for the $500 deductible. Proceeding with a high fraud risk settlement without investigation is a critical oversight."
+      }
+    },
+    {
+      "case_id": "TRANS-01",
+      "judge": "transparency",
+      "correct": true,
+      "expected": {
+        "score": 1.0
+      },
+      "actual": {
+        "score": 1.0,
+        "raw_reasoning": "The calculation breakdown provides a clear, step-by-step path from the assessed damage to the final payable amount. It subtracts the deductible from the assessed damage, verifies that the result is within the policy's coverage limit, and clearly explains the final approval without leaving any missing logic or requiring guesswork."
+      }
+    },
+    {
+      "case_id": "TRANS-02",
+      "judge": "transparency",
+      "correct": true,
+      "expected": {
+        "score": 1.0
+      },
+      "actual": {
+        "score": 1.0,
+        "raw_reasoning": "The decision is fully explainable and traceable. The calculation breakdown clearly states that coverage is NOT_COVERED due to a specific racing exclusion, resulting in a settlement amount of $0. The denial reasons provide the direct justification by citing the claimant's own narrative that the vehicles were racing on a closed stretch of road, which directly maps to the policy's exclusion criteria. A claimant or regulator can easily follow the logic from the policy exclusion to the denial without needing to infer missing logic."
+      }
+    },
+    {
+      "case_id": "TRANS-03",
+      "judge": "transparency",
+      "correct": true,
+      "expected": {
+        "score": 0.15
+      },
+      "actual": {
+        "score": 0.0,
+        "raw_reasoning": "The provided calculation breakdown lists high-level categories (damage assessed, deductions applied, settlement calculated) but lacks any actual numbers, specific formulas, policy terms, or concrete steps. A claimant or regulator cannot follow why the final amount of $58,000 was reached because all specific logic, values, and reasoning are entirely missing."
+      }
+    },
+    {
+      "case_id": "TRANS-04",
+      "judge": "transparency",
+      "correct": false,
+      "expected": {
+        "score": 0.4
+      },
+      "actual": {
+        "score": 0.0,
+        "raw_reasoning": "The calculation breakdown shows an intermediate payable amount of $33,100 (derived from $33,600 assessed damage minus a $500 deductible). It then mentions that a 'Fraud review adjustment applied', resulting in a final settlement of $28,000. However, there is no explanation of how the $28,000 figure was reached. The specific reason, formula, or policy rule for the $5,100 discrepancy between the intermediate payable amount and the final settlement is entirely missing, leaving the claimant or regulator to guess the logic."
+      }
+    }
+  ]
+}

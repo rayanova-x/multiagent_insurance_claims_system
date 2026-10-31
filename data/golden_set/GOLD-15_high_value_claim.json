@@ -1,0 +1,32 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "estimated_amount 95,000 >= 84,100 (hitl.triggers.min_amount) -> mandatory sign-off pause",
+  "claimant": "Rosa Delgado",
+  "location": "Interstate 35 southbound, Austin, TX",
+  "vehicle": {
+    "age_years": 3,
+    "make": "Ford",
+    "model": "F-150"
+  },
+  "incident_days_ago": 18,
+  "policy": {
+    "kind": "standard"
+  },
+  "estimated_amount": 95000,
+  "repair": {
+    "ratio_of_acv": 0.5
+  },
+  "police_report_number": "AUS-24-662109",
+  "other_driver": "Brent Callahan",
+  "narrative": "A multi-vehicle pile-up on {location} left my pickup with heavy front-end damage. I was taken to hospital with a neck injury and have medical bills and a rental car on top of the vehicle repair. The claim total I am submitting includes all of these. Police attended and the other driver was cited.",
+  "expected": {
+    "paused": true,
+    "trigger": "exceeds review threshold",
+    "path_includes": [
+      "damage_assessor",
+      "policy_checker"
+    ]
+  },
+  "id": "GOLD-15",
+  "slug": "high_value_claim"
+}

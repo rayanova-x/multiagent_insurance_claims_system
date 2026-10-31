@@ -8,7 +8,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 import { analyticsAPI } from '../../services/api';
 import { fmt } from '../../services/currency';
 
-const COLORS = ['#3B82F6', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'];
+const COLORS = ['#0F766E', '#1a7a4c', '#8a5a00', '#a3242a', '#7C5CBF'];
 
 export default function AnalyticsDashboard() {
   const [metrics, setMetrics] = useState(null);
@@ -65,27 +65,27 @@ export default function AnalyticsDashboard() {
 
   return (
     <Box>
-      <Typography variant="h5" fontWeight={700} color="#F1F5F9" gutterBottom>
-        <Analytics sx={{ mr: 1, verticalAlign: 'middle', color: '#3B82F6' }} />
+      <Typography variant="h5" fontWeight={700} color="#161616" gutterBottom>
+        <Analytics sx={{ mr: 1, verticalAlign: 'middle', color: '#0F766E' }} />
         Pipeline Analytics
       </Typography>
-      <Typography variant="body2" color="#94A3B8" sx={{ mb: 3 }}>Performance metrics and cost breakdown</Typography>
+      <Typography variant="body2" color="rgba(22,22,22,0.62)" sx={{ mb: 3 }}>Performance metrics and cost breakdown</Typography>
 
       {/* Key Metrics */}
       <Grid container spacing={2} sx={{ mb: 4 }}>
         {[
-          { label: 'Total Claims', value: m.total_claims, icon: <Speed />, color: '#3B82F6' },
-          { label: 'Approval Rate', value: `${(m.approval_rate * 100).toFixed(0)}%`, icon: <TrendingUp />, color: '#10B981' },
-          { label: 'HITL (Human-In-The-Loop) Rate', value: `${(m.hitl_rate * 100).toFixed(0)}%`, icon: <Security />, color: '#F59E0B' },
-          { label: 'Avg Processing', value: `${m.avg_processing_time_sec}s`, icon: <Speed />, color: '#8B5CF6' },
-          { label: 'Total Cost', value: fmt(m.total_cost_usd), icon: <AttachMoney />, color: '#EF4444' },
-          { label: 'Avg Eval Score', value: `${(m.avg_eval_score * 100).toFixed(0)}%`, icon: <Gavel />, color: '#0EA5E9' },
+          { label: 'Total Claims', value: m.total_claims, icon: <Speed />, color: '#0F766E' },
+          { label: 'Approval Rate', value: `${(m.approval_rate * 100).toFixed(0)}%`, icon: <TrendingUp />, color: '#1a7a4c' },
+          { label: 'HITL (Human-In-The-Loop) Rate', value: `${(m.hitl_rate * 100).toFixed(0)}%`, icon: <Security />, color: '#8a5a00' },
+          { label: 'Avg Processing', value: `${m.avg_processing_time_sec}s`, icon: <Speed />, color: '#7C5CBF' },
+          { label: 'Total Cost', value: fmt(m.total_cost_usd), icon: <AttachMoney />, color: '#a3242a' },
+          { label: 'Avg Eval Score', value: `${(m.avg_eval_score * 100).toFixed(0)}%`, icon: <Gavel />, color: '#0F766E' },
         ].map((stat) => (
           <Grid item xs={6} md={2} key={stat.label}>
-            <Paper sx={{ p: 2, bgcolor: '#1E293B', borderRadius: 2, border: '1px solid #334155' }}>
+            <Paper sx={{ p: 2, bgcolor: '#FFFFFF', borderRadius: 2, border: '1px solid #161616' }}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
                 <Box sx={{ color: stat.color }}>{stat.icon}</Box>
-                <Typography variant="caption" color="#94A3B8">{stat.label}</Typography>
+                <Typography variant="caption" color="rgba(22,22,22,0.62)">{stat.label}</Typography>
               </Box>
               <Typography variant="h5" fontWeight={700} sx={{ color: stat.color }}>{stat.value}</Typography>
             </Paper>
@@ -96,15 +96,15 @@ export default function AnalyticsDashboard() {
       <Grid container spacing={3}>
         {/* Claims by Type - Bar Chart */}
         <Grid item xs={12} md={7}>
-          <Paper sx={{ p: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-            <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" gutterBottom>Claims by Type</Typography>
+          <Paper sx={{ p: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+            <Typography variant="subtitle1" fontWeight={600} color="#161616" gutterBottom>Claims by Type</Typography>
             <ResponsiveContainer width="100%" height={300}>
               <BarChart data={m.claims_by_type || []}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#334155" />
-                <XAxis dataKey="type" tick={{ fill: '#94A3B8', fontSize: 11 }} />
-                <YAxis tick={{ fill: '#94A3B8' }} />
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', borderRadius: 8, color: '#F1F5F9' }} />
-                <Bar dataKey="count" fill="#3B82F6" radius={[4, 4, 0, 0]} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#161616" />
+                <XAxis dataKey="type" tick={{ fill: 'rgba(22,22,22,0.62)', fontSize: 11 }} />
+                <YAxis tick={{ fill: 'rgba(22,22,22,0.62)' }} />
+                <Tooltip contentStyle={{ background: '#F7F5EE', border: '1px solid #161616', borderRadius: 8, color: '#161616' }} />
+                <Bar dataKey="count" fill="#0F766E" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </Paper>
@@ -112,14 +112,14 @@ export default function AnalyticsDashboard() {
 
         {/* Decisions - Pie Chart */}
         <Grid item xs={12} md={5}>
-          <Paper sx={{ p: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-            <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" gutterBottom>Decision Distribution</Typography>
+          <Paper sx={{ p: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+            <Typography variant="subtitle1" fontWeight={600} color="#161616" gutterBottom>Decision Distribution</Typography>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie data={m.decisions || []} dataKey="count" nameKey="decision" cx="50%" cy="50%" outerRadius={100} label={({ decision, percent }) => `${decision} ${(percent * 100).toFixed(0)}%`}>
                   {(m.decisions || []).map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                 </Pie>
-                <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', borderRadius: 8, color: '#F1F5F9' }} />
+                <Tooltip contentStyle={{ background: '#F7F5EE', border: '1px solid #161616', borderRadius: 8, color: '#161616' }} />
               </PieChart>
             </ResponsiveContainer>
           </Paper>
@@ -127,33 +127,33 @@ export default function AnalyticsDashboard() {
 
         {/* Pipeline Paths Table */}
         <Grid item xs={12}>
-          <Paper sx={{ bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-            <Typography variant="subtitle1" fontWeight={600} color="#F1F5F9" sx={{ p: 2, pb: 1 }}>Pipeline Path Performance</Typography>
+          <Paper sx={{ bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+            <Typography variant="subtitle1" fontWeight={600} color="#161616" sx={{ p: 2, pb: 1 }}>Pipeline Path Performance</Typography>
             <TableContainer>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Path</TableCell>
-                    <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Claims</TableCell>
-                    <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Distribution</TableCell>
-                    <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Avg Cost</TableCell>
-                    <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Avg Agents</TableCell>
+                    <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Path</TableCell>
+                    <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Claims</TableCell>
+                    <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Distribution</TableCell>
+                    <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Avg Cost</TableCell>
+                    <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Avg Agents</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {(m.pipeline_paths || []).map((p, i) => (
                     <TableRow key={p.path}>
-                      <TableCell sx={{ color: '#F1F5F9', fontWeight: 600 }}>{p.path}</TableCell>
-                      <TableCell sx={{ color: '#94A3B8' }}>{p.count}</TableCell>
+                      <TableCell sx={{ color: '#161616', fontWeight: 600 }}>{p.path}</TableCell>
+                      <TableCell sx={{ color: 'rgba(22,22,22,0.62)' }}>{p.count}</TableCell>
                       <TableCell>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                           <LinearProgress variant="determinate" value={(p.count / m.total_claims) * 100}
-                            sx={{ width: 100, height: 8, borderRadius: 4, bgcolor: '#334155', '& .MuiLinearProgress-bar': { bgcolor: COLORS[i], borderRadius: 4 } }} />
-                          <Typography variant="caption" color="#94A3B8">{((p.count / m.total_claims) * 100).toFixed(0)}%</Typography>
+                            sx={{ width: 100, height: 8, borderRadius: 4, bgcolor: 'rgba(22,22,22,0.15)', '& .MuiLinearProgress-bar': { bgcolor: COLORS[i], borderRadius: 4 } }} />
+                          <Typography variant="caption" color="rgba(22,22,22,0.62)">{((p.count / m.total_claims) * 100).toFixed(0)}%</Typography>
                         </Box>
                       </TableCell>
-                      <TableCell sx={{ color: '#10B981', fontWeight: 600 }}>{fmt(p.avg_cost)}</TableCell>
-                      <TableCell sx={{ color: '#94A3B8' }}>{p.avg_agents}</TableCell>
+                      <TableCell sx={{ color: '#1a7a4c', fontWeight: 600 }}>{fmt(p.avg_cost)}</TableCell>
+                      <TableCell sx={{ color: 'rgba(22,22,22,0.62)' }}>{p.avg_agents}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

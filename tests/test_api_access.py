@@ -6,12 +6,12 @@ reviewer name on a decision came from the browser, and notes were optional
 despite the UI's "Required for audit trail".
 """
 
-import sqlite3
 from datetime import datetime, timedelta, timezone
 
 import pytest
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
+from sqlalchemy import text
 from sqlalchemy.pool import StaticPool
 from sqlmodel import Session, SQLModel, create_engine
 
@@ -77,10 +77,11 @@ def _pending_ticket(ticket_id="HITL-T1", created=None, deadline=None):
     conn = queue._get_db()
     now = created or datetime.now(timezone.utc)
     conn.execute(
-        "INSERT INTO hitl_queue (ticket_id, claim_id, priority, priority_score, triggers, review_brief, "
-        "state_snapshot, status, created_at, sla_deadline) VALUES (?, 'CLM-1', 'normal', 20, '[]', 'b', '{}', "
-        "'pending', ?, ?)",
-        (ticket_id, now.isoformat(), (deadline or now + timedelta(hours=72)).isoformat()),
+        text("INSERT INTO hitl_queue (ticket_id, claim_id, priority, priority_score, triggers, review_brief, "
+             "state_snapshot, status, created_at, sla_deadline) VALUES (:ticket_id, 'CLM-1', 'normal', 20, '[]', 'b', '{}', "
+             "'pending', :created_at, :sla_deadline)"),
+        {"ticket_id": ticket_id, "created_at": now.isoformat(),
+         "sla_deadline": (deadline or now + timedelta(hours=72)).isoformat()},
     )
     conn.commit()
     conn.close()
@@ -101,8 +102,11 @@ def test_decision_is_attributed_to_the_logged_in_reviewer(client, monkeypatch):
     r = client.post("/api/hitl/decide/HITL-T1", json={
         "decision": "approved", "notes": "checked photos", "reviewer_id": "someone_else"})
     assert r.status_code == 200 and r.json()["reviewer"] == "real_reviewer"
-    with sqlite3.connect(queue.DB_PATH) as conn:
-        assert conn.execute("SELECT reviewer_id FROM hitl_queue").fetchone()[0] == "real_reviewer"
+    conn = queue._get_db()
+    try:
+        assert conn.execute(text("SELECT reviewer_id FROM hitl_queue")).fetchone()[0] == "real_reviewer"
+    finally:
+        conn.close()
 
 
 def test_overdue_tickets_are_escalated_and_listed_first(client):

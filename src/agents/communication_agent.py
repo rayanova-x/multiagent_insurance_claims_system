@@ -14,6 +14,7 @@ Output:
 from __future__ import annotations
 
 import logging
+import re
 import time
 
 from langchain_core.messages import HumanMessage, SystemMessage
@@ -82,7 +83,8 @@ def run_communication_agent(state: ClaimsState) -> dict:
             next_steps=["Contact your agent for details"],
             appeal_instructions=_get_appeal_instructions() if "denied" in decision_str else None,
         )
-        return _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_required, output, start_time)
+        return _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_required, output, start_time,
+                       prompt=None, raw_output=None)
 
     llm = get_structured_llm(CommunicationOutput)
 
@@ -151,14 +153,20 @@ def run_communication_agent(state: ClaimsState) -> dict:
     Internal notes should be complete and factual. Can be longer.
     """
 
+    raw_llm_output = None
     try:
         output = llm.invoke([
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=prompt),
         ])
+        # Captured before the merge/enforce helpers below mutate output in
+        # place (e.g. _enforce_no_fraud_leak can replace the whole message).
+        raw_llm_output = output.model_dump(mode="json")
         _merge_claimant_name(output, claim)
+        _enforce_letter_matches_decision(output, claim_id, decision_str, final_amount, _known_figures(state, final_amount))
         if fraud_output and fraud_output.fraud_score > 0.5:
             _enforce_no_fraud_leak(output, claim_id, decision_str, final_amount)
+        _merge_claimant_name(output, claim)  # again: a template replacement above has no name in it
     except Exception as e:
         logger.error(f"[{claim_id}] Communication agent LLM failed: {e}")
         output = CommunicationOutput(
@@ -169,7 +177,8 @@ def run_communication_agent(state: ClaimsState) -> dict:
             appeal_instructions=_get_appeal_instructions() if "denied" in decision_str else None,
         )
 
-    return _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_required, output, start_time)
+    return _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_required, output, start_time,
+                   prompt=prompt, raw_output=raw_llm_output)
 
 
 def _merge_claimant_name(output: CommunicationOutput, claim: dict) -> None:
@@ -180,7 +189,62 @@ def _merge_claimant_name(output: CommunicationOutput, claim: dict) -> None:
     "[CLAIMANT]" instead of the claimant's name."""
     name = claim.get("claimant_name") or "Claimant"
     output.subject = output.subject.replace("[CLAIMANT]", name)
-    output.message = output.message.replace("[CLAIMANT]", name)
+    output.message = output.message.replace("[CLAIMANT]", name).replace("Dear Claimant,", f"Dear {name},", 1)
+
+
+_MONEY_RE = re.compile(r"[$₹]\s?(\d[\d,]*(?:\.\d+)?)")
+_APPROVAL_WORDING = re.compile(r"(has|have) been (partially )?approved|pleased to (inform|let)")
+_DENIAL_WORDING = re.compile(r"(has|have) been denied|we regret|unable to approve")
+
+
+def _money_figures(text: str) -> set[float]:
+    return {round(float(m.replace(",", "")), 2) for m in _MONEY_RE.findall(text) if m.replace(",", "").replace(".", "", 1).isdigit()}
+
+
+def _known_figures(state: dict, final_amount: float) -> set[float]:
+    """Every dollar figure the claim record legitimately contains, so a figure in the letter that is
+    in none of them can only have been invented. Includes numbers quoted in the settlement breakdown."""
+    figs = {round(float(final_amount or 0), 2), round(float((state.get("claim") or {}).get("estimated_amount") or 0), 2)}
+    for obj, fields in (
+        (state.get("settlement_output"), ("settlement_amount_usd", "gross_damage_usd", "deductible_applied_usd", "depreciation_applied_usd")),
+        (state.get("damage_output"), ("assessed_damage_usd",)),
+        (state.get("policy_output"), ("deductible_usd", "covered_amount_usd")),
+    ):
+        for f in fields:
+            v = getattr(obj, f, None)
+            if isinstance(v, (int, float)):
+                figs.add(round(float(v), 2))
+    for line in getattr(state.get("settlement_output"), "calculation_breakdown", None) or []:
+        figs |= {round(float(n.replace(",", "")), 2) for n in re.findall(r"\d[\d,]*(?:\.\d+)?", str(line)) if n.replace(",", "").replace(".", "", 1).isdigit()}
+    return figs
+
+
+def _enforce_letter_matches_decision(output: CommunicationOutput, claim_id: str, decision_str: str,
+                                     final_amount: float, known: set[float]) -> None:
+    """The model writes the letter from the settlement record, but nothing checked that it says what the
+    record says: a wrong payout amount or a letter that contradicts the decision would go straight to the
+    claimant. Same pattern as the fraud-leak backstop: on a mismatch, send the template (which is built
+    from the record) and keep the model's text in internal_notes so the miss stays visible."""
+    text = f"{output.subject} {output.message}"
+    low = text.lower()
+    figures = _money_figures(text)
+    problems = []
+    if decision_str in ("approved", "approved_partial") and round(float(final_amount or 0), 2) not in figures:
+        problems.append(f"does not state the settlement amount {_currency_symbol()}{final_amount:,.2f}")
+    stray = sorted(f for f in figures if f not in known)
+    if stray:
+        problems.append(f"states amount(s) {stray} that appear nowhere in the claim record")
+    if decision_str == "denied" and _APPROVAL_WORDING.search(low):
+        problems.append("reads as an approval but the decision is denied")
+    if decision_str == "approved" and _DENIAL_WORDING.search(low):
+        problems.append("reads as a denial but the decision is approved")
+    if problems:
+        logger.warning(f"[{claim_id}] Communication letter does not match the decision record ({'; '.join(problems)}) - using the template")
+        output.internal_notes = (
+            f"ACCURACY OVERRIDE: the generated letter {'; '.join(problems)}. It was replaced with the template. "
+            f"Original message: {output.message!r}\n\n" + output.internal_notes
+        )
+        output.message = _fallback_message(claim_id, decision_str, final_amount)
 
 
 _FRAUD_LEAK_TERMS = ("fraud", "investigat", "suspicious activity", "flagged your claim")
@@ -213,7 +277,8 @@ def _enforce_no_fraud_leak(output: CommunicationOutput, claim_id: str, decision_
         output.message = _fallback_message(claim_id, decision_str, final_amount)
 
 
-def _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_required, output, start_time) -> dict:
+def _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_required, output, start_time,
+            prompt=None, raw_output=None) -> dict:
     duration_ms = int((time.time() - start_time) * 1000)
 
     # Log final decision (compliance record)
@@ -255,6 +320,7 @@ def _finish(state, claim_id, decision_str, final_amount, evaluation, hitl_requir
                 "next_steps": output.next_steps,
                 "has_appeal_instructions": bool(output.appeal_instructions),
             },
+            "calls": [{"label": "communication_generation", "prompt": prompt, "raw_output": raw_output}],
         }],
     }
 

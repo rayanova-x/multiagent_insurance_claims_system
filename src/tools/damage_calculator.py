@@ -53,10 +53,15 @@ def calculate_vehicle_acv(
     make: str,
     model: str,
     mileage: Optional[int] = None,
+    as_of=None,
 ) -> float:
     """
     Estimate Actual Cash Value (ACV) of a vehicle.
     Uses simplified model - production would use NADA/KBB API.
+
+    `as_of` (a date or ISO string, normally the claim's incident date) is when the age is
+    measured; it defaults to today. ACV is the value at the time of loss, so a claim
+    processed months later must not be valued as an older car.
 
     FIXED (was double-counting age): the base-value bracket used to flatten
     at "age > 10 -> $7,000" and then the depreciation loop below was applied
@@ -79,7 +84,8 @@ def calculate_vehicle_acv(
     old vehicles toward near-zero, matching real-world practice that even
     old cars retain scrap/resale value.
     """
-    age = date.today().year - year
+    from src.utils import year_of
+    age = year_of(as_of) - year
 
     # Base vehicle value by age - country-aware
     try:

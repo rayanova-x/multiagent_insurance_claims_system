@@ -1,0 +1,36 @@
+{
+  "label_basis": "rule-text",
+  "rule_citation": "policy_checker 'racing' does NOT apply to an organized public-road charity drive at legal speed with no competitive timing",
+  "claimant": "Grace Holloway",
+  "location": "County Road 14 near Millbrook, VT",
+  "vehicle": {
+    "age_years": 5,
+    "make": "Volkswagen",
+    "model": "Golf"
+  },
+  "incident_days_ago": 55,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "VT-24-009915",
+  "other_driver": "Phil Anders",
+  "narrative": "I was one of about forty cars in the annual hospital charity drive, which the organisers run on public roads with a route sheet and a reminder to stay at the posted limit. On {location} the car in front stopped abruptly for a deer and I rear-ended it while braking.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "damage": "repair",
+    "payout": "oracle",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-09",
+  "slug": "exclusion_racing_near_miss"
+}

@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
+import { ThemeProvider, CssBaseline } from '@mui/material';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+import theme from './theme';
 import useAuthStore from './store/authStore';
 import { loadCurrency } from './services/currency';
 
@@ -15,64 +20,10 @@ import HITLQueue from './components/HITL/HITLQueue';
 import AppealsManagement from './components/HITL/AppealsManagement';
 import AnalyticsDashboard from './components/Analytics/AnalyticsDashboard';
 import EvalsDashboard from './components/Evals/EvalsDashboard';
+import ClaimTrace from './components/Observability/ClaimTrace';
 import UserManagement from './components/Auth/UserManagement';
 import PolicyManagement from './components/Admin/PolicyManagement';
 import Settings from './components/Layout/Settings';
-
-// Dark theme matching the Streamlit dashboard
-const theme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: { main: '#3B82F6' },
-    secondary: { main: '#8B5CF6' },
-    success: { main: '#10B981' },
-    warning: { main: '#F59E0B' },
-    error: { main: '#EF4444' },
-    info: { main: '#0EA5E9' },
-    background: { default: '#0F172A', paper: '#1E293B' },
-    text: { primary: '#F1F5F9', secondary: '#94A3B8' },
-    divider: '#334155',
-  },
-  typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
-  },
-  shape: { borderRadius: 8 },
-  components: {
-    MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' } } },
-    MuiCard: { styleOverrides: { root: { borderRadius: 12 } } },
-    MuiButton: { styleOverrides: { root: { textTransform: 'none', fontWeight: 600 } } },
-    MuiChip: { styleOverrides: { root: { fontWeight: 500 } } },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            borderRadius: 8,
-            '& fieldset': { borderColor: '#334155' },
-            '&:hover fieldset': { borderColor: '#475569' },
-          },
-          '& .MuiInputLabel-root': { color: '#64748B' },
-          '& .MuiInputBase-input': { color: '#F1F5F9' },
-        },
-      },
-    },
-    MuiTableCell: {
-      styleOverrides: {
-        root: { borderColor: '#334155', padding: '12px 16px' },
-        head: { backgroundColor: '#0F172A' },
-      },
-    },
-    MuiTableRow: {
-      styleOverrides: {
-        root: { '&:hover': { backgroundColor: '#1E293B80' } },
-      },
-    },
-    MuiDialog: {
-      styleOverrides: {
-        paper: { borderRadius: 12 },
-      },
-    },
-  },
-});
 
 // Pick the correct landing for the current user's role.
 // Claimants (role=user) see My Claims; reviewers/admins see the staff dashboard.
@@ -124,6 +75,7 @@ export default function App() {
             <Route path="appeals"    element={<ProtectedRoute minRole="reviewer"><AppealsManagement /></ProtectedRoute>} />
             <Route path="analytics"  element={<ProtectedRoute minRole="reviewer"><AnalyticsDashboard /></ProtectedRoute>} />
             <Route path="evals"      element={<ProtectedRoute minRole="reviewer"><EvalsDashboard /></ProtectedRoute>} />
+            <Route path="observability/:claimId" element={<ProtectedRoute minRole="reviewer"><ClaimTrace /></ProtectedRoute>} />
 
             {/* Admin-only */}
             <Route path="user-management" element={<ProtectedRoute minRole="admin"><UserManagement /></ProtectedRoute>} />

@@ -73,7 +73,10 @@ occurred, do NOT assume it applies.
 Guidelines:
 - Apply policy terms precisely and fairly
 - Flag any regulatory compliance issues (e.g. late filing, missing required
-  notices)
+  notices). A missing supporting document (a police report, for example) is
+  NOT a compliance concern on its own: intake reports missing documents
+  separately. Flag it only if the policy or law sets a filing deadline or
+  notice that was actually missed.
 - When coverage is ambiguous, note it clearly rather than guessing
 - Always cite the specific policy provision that applies"""
 
@@ -193,11 +196,14 @@ def run_policy_checker(state: ClaimsState) -> dict:
     recompute it regardless of what you return.
     """
 
+    raw_llm_output = None
     try:
         output = llm.invoke([
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=prompt),
         ])
+        # Captured before _enforce_hard_rules mutates output in place.
+        raw_llm_output = output.model_dump(mode="json")
         _enforce_hard_rules(output, coverage)
     except Exception as e:
         logger.error(f"[{claim_id}] Policy checker LLM failed: {e}")
@@ -251,6 +257,7 @@ def run_policy_checker(state: ClaimsState) -> dict:
                 "deductible": output.deductible_usd,
                 "exclusions_triggered": output.exclusions_triggered,
             },
+            "calls": [{"label": "policy_check", "prompt": prompt, "raw_output": raw_llm_output}],
         }],
         "agent_call_count": 1,  # operator.add reducer sums this into the running total - see state.py
         "consistency_retry_context": None,  # consumed - don't leak into a later, unrelated run

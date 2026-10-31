@@ -1,0 +1,81 @@
+{
+  "total_claims": 5,
+  "scoreable_claims": 5,
+  "correct": 4,
+  "completion_rate": 0.8,
+  "best_effort_claims_not_scored": 0,
+  "by_tag": {
+    "clean": {
+      "correct": 1,
+      "total": 1,
+      "best_effort": 0
+    },
+    "exclusion_racing_near_miss": {
+      "correct": 1,
+      "total": 1,
+      "best_effort": 0
+    },
+    "missing_doc_repair_estimate": {
+      "correct": 1,
+      "total": 1,
+      "best_effort": 0
+    },
+    "invalid_policy_number": {
+      "correct": 1,
+      "total": 1,
+      "best_effort": 0
+    },
+    "low_confidence_low_value": {
+      "correct": 0,
+      "total": 1,
+      "best_effort": 0
+    }
+  },
+  "results": [
+    {
+      "claim": "CLM-TEST100-002",
+      "tag": "clean",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=17420.0",
+      "elapsed_s": 170.9
+    },
+    {
+      "claim": "CLM-TEST100-022",
+      "tag": "exclusion_racing_near_miss",
+      "expected": "settled_not_denied",
+      "actual": "settled_not_denied",
+      "correct": true,
+      "detail": "decision=approved_partial, amount=6130.0",
+      "elapsed_s": 70.9
+    },
+    {
+      "claim": "CLM-TEST100-042",
+      "tag": "missing_doc_repair_estimate",
+      "expected": "paused_for_inspection",
+      "actual": "paused_for_inspection",
+      "correct": true,
+      "detail": "triggers=['Damage assessor requires physical inspection before a decision', 'First-time claimant with high-value claim ($68,530)', 'Intake flags: Missing documents: other_driver_info, repair_estimate']",
+      "elapsed_s": 28.9
+    },
+    {
+      "claim": "CLM-TEST100-062",
+      "tag": "invalid_policy_number",
+      "expected": "denied_at_intake",
+      "actual": "denied_at_intake",
+      "correct": true,
+      "detail": "decision=denied, amount=0.0",
+      "elapsed_s": 4.0
+    },
+    {
+      "claim": "CLM-TEST100-082",
+      "tag": "low_confidence_low_value",
+      "expected": "settled_not_denied",
+      "actual": "paused_for_review",
+      "correct": false,
+      "detail": "triggers=['Policy exclusions/compliance concerns: Vague and incomplete incident description provided by the claimant, requiring follow-up for proper statutory and contractual notice.', 'First-time claimant with high-value claim ($45,630)']",
+      "elapsed_s": 51.1
+    }
+  ]
+}

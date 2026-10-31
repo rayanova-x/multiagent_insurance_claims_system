@@ -47,6 +47,7 @@ Conditional routing functions determine which path to take at each junction.
 from __future__ import annotations  # for Python 3.10 compatibility with forward references in type hints
 
 import logging
+import os
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Literal, Optional
@@ -55,20 +56,32 @@ from langchain_core.runnables import RunnableConfig
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
-# SqliteSaver lives in the separate `langgraph-checkpoint-sqlite` package.
-# Fall back to MemorySaver if it isn't installed - the pipeline still works,
-# the only thing lost is durability across restarts of a paused (HITL) claim.
+# SqliteSaver/PostgresSaver live in separate packages. Postgres is used when
+# DATABASE_URL is set (Render's own disk is ephemeral, so a HITL-paused
+# claim's checkpoint must live in the same Postgres instance as everything
+# else to survive a redeploy); SqliteSaver for local dev; MemorySaver as the
+# last-resort fallback if neither package is installed.
+try:
+    from langgraph.checkpoint.postgres import PostgresSaver   # type: ignore
+    _HAS_POSTGRES_SAVER = True
+except ImportError:
+    PostgresSaver = None  # type: ignore
+    _HAS_POSTGRES_SAVER = False
+
 try:
     from langgraph.checkpoint.sqlite import SqliteSaver   # type: ignore
     _HAS_SQLITE_SAVER = True
 except ImportError:
-    from langgraph.checkpoint.memory import MemorySaver
     SqliteSaver = None  # type: ignore
     _HAS_SQLITE_SAVER = False
+
+if not _HAS_POSTGRES_SAVER and not _HAS_SQLITE_SAVER:
+    from langgraph.checkpoint.memory import MemorySaver
 
 from src.agents.communication_agent import run_communication_agent
 from src.agents.consistency_coordinator import run_consistency_coordinator
 from src.agents.damage_assessor import run_damage_assessor
+from src.agents.document_agent import run_document_agent
 from src.agents.fraud_crew import run_fraud_crew
 from src.agents.intake_agent import run_intake_agent
 from src.agents.policy_checker import run_policy_checker
@@ -180,7 +193,12 @@ def _routing_reasons(node_name: str, state: ClaimsState) -> list[str]:
         evaluation = state.get("evaluation_output")
         score = getattr(evaluation, "overall_score", None)
         min_score = get_evaluation_config().get("min_score_to_release", 0.70)
-        if score is not None:
+        # A judge answering "I can't tell" fails the gate even though the average of the OTHER dimensions can
+        # be 1.00, so "score 1.00 < 0.70" would read as a bug. Say what actually happened.
+        unresolved = [f.split("_unresolved")[0] for f in (getattr(evaluation, "flags", None) or []) if "_unresolved" in f]
+        if unresolved:
+            reasons.append(f"Evaluator quality gate: the judge could not score {', '.join(unresolved)} - needs a human")
+        elif score is not None:
             reasons.append(f"Evaluator quality gate failed (score {score:.2f} < {min_score:.2f})")
         else:
             reasons.append("Evaluator quality gate failed")
@@ -213,6 +231,10 @@ def _routing_reasons(node_name: str, state: ClaimsState) -> list[str]:
             f"Policy exclusions/compliance concerns: "
             f"{', '.join(policy.compliance_flags + policy.exclusions_triggered)}"
         )
+    doc_findings = state.get("document_verification_findings")
+    if doc_findings:
+        details = "; ".join(f.get("detail", "") for f in doc_findings if isinstance(f, dict))
+        reasons.append(f"Document verification concerns: {details}")
     if fraud and _check_confidence_gate("fraud_crew", fraud.confidence, amount):
         reasons.append(f"Confidence gate: fraud_crew confidence {fraud.confidence:.2f} below {_gate_threshold('fraud_crew'):.2f}")
     if damage and _check_confidence_gate("damage_assessor", damage.assessment_confidence, amount):
@@ -550,6 +572,15 @@ def route_after_intake(state: ClaimsState) -> list[str] | str:
         logger.warning("Routing to mandatory human review: claimant disputed the suggested incident_type")
         return "hitl_checkpoint"
 
+    # document_agent (runs before intake) found a problem with an uploaded
+    # document - wrong slot, arithmetic mismatch, implausible amount, or a
+    # parse failure. Property-based, like the two checks above: a concrete,
+    # specific finding about the evidence itself, not a routine confidence
+    # judgment, so it applies regardless of claim amount.
+    if state.get("document_verification_findings"):
+        logger.warning("Routing to mandatory human review: document verification findings present")
+        return "hitl_checkpoint"
+
     # Confidence gate (risk-stratified: only on high-impact claims). Dead for
     # intake specifically now (no confidence field), kept for the other
     # nodes that share this helper via _GATE_NODES.
@@ -818,7 +849,7 @@ def route_after_hitl_checkpoint(state: ClaimsState) -> list[str] | str:
 # ------- Checkpointer (shared across invocations so interrupt/resume works) ---
 
 _CHECKPOINT_DB = str(Path(__file__).resolve().parent.parent / "data" / "claims_checkpoints.db")
-_checkpointer_ctx = None   # must stay alive so the SQLite connection isn't garbage-collected
+_checkpointer_ctx = None   # must stay alive so the underlying connection isn't garbage-collected
 _checkpointer = None
 _compiled_graph = None
 
@@ -826,11 +857,39 @@ _compiled_graph = None
 def _get_checkpointer():
     """Lazy, process-lifetime checkpointer so interrupted claims can resume.
 
-    Prefers SqliteSaver (durable across restarts). Falls back to MemorySaver
-    if langgraph-checkpoint-sqlite isn't installed, so the pipeline still runs.
+    Uses PostgresSaver when DATABASE_URL is set (Render's disk is ephemeral,
+    so a paused claim's checkpoint must live in the same Postgres instance as
+    everything else). Falls back to SqliteSaver for local dev, then
+    MemorySaver as a last resort if neither package is installed.
     """
     global _checkpointer, _checkpointer_ctx
     if _checkpointer is not None:
+        return _checkpointer
+
+    database_url = os.getenv("DATABASE_URL")
+    if database_url:
+        if not _HAS_POSTGRES_SAVER:
+            raise RuntimeError(
+                "DATABASE_URL is set but langgraph-checkpoint-postgres isn't installed. "
+                "Run: uv pip install langgraph-checkpoint-postgres"
+            )
+        # setup() runs several CREATE TABLE/ALTER TABLE migrations in one
+        # connection. A pooled connection (e.g. Supabase's PgBouncer) can
+        # reject or ignore session-level options like statement_timeout,
+        # failing with QueryCanceled on first boot (confirmed: SHOW
+        # statement_timeout came back overridden by the pooler regardless of
+        # what was requested). DATABASE_URL_DIRECT, when set, is a
+        # non-pooled connection used for this ONE-TIME setup() call only -
+        # Supabase's own guidance for migrations. Falls back to the normal
+        # (possibly pooled) DATABASE_URL if no direct URL is given, since a
+        # non-pooled Postgres (e.g. Render's own managed Postgres) doesn't
+        # need a separate one.
+        setup_conn_string = os.getenv("DATABASE_URL_DIRECT") or database_url
+        with PostgresSaver.from_conn_string(setup_conn_string) as setup_saver:
+            setup_saver.setup()  # creates checkpoint tables on first run; a no-op if they already exist
+
+        _checkpointer_ctx = PostgresSaver.from_conn_string(database_url)
+        _checkpointer = _checkpointer_ctx.__enter__()
         return _checkpointer
 
     if not _HAS_SQLITE_SAVER:
@@ -903,6 +962,7 @@ def _build_graph_object() -> StateGraph:
     graph = StateGraph(ClaimsState)
 
     # ------- Core agent nodes (each wrapped in the guardrails) ---------------------
+    graph.add_node("document_agent", guard_node("document_agent", run_document_agent))
     graph.add_node("intake_agent", guard_node("intake_agent", run_intake_agent))
     graph.add_node("fraud_crew", guard_node("fraud_crew", run_fraud_crew))
     graph.add_node("damage_assessor", guard_node("damage_assessor", run_damage_assessor))
@@ -924,8 +984,9 @@ def _build_graph_object() -> StateGraph:
     graph.add_node("hitl_after_intake", hitl_checkpoint_node)     # intake low confidence
     graph.add_node("hitl_after_settlement", hitl_checkpoint_node) # settlement low confidence
 
-    # ------- Entry: fan out to three parallel branches -------------------------------
-    graph.add_edge(START, "intake_agent")
+    # ------- Entry: document extraction always runs first, then intake --------------
+    graph.add_edge(START, "document_agent")
+    graph.add_edge("document_agent", "intake_agent")
 
     graph.add_conditional_edges("intake_agent", route_after_intake, {
         "damage_assessor": "damage_assessor",
@@ -1108,7 +1169,12 @@ def _store_to_memory(final_state: dict) -> None:
         logger.warning("Memory storage skipped: %s", e)
 
 
-def process_claim(claim_input: ClaimInput, documents: Optional[dict] = None) -> dict:
+def process_claim(
+    claim_input: ClaimInput,
+    documents: Optional[dict] = None,
+    uploaded_documents: Optional[dict] = None,
+    on_step: Optional[callable] = None,
+) -> dict:
     """
     Run the pipeline. Returns one of:
       { "paused": True,  "state": {...}, "interrupt": {...} }   # awaiting approver
@@ -1132,15 +1198,34 @@ def process_claim(claim_input: ClaimInput, documents: Optional[dict] = None) -> 
     hard rule on every claim with no attached repair-estimate document,
     regardless of whether a caller actually had real document content to
     offer. The real API (api/routes_claims.py) still has no real document
-    upload capability (separate, already-documented gap - see "Document
-    extraction" elsewhere in this file) and is unaffected by this change,
-    since it simply never passes this new argument, same as before.
+    upload capability (separate, already-documented gap) at the time this
+    docstring was written - closed by api/routes_claims.py's
+    /upload-staging/{token}/{slot} endpoints and claim_staged_documents(),
+    which now pass real uploaded_documents through on every claim that used
+    the real upload flow.
+
+    uploaded_documents: raw per-slot file paths for document_agent
+    (src/agents/document_agent.py) to extract FROM - passed straight
+    through to initial_state(). Mutually exclusive with `documents` in
+    practice (a claim either already has parsed content, e.g. eval scripts,
+    or has raw uploads to parse), but both are accepted independently.
+
+    on_step: optional callback(state: dict) invoked with the cumulative
+    state after each super-step finishes, for a caller that wants live
+    per-node progress (e.g. api/routes_claims.py persisting agent_outputs/
+    pipeline_path to the DB as each agent completes, so the Observability
+    view's step circles update live instead of jumping all at once at the
+    end). When given, uses graph.stream(stream_mode="values") instead of
+    graph.invoke() - functionally equivalent (same final state), just
+    observed one super-step at a time. None by default: every other
+    caller (eval scripts, tests) keeps the original invoke() behavior
+    unchanged.
     """
     from src.llm import reset_token_tracking, get_token_usage
 
     graph = get_compiled_graph()
     claim_id = claim_input["claim_id"]
-    state = initial_state(claim_input, documents)
+    state = initial_state(claim_input, documents, uploaded_documents)
     state["execution_start_time"] = datetime.now(timezone.utc).isoformat()
     reset_token_tracking()
 
@@ -1148,7 +1233,13 @@ def process_claim(claim_input: ClaimInput, documents: Optional[dict] = None) -> 
     cfg = _thread_config(claim_id)
 
     try:
-        final_state = graph.invoke(state, config=cfg)
+        if on_step is not None:
+            final_state = state
+            for step_state in graph.stream(state, config=cfg, stream_mode="values"):
+                final_state = step_state
+                on_step(final_state)
+        else:
+            final_state = graph.invoke(state, config=cfg)
     except Exception as e:
         logger.error(f"[{claim_id}] Pipeline crashed: {e}", exc_info=True)
         state["error_log"] = [f"Pipeline crash: {str(e)}"]
@@ -1173,7 +1264,7 @@ def process_claim(claim_input: ClaimInput, documents: Optional[dict] = None) -> 
     return {"paused": False, "state": final_state}
 
 
-def resume_claim(claim_id: str, decision: dict) -> dict:
+def resume_claim(claim_id: str, decision: dict, on_step: Optional[callable] = None) -> dict:
     """
     Resume a paused pipeline with an approver's decision.
 
@@ -1184,6 +1275,9 @@ def resume_claim(claim_id: str, decision: dict) -> dict:
         "override_ai": bool,
         "settlement_override_usd": float | None,
     }
+
+    on_step: see process_claim's own doc - same live-progress callback,
+    same stream() vs invoke() choice.
     """
     from src.llm import reset_token_tracking
 
@@ -1191,7 +1285,13 @@ def resume_claim(claim_id: str, decision: dict) -> dict:
     cfg = _thread_config(claim_id)
     reset_token_tracking()
     logger.info(f"[{claim_id}] Resuming pipeline with decision={decision.get('decision')}")
-    final_state = graph.invoke(Command(resume=decision), config=cfg)
+    if on_step is not None:
+        final_state = None
+        for step_state in graph.stream(Command(resume=decision), config=cfg, stream_mode="values"):
+            final_state = step_state
+            on_step(final_state)
+    else:
+        final_state = graph.invoke(Command(resume=decision), config=cfg)
 
     if _is_paused(final_state):
         # Legitimate: e.g. fraud HITL approved, then the evaluator quality gate

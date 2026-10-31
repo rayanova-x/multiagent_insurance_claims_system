@@ -67,7 +67,9 @@ _PRICING = {
 
 
 def _empty_usage() -> dict:
-    return {"input": 0, "output": 0, "total": 0, "cost": 0.0}
+    # "models": calls per model name, so a run shows when the fallback model (or a different
+    # one than configured) actually answered.
+    return {"input": 0, "output": 0, "total": 0, "cost": 0.0, "models": {}}
 
 
 _usage_var: contextvars.ContextVar[dict] = contextvars.ContextVar("claim_token_usage")
@@ -90,7 +92,9 @@ def reset_token_tracking() -> None:
 
 def get_token_usage() -> dict:
     """Return accumulated tokens and cost for the current pipeline run."""
-    return dict(_current_usage())
+    usage = dict(_current_usage())
+    usage["models"] = dict(usage.get("models", {}))
+    return usage
 
 
 def record_external_usage(input_tokens: int, output_tokens: int, model: str | None = None) -> None:
@@ -141,6 +145,8 @@ class _TokenTracker(BaseCallbackHandler):
         try:
             usage_acc = _current_usage()
             model = _model_name_from(response, get_llm_config().get("model", ""))
+            models = usage_acc.setdefault("models", {})
+            models[model] = models.get(model, 0) + 1
             for gen_list in response.generations:
                 for gen in gen_list:
                     meta = getattr(gen, "generation_info", None) or {}
@@ -218,8 +224,19 @@ def _resolve(cfg: dict) -> tuple[Any, str]:
     return builder, api_key
 
 
-def _build(cfg: dict, model: str, temperature: float, streaming: bool) -> BaseChatModel:
-    builder, api_key = _resolve(cfg)
+def _api_keys(cfg: dict) -> list[str]:
+    """Configured keys for the provider, in priority order: <KEY_ENV> then <KEY_ENV>2.
+
+    A second key (normally a separate Google project) has its own daily quota, so it is the
+    first thing to try when the first key's quota is gone.
+    """
+    env = cfg.get("api_key_env", "GOOGLE_API_KEY")
+    return [k for k in (os.getenv(env), os.getenv(f"{env}2")) if k]
+
+
+def _build(cfg: dict, model: str, temperature: float, streaming: bool, api_key: str | None = None) -> BaseChatModel:
+    builder, first_key = _resolve(cfg)
+    api_key = api_key or first_key
     llm = builder(
         model,
         temperature,
@@ -234,17 +251,24 @@ def _build(cfg: dict, model: str, temperature: float, streaming: bool) -> BaseCh
 
 
 def _with_fallback(cfg: dict, primary_model: str, temperature: float, streaming: bool) -> Runnable:
-    """Primary model, replayed on the fallback model if a call fails."""
-    primary = _build(cfg, primary_model, temperature, streaming)
+    """Primary model, replayed on the next candidate if a call fails.
+
+    Candidates, in order: primary model on key 1, primary model on key 2 (if set), then the
+    fallback model on key 1 and key 2. Quota is per model per key, so the same model on a fresh
+    key is a like-for-like substitute and is tried before a different, weaker model.
+    """
     fallback_model = cfg.get("fallback_model")
-    if not fallback_model or fallback_model == primary_model:
-        return primary
-    fallback = _build(cfg, fallback_model, temperature, streaming)
-    logger.debug("LLM initialized: provider=%s model=%s fallback=%s",
-                 cfg["provider"], primary_model, fallback_model)
+    models = [primary_model]
+    if fallback_model and fallback_model != primary_model:
+        models.append(fallback_model)
+    keys = _api_keys(cfg) or [None]  # None lets _build raise the usual "key not set" error
+    chain = [_build(cfg, m, temperature, streaming, k) for m in models for k in keys]
+    logger.debug("LLM initialized: provider=%s models=%s keys=%d", cfg["provider"], models, len(keys))
+    if len(chain) == 1:
+        return chain[0]
     # RunnableWithFallbacks forwards with_structured_output() and bind_tools()
-    # to both models, so callers use it exactly like a chat model.
-    return primary.with_fallbacks([fallback])
+    # to every candidate, so callers use it exactly like a chat model.
+    return chain[0].with_fallbacks(chain[1:])
 
 
 def get_llm(temperature: float | None = None, streaming: bool = False) -> Runnable:

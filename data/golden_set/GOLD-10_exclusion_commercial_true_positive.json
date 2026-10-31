@@ -1,0 +1,31 @@
+{
+  "label_basis": "rule-text",
+  "rule_citation": "policy_checker 'commercial_use': transporting goods FOR PAYMENT (delivery) at the time of the incident",
+  "claimant": "Hector Alvarez",
+  "location": "Westgate Boulevard, Phoenix, AZ",
+  "vehicle": {
+    "age_years": 4,
+    "make": "Kia",
+    "model": "Forte"
+  },
+  "incident_days_ago": 35,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "PHX-24-415207",
+  "other_driver": "Monica Reyes",
+  "narrative": "I was on my third food delivery of the evening for the delivery app, with the customer's order on the back seat, when I rear-ended a stopped car at the light on {location} while looking at the app for the next address. I get paid per delivery through the app. The other driver was fine, police attended.",
+  "expected": {
+    "paused": true,
+    "trigger": "exclusion",
+    "path_includes": [
+      "damage_assessor",
+      "policy_checker"
+    ]
+  },
+  "id": "GOLD-10",
+  "slug": "exclusion_commercial_true_positive"
+}

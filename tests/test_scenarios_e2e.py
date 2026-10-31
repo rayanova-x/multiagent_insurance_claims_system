@@ -65,7 +65,7 @@ def test_01_invalid_claim_routes_straight_to_denial_communication():
     h = ScenarioHarness(intake=make_intake(is_valid=False))
     result = run_scenario(h, make_claim("CLM-SC-01"))
     assert result["paused"] is False
-    assert trace_agents(result["state"]) == ["intake_agent", "communication_agent"]
+    assert trace_agents(result["state"]) == ["document_agent", "intake_agent", "communication_agent"]
     assert h.calls["damage"] == 0 and h.calls["policy"] == 0 and h.calls["fraud"] == 0
 
 
@@ -103,7 +103,7 @@ def test_05_fast_mode_small_claim_skips_the_fanout_entirely():
     result = run_scenario(h, make_claim("CLM-SC-05", estimated_amount=100))
     assert result["paused"] is False
     assert trace_agents(result["state"]) == [
-        "intake_agent", "settlement_calculator", "evaluator", "communication_agent",
+        "document_agent", "intake_agent", "settlement_calculator", "evaluator", "communication_agent",
     ]
     assert h.calls["damage"] == 0 and h.calls["policy"] == 0 and h.calls["fraud"] == 0
 
@@ -115,7 +115,7 @@ def test_06_normal_valid_claim_fans_out_to_all_three_branches():
     result = run_scenario(h, make_claim("CLM-SC-06"))
     assert h.calls["damage"] == 1 and h.calls["policy"] == 1 and h.calls["fraud"] == 1
     trace = trace_agents(result["state"])
-    assert set(trace[1:4]) == {"damage_assessor", "policy_checker", "fraud_crew"}
+    assert set(trace[2:5]) == {"damage_assessor", "policy_checker", "fraud_crew"}
 
 
 # ── route_after_fan_out (branches 7-9) ──────────────────────────────────────

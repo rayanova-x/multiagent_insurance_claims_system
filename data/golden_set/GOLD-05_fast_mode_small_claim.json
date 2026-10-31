@@ -1,0 +1,43 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "amount $400 < fast-mode cutoff $500 -> intake->settlement; payout = 400 - depreciation(age 6) - $100 deductible",
+  "claimant": "Aisha Bello",
+  "location": "Greenfield Mall parking lot, Albany, NY",
+  "vehicle": {
+    "age_years": 6,
+    "make": "Nissan",
+    "model": "Sentra"
+  },
+  "incident_days_ago": 12,
+  "policy": {
+    "kind": "lowded"
+  },
+  "repair": {
+    "amount": 400
+  },
+  "documents": [
+    "other_driver_info",
+    "repair_estimate"
+  ],
+  "other_driver": "Kevin Doyle",
+  "narrative": "Someone backed into my front bumper in a parking lot at {location}, leaving a scrape and a small dent. The other driver left a note with his phone number and insurer. A local shop quoted a small bumper repair.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "payout": "oracle",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ],
+    "path_excludes": [
+      "damage_assessor",
+      "policy_checker",
+      "fraud_crew"
+    ]
+  },
+  "id": "GOLD-05",
+  "slug": "fast_mode_small_claim"
+}

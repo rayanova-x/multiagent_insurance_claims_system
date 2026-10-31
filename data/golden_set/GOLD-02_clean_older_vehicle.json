@@ -1,0 +1,36 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "repair/ACV 0.45 < 0.75 -> repair; age 8 uses the 0.07 depreciation rate",
+  "claimant": "Marcus Webb",
+  "location": "Riverside Plaza parking lot, 220 Riverside Drive, Tampa, FL",
+  "vehicle": {
+    "age_years": 8,
+    "make": "Toyota",
+    "model": "Camry"
+  },
+  "incident_days_ago": 70,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.45
+  },
+  "police_report_number": "TPA-24-203377",
+  "other_driver": "Helen Castro",
+  "narrative": "While I was pulling out of a parking space at {location}, a vehicle reversing from the next row hit my driver-side rear door and quarter panel. Nobody was hurt. The other driver gave me her insurance information and the store's security camera covers that row of the lot. I obtained a written estimate from the body shop.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "damage": "repair",
+    "payout": "oracle",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-02",
+  "slug": "clean_older_vehicle"
+}

@@ -11,6 +11,8 @@ name: LLM Evaluation (manual)
 #
 # Needs GOOGLE_API_KEY (or GROQ_API_KEY) as a repo secret before this can
 # run for real - add it under Settings -> Secrets and variables -> Actions.
+# GOOGLE_API_KEY2 is optional: a second key (separate project = separate daily
+# quota) that src/llm.py tries on the same model before the fallback model.
 
 on:
   workflow_dispatch:
@@ -27,6 +29,10 @@ on:
         description: "Run evaluation/regression_check.py (model-swap regression gate)"
         type: boolean
         default: true
+      golden_set:
+        description: "Run scripts/run_golden_set.py with fairness pairs (~26 claims, ~250 LLM calls)"
+        type: boolean
+        default: false
 
 jobs:
   llm-eval:
@@ -58,6 +64,25 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           COUNTRY: us
         run: python evaluation/validate_judges.py --json-out judge_validation_results.json
+
+      # Demo golden set gate: exits non-zero on any critical error (a claim paid that
+      # should have been stopped), tier-1 pass rate below TIER1_TARGET, or an
+      # inconsistent fairness pair. Off by default - it is the most expensive job here.
+      - name: Run the demo golden set (with fairness pairs)
+        if: ${{ inputs.golden_set }}
+        env:
+          LLM_PROVIDER: gemini
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          GOOGLE_API_KEY2: ${{ secrets.GOOGLE_API_KEY2 }}
+          COUNTRY: us
+        run: python scripts/run_golden_set.py --pairs
+
+      - name: Upload golden set results
+        if: ${{ always() && inputs.golden_set }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: golden-set-results
+          path: data/batch_results/*_golden_set_*.json
 
       - name: Upload judge validation results
         if: ${{ inputs.validate_judges }}

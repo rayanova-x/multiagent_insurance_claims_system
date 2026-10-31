@@ -92,7 +92,7 @@ class ExpectedTrajectory:
 
 EXPECTED_PATHS: dict[str, ExpectedTrajectory] = {
     "SC-01_invalid_claim_lapsed_policy": ExpectedTrajectory(
-        ("intake_agent", "communication_agent"), 1, 1,
+        ("document_agent", "intake_agent", "communication_agent"), 1, 1,
         "intake invalid -> straight to denial, no fan-out"),
     # NOTE on hitl_checkpoint: src/agents/graph.py only appends a
     # "hitl_checkpoint" pipeline_trace entry AFTER interrupt() returns with a
@@ -103,20 +103,20 @@ EXPECTED_PATHS: dict[str, ExpectedTrajectory] = {
     # still-PAUSED claim's expected path ends at whichever node triggered the
     # pause, not at "hitl_checkpoint" - that name only appears post-resume.
     "SC-02_prompt_injection_attempt": ExpectedTrajectory(
-        ("intake_agent",), 1, 1,
+        ("document_agent", "intake_agent",), 1, 1,
         "injection flag at intake -> mandatory human review before fan-out (paused; path ends at intake_agent)"),
     "SC-03_disputed_incident_type": ExpectedTrajectory(
-        ("intake_agent",), 1, 1,
+        ("document_agent", "intake_agent",), 1, 1,
         "disputed incident_type -> mandatory human review before fan-out (paused; path ends at intake_agent)"),
     "SC-05_fast_mode_small_claim": ExpectedTrajectory(
-        ("intake_agent", "settlement_calculator", "evaluator", "communication_agent"), 2, 2,
+        ("document_agent", "intake_agent", "settlement_calculator", "evaluator", "communication_agent"), 2, 2,
         "below fast_mode.max_amount -> skips fan-out entirely"),
     "SC-06_normal_claim_fans_out": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
          "consistency_coordinator", "settlement_calculator", "evaluator", "communication_agent"),
         5, 6, "clean claim, full fan-out, no pauses"),
     "SC-07_guardrail_budget_halt": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "guardrails"),
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "guardrails"),
         3, 3, "guardrail budget halt during fan-out, before consistency_coordinator "
               "(paused; confirmed live 2026-10-20 with MAX_AGENT_CALLS=2 override)"),
     # SC-08 deliberately excluded: its own branch definition requires
@@ -132,16 +132,16 @@ EXPECTED_PATHS: dict[str, ExpectedTrajectory] = {
     # never produce - the same fabricated-ground-truth trap EXPECTED_PATHS'
     # own module docstring warns against.
     "SC-09_non_confirmed_fraud_proceeds": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
         4, 6, "elevated but not CONFIRMED fraud -> proceeds like any other claim"),
     "SC-12_notable_conflict_no_retry": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
         4, 6, "NOTABLE conflict surfaced but never triggers a retry"),
     "SC-14_physical_inspection_required": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
         4, 4, "requires_physical_inspection -> always human review"),
     "SC-15_policy_exclusion_pre_existing_damage": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
         4, 4, "policy exclusion -> always human review"),
     # SC-17/19/23 all depend on a companion *_documents.json fixture being
     # passed to process_claim(documents=...) - without it, damage_assessor's
@@ -151,26 +151,26 @@ EXPECTED_PATHS: dict[str, ExpectedTrajectory] = {
     # the documents fixtures existed). The path below is the WITH-DOCUMENTS
     # expected path - each scenario's true intent per its own _scenario_note.
     "SC-17_clean_fanout_to_settlement": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
          "consistency_coordinator", "settlement_calculator", "evaluator", "communication_agent"),
         5, 6, "no conflicts/triggers/low confidence -> straight to settlement "
               "(requires documents - confirmed live 2026-10-20, settlement math exact: "
               "$4,500 - $2,025 depreciation - $500 deductible = $1,975)"),
     "SC-19_normal_settlement_to_evaluator": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
          "consistency_coordinator", "settlement_calculator", "evaluator", "communication_agent"),
         5, 6, "normal settlement confidence -> proceeds to evaluator as usual "
               "(requires documents - NOT yet live-confirmed with documents attached; "
               "the one run that used this fixture's _documents.json ran it as a "
               "standalone bad entry from the scenario-glob bug, not a valid test)"),
     "SC-23_passed_low_value_to_communication": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker",
          "consistency_coordinator", "settlement_calculator", "evaluator", "communication_agent"),
         5, 6, "simplest full-pipeline completion "
               "(requires documents - confirmed live 2026-10-20 in the corrected "
               "scenarios3 run, final_amount_usd=$160)"),
     "SC-30_low_confidence_low_value": ExpectedTrajectory(
-        ("intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
+        ("document_agent", "intake_agent", "damage_assessor", "fraud_crew", "policy_checker", "consistency_coordinator"),
         4, 6, "low-value ambiguous narrative - confidence alone must NOT pause here"),
     # Branches whose own note says the result depends on a real (non-mocked)
     # judgment call that cannot be pinned to one exact expected path

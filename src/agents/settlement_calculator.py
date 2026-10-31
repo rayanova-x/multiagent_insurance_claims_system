@@ -96,7 +96,7 @@ def run_settlement_calculator(state: ClaimsState) -> dict:
 
     # ----- Pre-compute depreciation from tools ----------------------------------------------─
     asset_type = detect_asset_type(claim.get("incident_type", ""))
-    asset_age = calculate_asset_age(claim.get("vehicle_year"))
+    asset_age = calculate_asset_age(claim.get("vehicle_year"), claim.get("incident_date"))
 
     assessed_damage = (
         damage_output.assessed_damage_usd
@@ -117,6 +117,11 @@ def run_settlement_calculator(state: ClaimsState) -> dict:
         coverage_limit = float(coverage.get("coverage_limit", 0) or 0) or assessed_damage
 
     _, depreciation, dep_method = apply_depreciation_country_aware(assessed_damage, asset_type, asset_age)
+    # A total loss pays the vehicle's ACV (damage_assessor rule 2), and the ACV already is the
+    # depreciated value - depreciating it again would charge the claimant for age twice.
+    total_loss = getattr(damage_output, "repair_vs_replace", None) == "total_loss"
+    if total_loss:
+        depreciation = 0.0
 
     # ----- Memory - the MODEL decides whether precedent is worth looking up ---------------------
     # Intake always injects similar claims into its prompt (cheap, fixed).
@@ -159,7 +164,7 @@ FRAUD ASSESSMENT:
     DAMAGE FIGURES:
     - Claimant Estimate: {_sym()}{float(claim.get('estimated_amount', 0)):,.2f}
     - Independently Assessed Damage: {_sym()}{assessed_damage:,.2f}
-    - Pre-computed Depreciation (tool): {_sym()}{depreciation:,.2f}
+    - Pre-computed Depreciation (tool): {_sym()}{depreciation:,.2f}{" (total loss: the assessed amount is already the depreciated ACV, so none applies)" if total_loss else ""}
 
     POLICY FIGURES:
     - Coverage Status: {policy_output.coverage_status.value if policy_output else 'unknown'}
@@ -188,11 +193,15 @@ FRAUD ASSESSMENT:
     IMPORTANT: If the decision is denied or approved_partial, you MUST populate denial_reasons with clear, specific reasons the claimant can understand (e.g. "Deductible ({deductible}) exceeds assessed damage", "Claim type not covered under policy").
     """
 
+    raw_llm_output = None
     try:
         output = llm.invoke([
             SystemMessage(content=SYSTEM_PROMPT),
             HumanMessage(content=prompt),
         ])
+        # Captured before any of the code-enforced caps/overrides below
+        # mutate output in place.
+        raw_llm_output = output.model_dump(mode="json")
         # gross_damage/deductible_applied/depreciation_applied are facts code
         # already computed above (assessed_damage, deductible, depreciation) -
         # not judgment calls. Force them so the displayed breakdown always
@@ -227,19 +236,31 @@ FRAUD ASSESSMENT:
                 f"({_sym()}{assessed_damage:,.2f}), so nothing is payable"
             ]
 
-        # Fix: LLM sometimes returns 0 in the numeric field but approves in decision.
-        # Compute a rule-based amount as fallback.
-        if output.settlement_amount_usd == 0 and output.decision in (
-            ClaimDecision.APPROVED, ClaimDecision.APPROVED_PARTIAL
-        ):
-            fallback = max(0, assessed_damage - depreciation - deductible)
-            if coverage_limit > 0:
-                fallback = min(fallback, coverage_limit)
-            output.settlement_amount_usd = round(fallback, 2)
-            logger.warning(
-                f"[{claim_id}] LLM returned 0 settlement but decision={output.decision.value}. "
-                f"Using rule-based fallback: {_sym()}{output.settlement_amount_usd:,.2f}"
-            )
+        # The payout of an approval is arithmetic, not judgment: assessed damage - depreciation
+        # - deductible, capped at the coverage limit. The caps above only bound it from ABOVE,
+        # so a model that under-pays (or returns 0 while approving) would pass untouched. The
+        # model decides whether to approve; code decides how much.
+        if output.decision in (ClaimDecision.APPROVED, ClaimDecision.APPROVED_PARTIAL):
+            uncapped = max(0.0, assessed_damage - depreciation - deductible)
+            rule_amount = min(uncapped, coverage_limit) if coverage_limit > 0 else uncapped
+            rule_amount = round(rule_amount, 2)
+            # "Partial" means the POLICY cut the payout (limit reached, or only partly covered), not that the
+            # ordinary deductible/depreciation applied - those reduce nearly every claim. The model used to
+            # pick approved vs approved_partial at random on identical claims, and the partial letter wording
+            # tells a fully paid claimant they were only partly approved.
+            policy_status = getattr(policy_output, "coverage_status", None)
+            partial = uncapped > rule_amount or policy_status == CoverageStatus.PARTIALLY_COVERED
+            output.decision = ClaimDecision.APPROVED_PARTIAL if partial else ClaimDecision.APPROVED
+            if abs(output.settlement_amount_usd - rule_amount) > 0.01:
+                logger.warning(
+                    f"[{claim_id}] LLM settlement {_sym()}{output.settlement_amount_usd:,.2f} != rule amount "
+                    f"{_sym()}{rule_amount:,.2f}; using the rule amount"
+                )
+                output.calculation_breakdown.append(
+                    f"Payout set to {_sym()}{rule_amount:,.2f} (assessed damage - depreciation - deductible, "
+                    f"capped at the coverage limit)"
+                )
+                output.settlement_amount_usd = rule_amount
 
         # Respect HITL: if a human reviewer approved this claim, do not override
         # with a denial. Compute the amount but keep the human's decision.
@@ -329,11 +350,13 @@ FRAUD ASSESSMENT:
             regulatory_compliance=True,
         )
 
-    return _build_return(state, output, start_time, claim_id, memory_calls)
+    return _build_return(state, output, start_time, claim_id, memory_calls,
+                        memory_notes=memory_notes, prompt=prompt, raw_llm_output=raw_llm_output)
 
 
 def _build_return(state, output: SettlementOutput, start_time: float, claim_id: str,
-                  memory_calls: list | None = None) -> dict:
+                  memory_calls: list | None = None, memory_notes: str | None = None,
+                  prompt: str | None = None, raw_llm_output: dict | None = None) -> dict:
     # A reviewer who set an amount at an earlier HITL pause has the last word.
     override = state.get("human_settlement_override_usd")
     if override is not None:
@@ -382,6 +405,10 @@ def _build_return(state, output: SettlementOutput, start_time: float, claim_id: 
                 "regulatory_compliance": output.regulatory_compliance,
                 "memory_tool_calls": memory_calls or [],
             },
+            "calls": [
+                {"label": "memory_research_tool_loop", "prompt": None, "raw_output": {"notes": memory_notes, "tool_calls": memory_calls or []}},
+                {"label": "settlement_calculation", "prompt": prompt, "raw_output": raw_llm_output},
+            ] if prompt is not None else None,
         }],
         "agent_call_count": 1,  # operator.add reducer sums this into the running total - see state.py
     }

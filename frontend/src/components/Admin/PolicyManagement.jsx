@@ -7,8 +7,8 @@ import {
 import { Refresh, Delete, Add, Policy, Edit } from '@mui/icons-material';
 import { policyAPI } from '../../services/api';
 
-const TYPE_COLORS = { auto: '#3B82F6', homeowners: '#10B981' };
-const STATUS_COLORS = { active: '#10B981', lapsed: '#EF4444', cancelled: '#F59E0B' };
+const TYPE_COLORS = { auto: '#0F766E', homeowners: '#1a7a4c' };
+const STATUS_COLORS = { active: '#1a7a4c', lapsed: '#a3242a', cancelled: '#8a5a00' };
 
 const EMPTY_FORM = {
   policy_number: '', holder_name: '', type: 'auto', status: 'active',
@@ -98,15 +98,15 @@ export default function PolicyManagement() {
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Box>
-          <Typography variant="h5" fontWeight={700} color="#F1F5F9">Policy Management</Typography>
-          <Typography variant="body2" color="#94A3B8">Seed and manage policies used by the claims pipeline</Typography>
+          <Typography variant="h5" fontWeight={700} color="#161616">Policy Management</Typography>
+          <Typography variant="body2" color="rgba(22,22,22,0.62)">Seed and manage policies used by the claims pipeline</Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button startIcon={<Add />} variant="contained" onClick={openAdd}
-            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
+            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #0F766E, #0B5B54)' }}>
             Add Policy
           </Button>
-          <Button startIcon={<Refresh />} onClick={fetchPolicies} sx={{ color: '#94A3B8' }}>Refresh</Button>
+          <Button startIcon={<Refresh />} onClick={fetchPolicies} sx={{ color: 'rgba(22,22,22,0.62)' }}>Refresh</Button>
         </Box>
       </Box>
 
@@ -115,47 +115,47 @@ export default function PolicyManagement() {
       {loading ? (
         <Box sx={{ textAlign: 'center', py: 6 }}><CircularProgress /></Box>
       ) : policies.length === 0 ? (
-        <Paper sx={{ p: 4, textAlign: 'center', bgcolor: '#1E293B', border: '1px solid #334155', borderRadius: 3 }}>
-          <Policy sx={{ fontSize: 48, color: '#334155', mb: 1 }} />
-          <Typography color="#94A3B8">No policies found. Add one or run <code>python scripts/seed_policies.py</code></Typography>
+        <Paper sx={{ p: 4, textAlign: 'center', bgcolor: '#FFFFFF', border: '1px solid #161616', borderRadius: 3 }}>
+          <Policy sx={{ fontSize: 48, color: '#161616', mb: 1 }} />
+          <Typography color="rgba(22,22,22,0.62)">No policies found. Add one or run <code>python scripts/seed_policies.py</code></Typography>
         </Paper>
       ) : (
-        <TableContainer component={Paper} sx={{ bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
+        <TableContainer component={Paper} sx={{ bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Policy Number</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Holder</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Type</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Status</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Period</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Deductible</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Actions</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Policy Number</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Holder</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Type</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Status</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Period</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Deductible</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {policies.map((p) => (
                 <TableRow key={p.policy_number} hover>
-                  <TableCell sx={{ color: '#F1F5F9', fontFamily: 'monospace', fontWeight: 600 }}>{p.policy_number}</TableCell>
-                  <TableCell sx={{ color: '#94A3B8' }}>{p.holder_name}</TableCell>
+                  <TableCell sx={{ color: '#161616', fontFamily: 'monospace', fontWeight: 600 }}>{p.policy_number}</TableCell>
+                  <TableCell sx={{ color: 'rgba(22,22,22,0.62)' }}>{p.holder_name}</TableCell>
                   <TableCell>
                     <Chip label={p.type} size="small"
-                      sx={{ bgcolor: `${TYPE_COLORS[p.type] || '#64748B'}20`, color: TYPE_COLORS[p.type] || '#94A3B8', fontWeight: 600 }} />
+                      sx={{ bgcolor: `${TYPE_COLORS[p.type] || 'rgba(22,22,22,0.45)'}20`, color: TYPE_COLORS[p.type] || 'rgba(22,22,22,0.62)', fontWeight: 600 }} />
                   </TableCell>
                   <TableCell>
                     <Chip label={p.status} size="small"
-                      sx={{ bgcolor: `${STATUS_COLORS[p.status] || '#64748B'}20`, color: STATUS_COLORS[p.status] || '#94A3B8', fontWeight: 600 }} />
+                      sx={{ bgcolor: `${STATUS_COLORS[p.status] || 'rgba(22,22,22,0.45)'}20`, color: STATUS_COLORS[p.status] || 'rgba(22,22,22,0.62)', fontWeight: 600 }} />
                   </TableCell>
-                  <TableCell sx={{ color: '#94A3B8', fontSize: '0.8rem' }}>{p.start_date} to {p.end_date}</TableCell>
-                  <TableCell sx={{ color: '#94A3B8' }}>{p.deductible?.toLocaleString()}</TableCell>
+                  <TableCell sx={{ color: 'rgba(22,22,22,0.62)', fontSize: '0.8rem' }}>{p.start_date} to {p.end_date}</TableCell>
+                  <TableCell sx={{ color: 'rgba(22,22,22,0.62)' }}>{p.deductible?.toLocaleString()}</TableCell>
                   <TableCell>
                     <Tooltip title="Edit policy">
-                      <IconButton size="small" sx={{ color: '#3B82F6' }} onClick={() => openEdit(p)}>
+                      <IconButton size="small" sx={{ color: '#0F766E' }} onClick={() => openEdit(p)}>
                         <Edit fontSize="small" />
                       </IconButton>
                     </Tooltip>
                     <Tooltip title="Delete policy">
-                      <IconButton size="small" sx={{ color: '#EF4444' }} onClick={() => handleDelete(p.policy_number)}>
+                      <IconButton size="small" sx={{ color: '#a3242a' }} onClick={() => handleDelete(p.policy_number)}>
                         <Delete fontSize="small" />
                       </IconButton>
                     </Tooltip>
@@ -169,8 +169,8 @@ export default function PolicyManagement() {
 
       {/* Add / Edit Dialog */}
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md" fullWidth
-        PaperProps={{ sx: { bgcolor: '#0F172A', border: '1px solid #334155', borderRadius: 3 } }}>
-        <DialogTitle sx={{ color: '#F1F5F9' }}>{editing ? 'Edit Policy' : 'Add Policy'}</DialogTitle>
+        PaperProps={{ sx: { bgcolor: '#F7F5EE', border: '1px solid #161616', borderRadius: 3 } }}>
+        <DialogTitle sx={{ color: '#161616' }}>{editing ? 'Edit Policy' : 'Add Policy'}</DialogTitle>
         <DialogContent sx={{ pt: 2 }}>
           <Grid container spacing={2} sx={{ mt: 0.5 }}>
             <Grid item xs={6}>
@@ -226,10 +226,10 @@ export default function PolicyManagement() {
           </Grid>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={() => setDialogOpen(false)} sx={{ color: '#94A3B8' }}>Cancel</Button>
+          <Button onClick={() => setDialogOpen(false)} sx={{ color: 'rgba(22,22,22,0.62)' }}>Cancel</Button>
           <Button variant="contained" onClick={handleSave}
             disabled={!form.policy_number || !form.holder_name || !form.start_date || !form.end_date}
-            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
+            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #0F766E, #0B5B54)' }}>
             {editing ? 'Update' : 'Create'}
           </Button>
         </DialogActions>

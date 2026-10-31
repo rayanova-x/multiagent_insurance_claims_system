@@ -38,11 +38,22 @@ export const authAPI = {
 export const claimsAPI = {
   submitClaim: (data) => api.post('/api/claims/submit', data),
   verifyType: (data) => api.post('/api/claims/verify-type', data),
+  uploadDocument: (token, slot, file) => {
+    const form = new FormData();
+    form.append('file', file);
+    return api.post(`/api/claims/upload-staging/${token}/${slot}`, form, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
+  removeStagedDocument: (token, slot) => api.delete(`/api/claims/upload-staging/${token}/${slot}`),
   getAllClaims: (status, limit = 100) => api.get('/api/claims/all', { params: { status, limit } }),
   getClaimById: (id) => api.get(`/api/claims/${id}`),
   getUserClaims: (userId) => api.get(`/api/claims/user/${userId}`),
   processClaim: (id) => api.post(`/api/claims/${id}/process`),
   getClaimStatus: (id) => api.get(`/api/claims/${id}/status`),
+  listDemoScenarios: () => api.get('/api/claims/demo-scenarios'),
+  materializeDemoScenario: (caseId) => api.get(`/api/claims/demo-scenarios/${caseId}/materialize`),
+  getDemoScenarioPdfUrl: (caseId, slot) => `${API_URL}/api/claims/demo-scenarios/${caseId}/pdf/${slot}`,
 };
 
 // ── HITL ──────────────────────────────────────────────────────────────────────
@@ -90,6 +101,9 @@ export const analyticsAPI = {
 // see api/routes_evals.py's own docstring.
 export const evalsAPI = {
   getFlowVerification: () => api.get('/api/evals/flow-verification'),
+  listCases: () => api.get('/api/evals/cases'),
+  materializeCase: (caseId) => api.get(`/api/evals/cases/${caseId}/materialize`),
+  getCasePdfUrl: (caseId, slot) => `${API_URL}/api/evals/cases/${caseId}/pdf/${slot}`,
 };
 
 export default api;

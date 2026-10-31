@@ -1,0 +1,40 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "only a missing repair estimate forces inspection; a missing police report alone does not block the pipeline",
+  "claimant": "Owen Pettigrew",
+  "location": "Pine Ridge Road, Boise, ID",
+  "vehicle": {
+    "age_years": 3,
+    "make": "Kia",
+    "model": "Sportage"
+  },
+  "incident_days_ago": 22,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.3
+  },
+  "documents": [
+    "other_driver_info",
+    "repair_estimate"
+  ],
+  "police_report_number": null,
+  "other_driver": "Sandra Keller",
+  "narrative": "A car pulled out of a side street onto {location} and our mirrors collided, damaging my driver-side mirror housing and door skin. Damage was minor and the other driver was cooperative so we did not call the police. We exchanged licence and insurance details and I got a repair estimate.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "damage": "repair",
+    "payout": "oracle",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-14",
+  "slug": "missing_police_report_only"
+}

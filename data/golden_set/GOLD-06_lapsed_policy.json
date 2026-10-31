@@ -1,0 +1,40 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "incident date outside policy period -> is_policy_active False -> is_valid False -> denied at intake",
+  "claimant": "Neil Fraser",
+  "location": "Route 30 near Exit 12, Lancaster, PA",
+  "vehicle": {
+    "age_years": 3,
+    "make": "Hyundai",
+    "model": "Elantra"
+  },
+  "incident_days_ago": 30,
+  "policy": {
+    "kind": "standard",
+    "start_days_ago": 600,
+    "end_days_ahead": -200
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "LNC-24-004418",
+  "other_driver": "Beth Sorensen",
+  "narrative": "I was driving on {location} when the car ahead braked suddenly and I could not stop in time. I hit its rear and my hood and radiator support are damaged. Police came and wrote a report. I realise now my policy term ended some months ago.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "denied"
+    ],
+    "payout": "zero",
+    "path_includes": [
+      "communication_agent"
+    ],
+    "path_excludes": [
+      "damage_assessor",
+      "policy_checker",
+      "settlement_calculator"
+    ]
+  },
+  "id": "GOLD-06",
+  "slug": "lapsed_policy"
+}

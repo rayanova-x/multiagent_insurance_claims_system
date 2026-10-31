@@ -3,20 +3,41 @@ Policy Lookup Tools - simulated policy database.
 
 In production this would connect to a real policy management system.
 For learning purposes, we use a SQLite mock with realistic sample data.
+Uses Postgres instead when DATABASE_URL is set (see api/db.py's own
+engine - this module shares it, one connection abstraction for the app).
 """
 
 from __future__ import annotations
 
 import json
-import sqlite3
+import os
 from datetime import date
 from pathlib import Path
 from typing import Optional
 
+from sqlalchemy import create_engine, text
+
 # Project-root anchored so the DB is the same regardless of the CWD the
 # server or scripts are launched from (matches scripts/seed_policies.py).
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-DB_PATH = PROJECT_ROOT / "data" / "policies.db"
+DB_PATH = PROJECT_ROOT / "data" / "policies.db"  # SQLite fallback path only; unused when DATABASE_URL is set
+
+_engine_cache: dict = {}
+
+
+def _get_engine():
+    """Builds (or reuses) the engine for the CURRENT DATABASE_URL/DB_PATH -
+    read fresh on every call (not bound once at import) so tests can
+    monkeypatch DB_PATH and have it take effect."""
+    database_url = os.getenv("DATABASE_URL")
+    key = (database_url, str(DB_PATH))
+    if key not in _engine_cache:
+        if database_url:
+            _engine_cache[key] = create_engine(database_url)
+        else:
+            DB_PATH.parent.mkdir(parents=True, exist_ok=True)
+            _engine_cache[key] = create_engine(f"sqlite:///{DB_PATH}", connect_args={"check_same_thread": False})
+    return _engine_cache[key]
 
 SAMPLE_POLICIES = [
     {
@@ -84,21 +105,19 @@ def _ensure_db():
     global _db_initialized
     if _db_initialized:
         return
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS policies (
-            policy_number TEXT PRIMARY KEY,
-            data TEXT NOT NULL
-        )
-    """)
-    for p in SAMPLE_POLICIES:
-        conn.execute(
-            "INSERT OR IGNORE INTO policies (policy_number, data) VALUES (?, ?)",
-            (p["policy_number"], json.dumps(p))
-        )
-    conn.commit()
-    conn.close()
+    with _get_engine().begin() as conn:
+        conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS policies (
+                policy_number TEXT PRIMARY KEY,
+                data TEXT NOT NULL
+            )
+        """))
+        for p in SAMPLE_POLICIES:
+            conn.execute(
+                text("INSERT INTO policies (policy_number, data) VALUES (:num, :data) "
+                     "ON CONFLICT (policy_number) DO NOTHING"),
+                {"num": p["policy_number"], "data": json.dumps(p)},
+            )
     _db_initialized = True
 
 
@@ -108,13 +127,10 @@ def lookup_policy(policy_number: str) -> Optional[dict]:
     Returns None if policy not found.
     """
     _ensure_db()
-    conn = sqlite3.connect(str(DB_PATH))
-    try:
+    with _get_engine().connect() as conn:
         row = conn.execute(
-            "SELECT data FROM policies WHERE policy_number = ?", (policy_number,)
+            text("SELECT data FROM policies WHERE policy_number = :num"), {"num": policy_number}
         ).fetchone()
-    finally:
-        conn.close()
 
     if not row:
         return None

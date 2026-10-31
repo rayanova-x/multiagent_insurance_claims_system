@@ -1,5 +1,7 @@
 """
-Policy Management - CRUD for the policies.db used by the claims pipeline.
+Policy Management - CRUD for the policies DB used by the claims pipeline.
+Shares src/tools/policy_lookup.py's engine (Postgres when DATABASE_URL is
+set, else local SQLite) - one connection abstraction, not a second one.
 
 GET    /api/policies/        - List all policies (any authenticated user).
 POST   /api/policies/        - Create / update a policy (admin only).
@@ -8,19 +10,17 @@ DELETE /api/policies/{num}   - Delete a policy (admin only).
 from __future__ import annotations # for Python 3.10-3.11 compatibility, allows forward references in type hints without quotes
 
 import json
-import sqlite3
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
+from sqlalchemy import text
 
 from api.security import get_current_user, require_role
 from src.config import get_country_config, get_country_meta
+from src.tools.policy_lookup import _ensure_db, _get_engine
 
 router = APIRouter(prefix="/api/policies", tags=["Policies"])
-
-DB_PATH = Path(__file__).resolve().parent.parent / "data" / "policies.db"
 
 
 # --- Country-aware default policy templates ---------------------------------
@@ -109,18 +109,6 @@ _INDIA_DEFAULTS = [
 ]
 
 
-def _get_conn() -> sqlite3.Connection:
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS policies (
-            policy_number TEXT PRIMARY KEY,
-            data TEXT NOT NULL
-        )
-    """)
-    return conn
-
-
 # --- Models ---------------------------------------------------------------
 
 class PolicyCreate(BaseModel):
@@ -154,17 +142,15 @@ def get_policy_defaults(_=Depends(get_current_user)):
 
 @router.get("/")
 def list_policies(user=Depends(get_current_user)):
-    """Return policies from policies.db, filtered by active country and current user."""
+    """Return policies, filtered by active country and current user."""
 
+    _ensure_db()
     meta = get_country_meta()
     country_code = (meta.get("code") or "US").upper()
-    conn = _get_conn()
-    try:
+    with _get_engine().connect() as conn:
         rows = conn.execute(
-            "SELECT policy_number, data FROM policies ORDER BY policy_number"
+            text("SELECT policy_number, data FROM policies ORDER BY policy_number")
         ).fetchall()
-    finally:
-        conn.close()
     policies = [json.loads(row[1]) for row in rows]
     # Filter: India policies contain "-IN-" in policy number; others are US
     if country_code == "IN":
@@ -180,33 +166,28 @@ def list_policies(user=Depends(get_current_user)):
 
 @router.post("/")
 def upsert_policy(body: PolicyCreate, _=Depends(get_current_user)):
-    """Create or update a policy (INSERT OR REPLACE)."""
+    """Create or update a policy."""
 
+    _ensure_db()
     data = body.model_dump()
-    conn = _get_conn()
-    try:
+    with _get_engine().begin() as conn:
         conn.execute(
-            "INSERT OR REPLACE INTO policies (policy_number, data) VALUES (?, ?)",
-            (data["policy_number"], json.dumps(data)),
+            text("INSERT INTO policies (policy_number, data) VALUES (:num, :data) "
+                 "ON CONFLICT (policy_number) DO UPDATE SET data = :data"),
+            {"num": data["policy_number"], "data": json.dumps(data)},
         )
-        conn.commit()
-    finally:
-        conn.close()
     return {"ok": True, "policy_number": data["policy_number"]}
 
 
 @router.delete("/{policy_number}")
 def delete_policy(policy_number: str, _=Depends(require_role("admin"))):
     """Delete a policy by its policy_number."""
-    
-    conn = _get_conn()
-    try:
-        cur = conn.execute(
-            "DELETE FROM policies WHERE policy_number = ?", (policy_number,)
+
+    _ensure_db()
+    with _get_engine().begin() as conn:
+        result = conn.execute(
+            text("DELETE FROM policies WHERE policy_number = :num"), {"num": policy_number}
         )
-        conn.commit()
-        if cur.rowcount == 0:
+        if result.rowcount == 0:
             raise HTTPException(status_code=404, detail=f"Policy '{policy_number}' not found")
-    finally:
-        conn.close()
     return {"ok": True, "deleted": policy_number}

@@ -7,7 +7,7 @@ import {
 import { Refresh, Delete, PersonAdd } from '@mui/icons-material';
 import { authAPI } from '../../services/api';
 
-const ROLE_COLORS = { user: '#3B82F6', reviewer: '#F59E0B', admin: '#EF4444' };
+const ROLE_COLORS = { user: '#0F766E', reviewer: '#8a5a00', admin: '#a3242a' };
 const ROLE_LABELS = { user: 'Claimant', reviewer: 'Reviewer', admin: 'Admin' };
 
 export default function UserManagement() {
@@ -58,15 +58,15 @@ export default function UserManagement() {
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Box>
-          <Typography variant="h5" fontWeight={700} color="#F1F5F9">User Management</Typography>
-          <Typography variant="body2" color="#94A3B8">Create, view, and remove user accounts</Typography>
+          <Typography variant="h5" fontWeight={700} color="#161616">User Management</Typography>
+          <Typography variant="body2" color="rgba(22,22,22,0.62)">Create, view, and remove user accounts</Typography>
         </Box>
         <Box sx={{ display: 'flex', gap: 1 }}>
           <Button startIcon={<PersonAdd />} variant="contained" onClick={() => setAddOpen(true)}
-            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
+            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #0F766E, #0B5B54)' }}>
             Add User
           </Button>
-          <Button startIcon={<Refresh />} onClick={fetchUsers} sx={{ color: '#94A3B8' }}>Refresh</Button>
+          <Button startIcon={<Refresh />} onClick={fetchUsers} sx={{ color: 'rgba(22,22,22,0.62)' }}>Refresh</Button>
         </Box>
       </Box>
 
@@ -75,30 +75,30 @@ export default function UserManagement() {
       {loading ? (
         <Box sx={{ textAlign: 'center', py: 6 }}><CircularProgress /></Box>
       ) : (
-        <TableContainer component={Paper} sx={{ bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
+        <TableContainer component={Paper} sx={{ bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
           <Table size="small">
             <TableHead>
               <TableRow>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>ID</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Username</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Email</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Role</TableCell>
-                <TableCell sx={{ color: '#64748B', fontWeight: 600 }}>Actions</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>ID</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Username</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Email</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Role</TableCell>
+                <TableCell sx={{ color: 'rgba(22,22,22,0.45)', fontWeight: 600 }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {users.map((u) => (
                 <TableRow key={u.id} hover>
-                  <TableCell sx={{ color: '#94A3B8', fontFamily: 'monospace' }}>{u.id}</TableCell>
-                  <TableCell sx={{ color: '#F1F5F9', fontWeight: 600 }}>{u.username}</TableCell>
-                  <TableCell sx={{ color: '#94A3B8' }}>{u.email}</TableCell>
+                  <TableCell sx={{ color: 'rgba(22,22,22,0.62)', fontFamily: 'monospace' }}>{u.id}</TableCell>
+                  <TableCell sx={{ color: '#161616', fontWeight: 600 }}>{u.username}</TableCell>
+                  <TableCell sx={{ color: 'rgba(22,22,22,0.62)' }}>{u.email}</TableCell>
                   <TableCell>
                     <Chip label={ROLE_LABELS[u.role] || u.role} size="small"
-                      sx={{ bgcolor: `${ROLE_COLORS[u.role] || '#64748B'}20`, color: ROLE_COLORS[u.role] || '#94A3B8', fontWeight: 600 }} />
+                      sx={{ bgcolor: `${ROLE_COLORS[u.role] || 'rgba(22,22,22,0.45)'}20`, color: ROLE_COLORS[u.role] || 'rgba(22,22,22,0.62)', fontWeight: 600 }} />
                   </TableCell>
                   <TableCell>
                     <Tooltip title="Delete user">
-                      <IconButton size="small" sx={{ color: '#EF4444' }} onClick={() => handleDelete(u.id, u.username)}>
+                      <IconButton size="small" sx={{ color: '#a3242a' }} onClick={() => handleDelete(u.id, u.username)}>
                         <Delete fontSize="small" />
                       </IconButton>
                     </Tooltip>
@@ -112,8 +112,8 @@ export default function UserManagement() {
 
       {/* Add User Dialog */}
       <Dialog open={addOpen} onClose={() => setAddOpen(false)} maxWidth="sm" fullWidth
-        PaperProps={{ sx: { bgcolor: '#0F172A', border: '1px solid #334155', borderRadius: 3 } }}>
-        <DialogTitle sx={{ color: '#F1F5F9' }}>Add User</DialogTitle>
+        PaperProps={{ sx: { bgcolor: '#F7F5EE', border: '1px solid #161616', borderRadius: 3 } }}>
+        <DialogTitle sx={{ color: '#161616' }}>Add User</DialogTitle>
         <DialogContent sx={{ pt: 2 }}>
           <TextField fullWidth label="Username" value={form.username} sx={{ mb: 2, mt: 1 }}
             onChange={(e) => setForm({ ...form, username: e.target.value })} />
@@ -129,10 +129,10 @@ export default function UserManagement() {
           </TextField>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 2 }}>
-          <Button onClick={() => setAddOpen(false)} sx={{ color: '#94A3B8' }}>Cancel</Button>
+          <Button onClick={() => setAddOpen(false)} sx={{ color: 'rgba(22,22,22,0.62)' }}>Cancel</Button>
           <Button variant="contained" onClick={handleAdd}
             disabled={!form.username || !form.email || !form.password}
-            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #2563EB, #1D4ED8)' }}>
+            sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #0F766E, #0B5B54)' }}>
             Create
           </Button>
         </DialogActions>

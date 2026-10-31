@@ -1,0 +1,11 @@
+{
+  "claim_id": "CLM-DOCTEST-001",
+  "policy_number": "POL-AUTO-TEST-US",
+  "claimant_name": "Alex Rivera",
+  "incident_date": "2026-06-10",
+  "incident_location": "4410 Birchwood Ave, Denver, CO",
+  "estimated_amount": 23100.0,
+  "vehicle_year": 2020,
+  "vehicle_make": "Toyota",
+  "vehicle_model": "Camry"
+}

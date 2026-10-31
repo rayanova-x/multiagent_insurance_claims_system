@@ -1,0 +1,36 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "policy lookup returns None -> is_valid False -> denied at intake",
+  "claimant": "Dana Pruitt",
+  "location": "Bayshore Boulevard, San Jose, CA",
+  "vehicle": {
+    "age_years": 3,
+    "make": "Mazda",
+    "model": "CX-5"
+  },
+  "incident_days_ago": 20,
+  "policy": null,
+  "repair": {
+    "ratio_of_acv": 0.35
+  },
+  "police_report_number": "SJC-24-330128",
+  "other_driver": "Luis Ortega",
+  "narrative": "A car changing lanes on {location} sideswiped my passenger side and kept going for a moment before pulling over. We exchanged details and the police took a statement. I typed my policy number from an old card.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "denied"
+    ],
+    "payout": "zero",
+    "path_includes": [
+      "communication_agent"
+    ],
+    "path_excludes": [
+      "damage_assessor",
+      "policy_checker",
+      "settlement_calculator"
+    ]
+  },
+  "id": "GOLD-07",
+  "slug": "invalid_policy_number"
+}

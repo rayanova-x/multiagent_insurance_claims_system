@@ -28,9 +28,9 @@ export default function Login() {
   const fieldSx = {
     mb: 2,
     '& input:-webkit-autofill, & input:-webkit-autofill:hover, & input:-webkit-autofill:focus, & input:-webkit-autofill:active': {
-      WebkitBoxShadow: '0 0 0 100px #1E293B inset',
-      WebkitTextFillColor: '#F1F5F9',
-      caretColor: '#F1F5F9',
+      WebkitBoxShadow: '0 0 0 100px #FFFFFF inset',
+      WebkitTextFillColor: '#161616',
+      caretColor: '#161616',
       transition: 'background-color 5000s ease-in-out 0s',
     },
   };
@@ -66,17 +66,17 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%)' }}>
-      <Paper sx={{ width: 480, maxWidth: '95vw', p: 4, borderRadius: 3, bgcolor: '#1E293B', border: '1px solid #334155' }}>
+    <Box sx={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #F7F5EE 0%, #FFFFFF 50%, #F7F5EE 100%)' }}>
+      <Paper sx={{ width: 480, maxWidth: '95vw', p: 4, borderRadius: 3, bgcolor: '#FFFFFF', border: '1px solid #161616' }}>
         {/* Header */}
         <Box sx={{ textAlign: 'center', mb: 3 }}>
-          <AccountBalance sx={{ fontSize: 48, color: '#3B82F6', mb: 1 }} />
-          <Typography variant="h5" fontWeight={700} color="#F1F5F9">Smart Claims Processor</Typography>
-          <Typography variant="body2" color="#94A3B8" sx={{ mt: 0.5 }}>AI-Powered Insurance Claims Processing</Typography>
+          <AccountBalance sx={{ fontSize: 48, color: '#0F766E', mb: 1 }} />
+          <Typography variant="h5" fontWeight={700} color="#161616">Smart Claims Processor</Typography>
+          <Typography variant="body2" color="rgba(22,22,22,0.62)" sx={{ mt: 0.5 }}>AI-Powered Insurance Claims Processing</Typography>
         </Box>
 
         {/* Tabs */}
-        <Tabs value={tab} onChange={(_, v) => { setTab(v); setError(''); }} centered sx={{ mb: 2, '& .MuiTab-root': { color: '#94A3B8', fontWeight: 600 }, '& .Mui-selected': { color: '#3B82F6' } }}>
+        <Tabs value={tab} onChange={(_, v) => { setTab(v); setError(''); }} centered sx={{ mb: 2, '& .MuiTab-root': { color: 'rgba(22,22,22,0.62)', fontWeight: 600 }, '& .Mui-selected': { color: '#0F766E' } }}>
           <Tab label="Sign In" />
           <Tab label="Register" />
         </Tabs>
@@ -88,14 +88,14 @@ export default function Login() {
             fullWidth label="Username" value={username}
             onChange={(e) => setUsername(e.target.value)}
             sx={fieldSx}
-            InputProps={{ startAdornment: <InputAdornment position="start"><Person sx={{ color: '#64748B' }} /></InputAdornment> }}
+            InputProps={{ startAdornment: <InputAdornment position="start"><Person sx={{ color: 'rgba(22,22,22,0.45)' }} /></InputAdornment> }}
           />
           {tab === 1 && (
             <TextField
               fullWidth label="Email" type="email" value={email}
               onChange={(e) => setEmail(e.target.value)}
               sx={fieldSx}
-              InputProps={{ startAdornment: <InputAdornment position="start"><Email sx={{ color: '#64748B' }} /></InputAdornment> }}
+              InputProps={{ startAdornment: <InputAdornment position="start"><Email sx={{ color: 'rgba(22,22,22,0.45)' }} /></InputAdornment> }}
             />
           )}
           <TextField
@@ -103,10 +103,10 @@ export default function Login() {
             value={password} onChange={(e) => setPassword(e.target.value)}
             sx={fieldSx}
             InputProps={{
-              startAdornment: <InputAdornment position="start"><Lock sx={{ color: '#64748B' }} /></InputAdornment>,
+              startAdornment: <InputAdornment position="start"><Lock sx={{ color: 'rgba(22,22,22,0.45)' }} /></InputAdornment>,
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" sx={{ color: '#64748B' }}>
+                  <IconButton onClick={() => setShowPassword(!showPassword)} edge="end" sx={{ color: 'rgba(22,22,22,0.45)' }}>
                     {showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
                 </InputAdornment>
@@ -126,7 +126,7 @@ export default function Login() {
           )}
           <Button
             fullWidth type="submit" variant="contained" size="large" disabled={loading || !username || !password}
-            sx={{ py: 1.5, fontWeight: 600, fontSize: '1rem', borderRadius: 2, background: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)' }}
+            sx={{ py: 1.5, fontWeight: 600, fontSize: '1rem', borderRadius: 2, background: 'linear-gradient(135deg, #0F766E 0%, #0B5B54 100%)' }}
           >
             {loading ? <CircularProgress size={24} /> : tab === 0 ? 'Sign In' : 'Create Account'}
           </Button>

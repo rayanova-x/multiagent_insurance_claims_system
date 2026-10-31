@@ -17,20 +17,20 @@ llm:
   # on fallback_model (call-level fallback via LangChain with_fallbacks).
   providers:
     gemini:
-      # Both primary and fallback deliberately set to real 500-RPD-quota
-      # models (confirmed directly from this account's AI Studio dashboard,
-      # 2026-10-20 - gemini-3.6-flash measured at only 20 RPD on this
-      # account, both gemini-3.5-flash-lite and gemini-3.1-flash-lite at
-      # 500 RPD). Previously gemini-3.6-flash was primary (20 RPD) with
-      # gemini-3.5-flash-lite as its only fallback - a single quota-
-      # exhausted call had nowhere higher-headroom to fall back to. Still
-      # overridable per-run via LLM_MODEL/JUDGE_MODEL env vars (see
-      # src/config.py:get_llm_config) without editing this file - e.g. to
-      # test against gemini-3.6-flash's reasoning quality specifically,
-      # quota permitting. check the provider's deprecation page before
-      # each release.
-      model: gemini-3.5-flash-lite
-      fallback_model: gemini-3.1-flash-lite
+      # Primary (gemini-3.1-flash-lite) and judge (gemini-3.5-flash-lite) are
+      # deliberately DIFFERENT models: an LLM judge tends to favour output from
+      # its own model (self-preference bias, baswe evaluation field guide
+      # ss3.3). Same family, adjacent generation, so this is a partial
+      # mitigation only - a different provider would be the real fix. The
+      # fallback is the stronger 3.5 model, so a failed 3.1 call degrades UP,
+      # not down (and a second key, <api_key_env>2, is tried on each model
+      # first - see src/llm.py:_with_fallback). Both models have 500 RPD on this
+      # account's free tier (checked in the AI Studio dashboard 2026-10-20;
+      # gemini-3.6-flash is only 20 RPD). Overridable per run via LLM_MODEL /
+      # JUDGE_MODEL (src/config.py:get_llm_config) without editing this file.
+      # Swapped 2026-10-30 - quality check against the golden set pending (CLAUDE.md).
+      model: gemini-3.1-flash-lite
+      fallback_model: gemini-3.5-flash-lite
       judge_model: gemini-3.5-flash-lite     # LLM-as-judge evaluator model
       api_key_env: GOOGLE_API_KEY
     groq:
@@ -81,6 +81,14 @@ agents:
     # in src/models/schemas.py) - never re-adjudicates a branch's own
     # judgment, only whether the branches agree with each other.
     max_retries: 2                  # per MATERIAL conflict, before forcing HITL regardless of resolution
+
+  document_agent:
+    # Code-only verification tolerances (src/agents/document_agent.py) - NOT
+    # yet calibrated against real documents, same placeholder-default
+    # treatment this project gives every other threshold before it's
+    # checked against real data (see the HITL amount cutoff's own history).
+    arithmetic_tolerance_pct: 0.05       # line_items_sum vs repair estimate's own stated_total
+    plausibility_tolerance_pct: 0.50     # repair estimate stated_total vs claim.estimated_amount
 
 # Human-In-The-Loop Configuration
 hitl:

@@ -132,10 +132,23 @@ def run_intake_agent(state: ClaimsState) -> dict:
     incident_type = claim.get("incident_type", "auto_collision")
     # Country-aware required documents (falls back to hardcoded defaults)
     required_docs = get_required_documents(incident_type) or REQUIRED_DOCUMENTS.get(incident_type, [])
-    provided_docs = [d.lower() for d in claim.get("documents", [])]
-    # Missing documents are recorded and shown to the LLM and the reviewer.
-    # They do not invalidate the claim on their own (see the prompt below).
-    missing_docs = find_missing_documents(required_docs, provided_docs)
+    claim_documents = state.get("claim_documents")
+    if claim_documents is not None:
+        # document_agent already ran (or a caller pre-populated parsed
+        # document content, e.g. eval scripts) - a slot counts as present
+        # only when its structured field actually got populated, not from
+        # a self-reported checklist string. Stricter and more honest than
+        # the fuzzy filename-token match below, which stays as the fallback
+        # for claims with no real document content at all.
+        missing_docs = [
+            doc for doc in required_docs
+            if not claim_documents.get(doc)
+        ]
+    else:
+        provided_docs = [d.lower() for d in claim.get("documents", [])]
+        # Missing documents are recorded and shown to the LLM and the reviewer.
+        # They do not invalidate the claim on their own (see the prompt below).
+        missing_docs = find_missing_documents(required_docs, provided_docs)
 
     # ---- Step 4: Quick rule-based flags -------------------
     validation_flags = []
@@ -182,6 +195,8 @@ def run_intake_agent(state: ClaimsState) -> dict:
     # -- Step 8: Notes-writing LLM call --------------
     # Only job left for the LLM: write intake_notes. is_valid/policy_active/
     # claimant_eligible are passed as already-decided facts, not asked for.
+    notes_call_prompt = None
+    notes_call_raw_output = None
     if missing_fields:
         output = IntakeValidationOutput(
             is_valid=False,
@@ -255,11 +270,16 @@ def run_intake_agent(state: ClaimsState) -> dict:
         validation_flags to match the facts given above - do not change
         is_valid, which is already decided.
         """
+        notes_call_prompt = prompt
         try:
             output = llm.invoke([
                 SystemMessage(content=SYSTEM_PROMPT),
                 HumanMessage(content=prompt),
             ])
+            # Captured BEFORE the code-wins overwrite below, so the admin
+            # debug view can show what the LLM actually said vs. what code
+            # corrected it to - two different, both useful, facts.
+            notes_call_raw_output = output.model_dump(mode="json")
             # is_valid/policy_active/claimant_eligible are DECIDED BY CODE,
             # never by the model - overwrite whatever the LLM returned, same
             # as settlement_calculator's code-enforced caps. The model's
@@ -305,6 +325,25 @@ def run_intake_agent(state: ClaimsState) -> dict:
         duration_ms=duration_ms,
     )
 
+    # Admin-only debug detail (see CLAUDE.md / the Observability plan this
+    # round) - the exact prompt text and raw LLM output per call this agent
+    # made. Prompts here are always built from masked_summary (PII-masked),
+    # never raw claim data, so capturing them in full is safe by
+    # construction, not something needing separate redaction.
+    calls = []
+    if injection_result is not None:
+        calls.append({
+            "label": "injection_check",
+            "prompt": None,  # injection_check.py builds its own prompt internally, not exposed to this caller
+            "raw_output": injection_result.model_dump(mode="json"),
+        })
+    if notes_call_prompt is not None:
+        calls.append({
+            "label": "intake_notes",
+            "prompt": notes_call_prompt,
+            "raw_output": notes_call_raw_output,
+        })
+
     trace_entry = {
         "agent": AGENT_NAME,
         "action": "intake_validation",
@@ -321,6 +360,7 @@ def run_intake_agent(state: ClaimsState) -> dict:
             "claimant_eligible": output.claimant_eligible,
             "missing_documents": output.missing_documents,
         },
+        "calls": calls,
     }
 
     logger.info(f"[{claim_id}] Intake complete: valid={output.is_valid}")

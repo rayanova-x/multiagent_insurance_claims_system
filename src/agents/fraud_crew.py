@@ -313,11 +313,67 @@ def _build_fraud_crew(masked_claim: dict, policy: dict) -> tuple[Crew, dict]:
 
 # ── Main Node Function ────────────────────────────────────────────────────────
 
+def _mocked_fraud_output() -> FraudAssessmentOutput:
+    """Inert placeholder - same shape scripts/run_live_batch.py's
+    _mock_fraud_crew() uses for every live-quota batch this project has
+    run, now wired into the real node itself (gated by MOCK_FRAUD_CREW)
+    so a Evals-tab case run doesn't burn real CrewAI calls on something
+    out of scope for this rebuild - see run_fraud_crew's own docstring."""
+    return FraudAssessmentOutput(
+        fraud_risk_level=FraudRiskLevel.LOW,
+        fraud_score=0.0,
+        primary_concerns=[],
+        recommendation="proceed",
+        crew_summary="fraud_crew NOT ASSESSED - MOCK_FRAUD_CREW is set, so this node returned an inert "
+                     "placeholder instead of a real CrewAI call. Do not treat fraud_score=0.0 as evidence "
+                     "this claim is low risk.",
+        pattern_score=0.0,
+        anomaly_score=0.0,
+        consistency_score=1.0,
+        narrative_risk=None,
+        confidence=0.0,
+    )
+
+
 def run_fraud_crew(state: ClaimsState) -> dict:
     """
     LangGraph node function. Runs the full CrewAI fraud detection crew.
     Returns state update dict.
+
+    MOCK_FRAUD_CREW=true (env var, checked fresh on every call - same
+    pattern as this project's other dev-only overrides, e.g. MAX_AGENT_CALLS
+    in src/config.py) skips the real CrewAI call entirely and returns an
+    inert placeholder - fraud_crew's own CrewAI internals are out of scope
+    for this rebuild (standing project decision), and the graph is compiled
+    once per server process so a per-request mock patch (the pattern
+    scripts/run_live_batch.py/run_golden_set.py use for CLI batch runs)
+    can't reach the real running API. This is the same reason the Evals
+    tab's "Run this case" flow needs this: it submits through the real
+    /api/claims/submit endpoint, not a CLI script, so there was nowhere
+    else to apply the mock. Never set this in a real deployment - it skips
+    real fraud detection for every claim the server processes.
     """
+    if os.getenv("MOCK_FRAUD_CREW", "").lower() == "true":
+        output = _mocked_fraud_output()
+        return {
+            "fraud_output": output,
+            "pipeline_trace": [{
+                "agent": AGENT_NAME,
+                "framework": "crewai",
+                "fraud_score": output.fraud_score,
+                "risk_level": output.fraud_risk_level.value,
+                "duration_ms": 0,
+                "confidence": output.confidence,
+                "decision": output.recommendation,
+                "reasoning": output.crew_summary,
+                "flags": output.primary_concerns,
+                "findings": {},
+                "calls": None,
+                "calls_note": "Mocked (MOCK_FRAUD_CREW) - no real CrewAI call was made.",
+            }],
+            "agent_call_count": 0,
+        }
+
     claim = state["claim"]
     claim_id = claim["claim_id"]
     masked_claim = state.get("masked_claim") or mask_claim(dict(claim))
@@ -390,6 +446,10 @@ def run_fraud_crew(state: ClaimsState) -> dict:
             "fraud_admission": output.fraud_admission,
             "risk_level": output.fraud_risk_level.value,
         },
+        "calls": None,
+        "calls_note": "CrewAI's crew.kickoff() bypasses this project's LangChain-based prompt capture hook - "
+                      "individual sub-agent (Pattern Analyst/Anomaly Detector/Consistency Validator) prompts "
+                      "aren't captured. fraud_crew's CrewAI internals are also out of scope for this rebuild.",
     }
 
     logger.info(

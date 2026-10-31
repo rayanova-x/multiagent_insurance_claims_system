@@ -1,0 +1,36 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "repair/ACV 0.40 < 0.75 -> repair; payout = gross - depreciation(age 2) - $500 deductible",
+  "claimant": "Priya Raman",
+  "location": "Maple Avenue and 5th Street, Columbus, OH",
+  "vehicle": {
+    "age_years": 2,
+    "make": "Honda",
+    "model": "Accord"
+  },
+  "incident_days_ago": 45,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "CMH-24-018841",
+  "other_driver": "Daniel Okoye",
+  "narrative": "I was stopped at a red light at {location} when the vehicle behind me failed to brake in time and struck my rear bumper. The other driver admitted fault at the scene and we exchanged insurance details. Police attended and filed a report. The car is drivable, but the trunk lid and rear bumper cover are damaged, so I took it to Precision Collision Center for an estimate.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "damage": "repair",
+    "payout": "oracle",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-01",
+  "slug": "clean_young_vehicle"
+}

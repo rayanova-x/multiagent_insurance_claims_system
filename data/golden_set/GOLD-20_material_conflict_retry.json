@@ -1,0 +1,45 @@
+{
+  "label_basis": "observed-only",
+  "rule_citation": "consistency_coordinator MISSED_FACT: a detail in the repair estimate (delivery decals) that the personal-use narrative contradicts; judge-dependent, not scored",
+  "claimant": "Bianca Moretti",
+  "location": "Sycamore Street, Nashville, TN",
+  "vehicle": {
+    "age_years": 5,
+    "make": "Ford",
+    "model": "Transit Connect"
+  },
+  "incident_days_ago": 38,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4,
+    "items": [
+      [
+        "Rear door shell and quarter panel",
+        0.5
+      ],
+      [
+        "Refinish, including removal and replacement of 'Quick-Dash Courier' vehicle decals",
+        0.3
+      ],
+      [
+        "Labor",
+        0.2
+      ]
+    ]
+  },
+  "police_report_number": "BNA-24-318850",
+  "other_driver": "Wes Tran",
+  "narrative": "I was driving on {location} on my day off, running personal errands, when a car pulled out of a driveway and struck the rear side of my van. Police attended. The shop gave me an estimate for the rear door and quarter panel.",
+  "expected": {
+    "paused": false,
+    "observe": [
+      "consistency_output",
+      "paths",
+      "decision"
+    ]
+  },
+  "id": "GOLD-20",
+  "slug": "material_conflict_retry"
+}

@@ -13,11 +13,17 @@ Safe to re-run - uses INSERT OR REPLACE so existing rows are updated.
 from __future__ import annotations
 
 import json
-import sqlite3
+import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-DB_PATH = PROJECT_ROOT / "data" / "policies.db"
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from sqlalchemy import text  # noqa: E402
+
+from src.tools.policy_lookup import DB_PATH, _get_engine  # noqa: E402 - shares the Postgres-or-SQLite engine
+
+engine = _get_engine()
 
 POLICIES = [
     # ── US test policies ─────────────────────────────────────────────────────
@@ -183,24 +189,20 @@ POLICIES = [
 
 
 def main():
-    DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(DB_PATH))
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS policies (
-            policy_number TEXT PRIMARY KEY,
-            data TEXT NOT NULL
-        )
-    """)
-
-    for pol in POLICIES:
-        conn.execute(
-            "INSERT OR REPLACE INTO policies (policy_number, data) VALUES (?, ?)",
-            (pol["policy_number"], json.dumps(pol)),
-        )
-
-    conn.commit()
-    rows = conn.execute("SELECT policy_number FROM policies ORDER BY policy_number").fetchall()
-    conn.close()
+    with engine.begin() as conn:
+        conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS policies (
+                policy_number TEXT PRIMARY KEY,
+                data TEXT NOT NULL
+            )
+        """))
+        for pol in POLICIES:
+            conn.execute(
+                text("INSERT INTO policies (policy_number, data) VALUES (:num, :data) "
+                     "ON CONFLICT (policy_number) DO UPDATE SET data = :data"),
+                {"num": pol["policy_number"], "data": json.dumps(pol)},
+            )
+        rows = conn.execute(text("SELECT policy_number FROM policies ORDER BY policy_number")).fetchall()
 
     print(f"\nSeeded {len(POLICIES)} policies into {DB_PATH}:\n")
     for r in rows:

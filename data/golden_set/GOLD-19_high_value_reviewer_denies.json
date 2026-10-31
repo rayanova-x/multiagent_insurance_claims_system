@@ -1,0 +1,45 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "amount >= 84,100 pause; reviewer denies -> straight to communication, no settlement spend",
+  "claimant": "Victor Almeida",
+  "location": "Crescent Parkway, Atlanta, GA",
+  "vehicle": {
+    "age_years": 4,
+    "make": "Chevrolet",
+    "model": "Silverado"
+  },
+  "incident_days_ago": 21,
+  "policy": {
+    "kind": "standard"
+  },
+  "estimated_amount": 91000,
+  "repair": {
+    "ratio_of_acv": 0.5
+  },
+  "police_report_number": "ATL-24-702245",
+  "other_driver": "Naomi Fields",
+  "narrative": "My truck was hit by a delivery van that ran a light at {location}, pushing it into a lamp post. I was treated for back injuries and my truck is badly damaged. The total I am claiming covers the truck, my medical treatment and lost wages.",
+  "resume": {
+    "decision": "denied",
+    "reviewer_id": "golden-set",
+    "notes": "Reviewer denied after senior review",
+    "override_ai": false,
+    "settlement_override_usd": null
+  },
+  "expected": {
+    "paused": true,
+    "trigger": "exceeds review threshold",
+    "decision": [
+      "denied"
+    ],
+    "payout": "zero",
+    "path_includes": [
+      "communication_agent"
+    ],
+    "path_excludes": [
+      "settlement_calculator"
+    ]
+  },
+  "id": "GOLD-19",
+  "slug": "high_value_reviewer_denies"
+}

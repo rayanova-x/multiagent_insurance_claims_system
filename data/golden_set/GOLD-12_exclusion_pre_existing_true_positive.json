@@ -1,0 +1,31 @@
+{
+  "label_basis": "rule-text",
+  "rule_citation": "policy_checker 'pre_existing_damage': narrative explicitly mentions prior unrepaired damage to the same area",
+  "claimant": "Walter Nguyen",
+  "location": "Cedar Lane, Raleigh, NC",
+  "vehicle": {
+    "age_years": 9,
+    "make": "Honda",
+    "model": "Civic"
+  },
+  "incident_days_ago": 28,
+  "policy": {
+    "kind": "preexisting"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "RAL-24-087431",
+  "other_driver": "Tina Marsh",
+  "narrative": "The front passenger corner of my car has had a cracked bumper cover and a dented fender since I scraped a concrete post last winter, and I never got it repaired. This month a driver ran the stop sign on {location} and clipped that same corner. The shop is quoting the bumper cover and fender as one job.",
+  "expected": {
+    "paused": true,
+    "trigger": "exclusion",
+    "path_includes": [
+      "damage_assessor",
+      "policy_checker"
+    ]
+  },
+  "id": "GOLD-12",
+  "slug": "exclusion_pre_existing_true_positive"
+}

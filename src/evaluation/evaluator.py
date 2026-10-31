@@ -212,16 +212,12 @@ Exclusions Triggered: {', '.join(policy_check.exclusions_triggered) if policy_ch
 """
 
     # ── Dimension 2: FAIRNESS - isolated judge call ────────────────────────
-    fairness = _judge_dimension(
-        FAIRNESS_SYSTEM_PROMPT,
-        f"{claim_context}\nWould a human adjuster reach the same conclusion on this claim?",
-    )
+    fairness_prompt = f"{claim_context}\nWould a human adjuster reach the same conclusion on this claim?"
+    fairness = _judge_dimension(FAIRNESS_SYSTEM_PROMPT, fairness_prompt)
 
     # ── Dimension 3: TRANSPARENCY - isolated judge call ────────────────────
-    transparency = _judge_dimension(
-        TRANSPARENCY_SYSTEM_PROMPT,
-        f"{claim_context}\nIs the reasoning above explainable and traceable, step by step?",
-    )
+    transparency_prompt = f"{claim_context}\nIs the reasoning above explainable and traceable, step by step?"
+    transparency = _judge_dimension(TRANSPARENCY_SYSTEM_PROMPT, transparency_prompt)
 
     # ── Combine: overall_score and passed are computed by code ────────────
     dimension_scores = [s for s in (fairness.score, transparency.score) if s is not None]
@@ -296,6 +292,10 @@ Exclusions Triggered: {', '.join(policy_check.exclusions_triggered) if policy_ch
                 "fairness_score": fairness.score,
                 "transparency_score": transparency.score,
             },
+            "calls": [
+                {"label": "fairness_judge", "prompt": fairness_prompt, "raw_output": fairness.model_dump(mode="json")},
+                {"label": "transparency_judge", "prompt": transparency_prompt, "raw_output": transparency.model_dump(mode="json")},
+            ],
         }],
         "agent_call_count": 1,  # operator.add reducer sums this into the running total - see state.py
     }

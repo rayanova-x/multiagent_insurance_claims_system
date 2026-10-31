@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -151,14 +152,41 @@ def _grade_score(actual_score, expected_score, tolerance: float = 0.3) -> bool:
     return abs(actual_score - expected_score) <= tolerance
 
 
-def run_validation(judge_filter: str | None = None) -> dict:
+def _load_partial(path: Path | None) -> dict:
+    """Cases an earlier (possibly crashed) run already finished: {case_id: result}. A torn last line is ignored."""
+    done = {}
+    if path and path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            try:
+                row = json.loads(line)
+            except ValueError:
+                continue
+            if row.get("correct") is not None:  # errored cases are retried
+                done[row["case_id"]] = row
+    return done
+
+
+def _append_partial(path: Path | None, row: dict) -> None:
+    if path:
+        with path.open("a", encoding="utf-8") as f:
+            f.write(json.dumps(row, default=str) + "\n")
+            f.flush()
+            os.fsync(f.fileno())
+
+
+def run_validation(judge_filter: str | None = None, partial: Path | None = None) -> dict:
     cases = [c for c in GOLDEN_SET if judge_filter is None or c["judge"] == judge_filter]
     if not cases:
         print(f"No cases found for judge={judge_filter!r}")
         return {}
 
+    done = _load_partial(partial)
     results = []
     for case in cases:
+        if case["case_id"] in done:
+            print(f"{case['case_id']}: already saved, skipping")
+            results.append(done[case["case_id"]])
+            continue
         print(f"Running {case['case_id']} ({case['judge']})...")
         try:
             if case["judge"] == "consistency_coordinator":
@@ -176,6 +204,7 @@ def run_validation(judge_filter: str | None = None) -> dict:
                 "case_id": case["case_id"], "judge": case["judge"],
                 "correct": None, "error": f"{type(e).__name__}: {e}",
             })
+        _append_partial(partial, results[-1])
 
     by_judge: dict[str, list[dict]] = {}
     for r in results:
@@ -217,7 +246,10 @@ if __name__ == "__main__":
     parser.add_argument("--json-out", default=None, help="Write full results as JSON to this path")
     args = parser.parse_args()
 
-    output = run_validation(args.judge)
+    partial = Path(args.json_out + ".partial.jsonl") if args.json_out else None
+    output = run_validation(args.judge, partial)
     if args.json_out:
         Path(args.json_out).write_text(json.dumps(output, indent=2, default=str), encoding="utf-8")
+        if partial:
+            partial.unlink(missing_ok=True)
         print(f"\nFull results written to {args.json_out}")

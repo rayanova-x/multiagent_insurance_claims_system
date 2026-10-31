@@ -1,0 +1,33 @@
+{
+  "label_basis": "rule-text",
+  "rule_citation": "policy_checker 'racing': operating against a time measuring device / in a timed competitive contest",
+  "claimant": "Evan Rhodes",
+  "location": "Eastfield Motorsport Park, Eastfield, TX",
+  "vehicle": {
+    "age_years": 5,
+    "make": "Subaru",
+    "model": "WRX"
+  },
+  "incident_days_ago": 40,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.45
+  },
+  "police_report_number": null,
+  "documents": [
+    "repair_estimate"
+  ],
+  "narrative": "I entered my car in a club time-attack event at {location}. Each driver's laps were recorded on the track's timing transponders and the fastest lap of the day wins the trophy. On my third timed lap I lost the rear through turn 4 and went into the tyre wall. No other cars were involved.",
+  "expected": {
+    "paused": true,
+    "trigger": "exclusion",
+    "path_includes": [
+      "damage_assessor",
+      "policy_checker"
+    ]
+  },
+  "id": "GOLD-08",
+  "slug": "exclusion_racing_true_positive"
+}

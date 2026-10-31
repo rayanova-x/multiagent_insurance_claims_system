@@ -103,6 +103,48 @@ class RepairEstimateFields(BaseModel):
     )
 
 
+# ── Document agent: classification + verification ───────────────────────────
+
+class DocumentClassificationOutput(BaseModel):
+    """Narrow classifier output (src/agents/document_agent.py) - the same
+    DELIMIT/CLASSIFY/RESTRICT shape as src/security/injection_check.py's
+    InjectionCheckOutput: one specific question, schema-enforced, nothing
+    else. Determines whether an uploaded file's content actually matches the
+    document type its upload slot claims to be, before any schema-specific
+    extraction runs on it."""
+
+    detected_type: Optional[DocumentType] = Field(
+        None, description="Which of the 3 known document types (police_report, other_driver_info, "
+        "repair_estimate) this text's content actually matches, based on what it says - not the slot "
+        "it was uploaded into. None if it matches none of the 3 known types."
+    )
+    confidence: float = Field(ge=0.0, le=1.0, description="Confidence in detected_type (or in 'matches none' when detected_type is None).")
+    reasoning: str = Field(description="Brief justification - always required, even when detected_type is None.")
+
+
+CLAIMANT_FACING_MESSAGES: dict[str, str] = {
+    "could_not_parse": "We couldn't read this file - it may be corrupted or not a valid PDF. Please re-upload.",
+    "wrong_document_type": "This looks like a different kind of document than expected. You can re-upload the correct file, or keep this one if you're sure it's right.",
+    "line_items_sum_mismatch": "The numbers on this document don't quite add up. You can re-upload a corrected version, or keep it as-is.",
+    "amount_implausible_vs_claim": "The total on this document is very different from the amount you entered for this claim. You can re-upload, or keep it as-is.",
+}
+"""Short, plain-language text shown to the claimant per finding issue -
+never the raw issue code, confidence score, or full finding detail (that
+stays in the reviewer's HITL brief). Keyed by DocumentVerificationFinding.issue."""
+
+
+class DocumentVerificationFinding(BaseModel):
+    """One specific, code-detected problem with an uploaded document - never
+    an LLM judgment call (see document_agent.py's arithmetic/plausibility
+    checks). Mirrors ConflictFinding's nested-model shape (schemas.py) for a
+    structured list of findings a HITL reviewer needs to see verbatim."""
+
+    slot: DocumentType = Field(description="Which required document slot this finding concerns.")
+    issue: str = Field(description="Short machine-stable tag: 'could_not_parse', 'wrong_document_type', "
+        "'line_items_sum_mismatch', or 'amount_implausible_vs_claim'.")
+    detail: str = Field(description="Human-readable specifics for the HITL reviewer brief, e.g. the actual numbers that disagreed.")
+
+
 # ── Per-claim-type document bundle ──────────────────────────────────────────
 
 class AutoCollisionDocuments(BaseModel):

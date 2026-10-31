@@ -6,6 +6,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, Query
+from sqlalchemy import text
 from sqlmodel import Session, select
 
 from api.db import Claim, get_session
@@ -176,12 +177,12 @@ def hitl_metrics():
     conn = _hitl_db()
     try:
         def one(q):
-            return conn.execute(q).fetchone()[0]
+            return conn.execute(text(q)).fetchone()[0]
         pending = one("SELECT COUNT(*) FROM hitl_queue WHERE status='pending'")
         resolved = one("SELECT COUNT(*) FROM hitl_queue WHERE status='resolved'")
         overrides = one("SELECT COUNT(*) FROM hitl_queue WHERE override_ai=1")
         by_priority = conn.execute(
-            "SELECT priority, COUNT(*) FROM hitl_queue GROUP BY priority"
+            text("SELECT priority, COUNT(*) FROM hitl_queue GROUP BY priority")
         ).fetchall()
     finally:
         conn.close()

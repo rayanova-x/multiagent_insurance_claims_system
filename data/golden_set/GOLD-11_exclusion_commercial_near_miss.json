@@ -1,0 +1,36 @@
+{
+  "label_basis": "rule-text",
+  "rule_citation": "policy_checker 'commercial_use' does NOT apply to a commute to a regular job or personal errands",
+  "claimant": "Julia Brandt",
+  "location": "Lakeshore Drive, Chicago, IL",
+  "vehicle": {
+    "age_years": 4,
+    "make": "Honda",
+    "model": "CR-V"
+  },
+  "incident_days_ago": 50,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "CHI-24-552310",
+  "other_driver": "Omar Haddad",
+  "narrative": "I was on my usual evening commute home from the office along {location} when a vehicle changing lanes clipped my front passenger fender. We pulled over, exchanged insurance details and the police made a report.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "damage": "repair",
+    "payout": "oracle",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-11",
+  "slug": "exclusion_commercial_near_miss"
+}

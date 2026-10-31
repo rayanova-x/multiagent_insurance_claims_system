@@ -1,0 +1,36 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "repair/ACV 1.30 >= 0.75 -> total_loss; assessed = ACV (rule 2); payout = ACV - deductible",
+  "claimant": "Tomasz Kowalski",
+  "location": "the intersection of Oak Road and Highway 9, Des Moines, IA",
+  "vehicle": {
+    "age_years": 7,
+    "make": "Chevrolet",
+    "model": "Malibu"
+  },
+  "incident_days_ago": 25,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 1.3
+  },
+  "police_report_number": "DSM-24-077120",
+  "other_driver": "Rita Valdez",
+  "narrative": "A pickup truck ran the stop sign at {location} and hit my car broadside on the driver's side. The car was towed from the scene and the shop says the frame is bent. Their estimate comes to more than the car is worth and they expect the insurer to treat it as a total loss. Police cited the other driver.",
+  "expected": {
+    "paused": false,
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "damage": "total_loss",
+    "payout": "total_loss",
+    "path_includes": [
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-04",
+  "slug": "total_loss"
+}

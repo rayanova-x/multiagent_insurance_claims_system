@@ -3,11 +3,15 @@ import {
   Box, Paper, Typography, TextField, Button, Grid, MenuItem, Alert,
   CircularProgress, Divider, Chip, Collapse, IconButton, Tooltip,
 } from '@mui/material';
-import { Send, Add, ExpandMore, ExpandLess, CheckCircle, Policy } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
-import { claimsAPI, policyAPI } from '../../services/api';
+import {
+  Send, Add, ExpandMore, ExpandLess, CheckCircle, Policy,
+  UploadFile, Warning, ErrorOutline, Close, Replay,
+} from '@mui/icons-material';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { claimsAPI, evalsAPI, policyAPI } from '../../services/api';
 import api from '../../services/api';
 import useAuthStore from '../../store/authStore';
+import useCaseRunStore from '../../store/caseRunStore';
 
 // ── Quick-create panel defaults ────────────────────────────────────────────
 
@@ -17,10 +21,28 @@ function randomSuffix() {
 
 export default function SubmitClaim() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const user = useAuthStore((s) => s.user);
+  const consumePendingCase = useCaseRunStore((s) => s.consumePendingCase);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
+
+  // Set when this submission was launched from the Evals tab's "Run this
+  // case" button (?case=...) - changes the post-submit redirect target
+  // (-> /observability/{claim_id} instead of /my-claims) and, for
+  // golden-set cases, carries already-structured document content through
+  // on submit instead of the real upload flow (see handleSubmit).
+  const [activeCase, setActiveCase] = useState(null); // { caseId, source, prebuilt_documents } | null
+  const [caseLoading, setCaseLoading] = useState(false);
+
+  // Demo-scenario picker ("try a demo") - a curated subset of the same
+  // golden-set/test_pdfs cases the admin-only Evals tab's "Run this case"
+  // uses, exposed here under plain claimant auth (api/claims/demo-scenarios)
+  // so a demo can start right from the claimant's own submit form.
+  const setPendingCase = useCaseRunStore((s) => s.setPendingCase);
+  const [demoScenarios, setDemoScenarios] = useState([]);
+  const [demoLoading, setDemoLoading] = useState(null); // caseId currently being materialized, or null
 
   // Country-aware state
   const [claimTypes, setClaimTypes] = useState([]);
@@ -29,10 +51,15 @@ export default function SubmitClaim() {
   const [countryName, setCountryName] = useState('');
   const [countryCode, setCountryCode] = useState('US');
 
-  // Document checklist (which of the required docs for the selected type
-  // the claimant says they have - real file upload doesn't exist yet, this
-  // is a self-reported checklist, same as the backend's `documents: list[str]`)
-  const [checkedDocs, setCheckedDocs] = useState({});
+  // Real document upload (replaces the old self-reported checklist). A
+  // random token is generated once per form load - files upload against it
+  // immediately on selection (see claimsAPI.uploadDocument), before a real
+  // claim_id exists; /submit links the staged files to the claim via
+  // upload_token (see api/routes_claims.py's /upload-staging endpoints).
+  // docUploads: { [slot]: { status: 'idle'|'uploading'|'ok'|'problem'|'failed',
+  //   message, keptAnyway, disputeReason } }
+  const [uploadToken] = useState(() => crypto.randomUUID());
+  const [docUploads, setDocUploads] = useState({});
 
   // Incident-type verification (src/security/incident_type_check.py via
   // POST /api/claims/verify-type) - runs once, synchronously, when the
@@ -119,7 +146,94 @@ export default function SubmitClaim() {
         setTemplates([]);
       }
     })();
+
+    // Demo scenarios for the "try a demo" picker
+    (async () => {
+      try {
+        const res = await claimsAPI.listDemoScenarios();
+        setDemoScenarios(res.data?.scenarios || []);
+      } catch {
+        setDemoScenarios([]);
+      }
+    })();
   }, []);
+
+  // Materialize a demo scenario and hand it off to the existing case-loader
+  // effect below (same caseRunStore + ?case= contract the Evals tab's "Run
+  // this case" button uses) - this just gives claimants a door onto it.
+  const runDemoScenario = async (caseId) => {
+    setDemoLoading(caseId);
+    try {
+      const res = await claimsAPI.materializeDemoScenario(caseId);
+      setPendingCase({ caseId, source: res.data.source, ...res.data, viaClaimantEndpoint: true });
+      navigate('/submit-claim?case=' + encodeURIComponent(caseId));
+    } catch {
+      setError('Could not load that demo scenario. Please try again.');
+    } finally {
+      setDemoLoading(null);
+    }
+  };
+
+  // Pick up a case launched from the Evals tab's "Run this case" button.
+  // The materialized data was handed off via caseRunStore (not just the
+  // ?case= id) since it carries a full claim payload + either
+  // prebuilt_documents or pdf files to stage - too much for a URL param.
+  useEffect(() => {
+    const caseId = searchParams.get('case');
+    if (!caseId) return;
+    const pending = consumePendingCase();
+    if (!pending || pending.caseId !== caseId) return;
+
+    setCaseLoading(true);
+    const c = pending.claim || {};
+    setForm((f) => ({
+      ...f,
+      policy_number: c.policy_number || f.policy_number,
+      incident_type: c.incident_type || f.incident_type,
+      incident_date: c.incident_date || f.incident_date,
+      incident_description: c.incident_description || f.incident_description,
+      incident_location: c.incident_location || f.incident_location,
+      police_report_number: c.police_report_number || '',
+      estimated_amount: c.estimated_amount != null ? String(c.estimated_amount) : f.estimated_amount,
+      vehicle_year: c.vehicle_year != null ? String(c.vehicle_year) : '',
+      vehicle_make: c.vehicle_make || '',
+      vehicle_model: c.vehicle_model || '',
+    }));
+
+    if (pending.source === 'golden_set' && pending.prebuilt_documents) {
+      setActiveCase({ caseId, source: 'golden_set', prebuilt_documents: pending.prebuilt_documents });
+      setCaseLoading(false);
+    } else if (pending.source === 'test_pdfs' && pending.pdf_files) {
+      setActiveCase({ caseId, source: 'test_pdfs', prebuilt_documents: null });
+      // Stage each case PDF through the REAL upload endpoint, same as a
+      // live claimant choosing a file - fetched from the case's own PDF
+      // endpoint and wrapped as a File, not a shortcut around the upload UI.
+      (async () => {
+        for (const [slot, filename] of Object.entries(pending.pdf_files)) {
+          setDocUploads((prev) => ({ ...prev, [slot]: { status: 'uploading', message: '' } }));
+          try {
+            const pdfUrl = pending.viaClaimantEndpoint
+              ? claimsAPI.getDemoScenarioPdfUrl(caseId, slot)
+              : evalsAPI.getCasePdfUrl(caseId, slot);
+            const res = await fetch(pdfUrl, {
+              headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+            });
+            const blob = await res.blob();
+            const file = new File([blob], filename, { type: 'application/pdf' });
+            const uploadRes = await claimsAPI.uploadDocument(uploadToken, slot, file);
+            const { status, message } = uploadRes.data;
+            setDocUploads((prev) => ({ ...prev, [slot]: { status, message, keptAnyway: false, disputeReason: '' } }));
+          } catch {
+            setDocUploads((prev) => ({ ...prev, [slot]: { status: 'failed', message: 'Could not stage this case file.' } }));
+          }
+        }
+        setCaseLoading(false);
+      })();
+    } else {
+      setCaseLoading(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   // ── Quick-create helpers ─────────────────────────────────────────────────
 
@@ -188,13 +302,18 @@ export default function SubmitClaim() {
   // incident_type or the description invalidates any prior check, since
   // either could change the answer.
   const typeNeedsResolution = typeCheck && !typeCheck.match && !typeConfirmed && !typeDisputeMode;
+  // Only a genuinely unreadable file (status 'failed', i.e. could_not_parse)
+  // blocks submit - a 'problem' status (wrong type, arithmetic/amount
+  // mismatch) never blocks, it follows the same dispute-and-continue
+  // pattern as the incident-type check below.
+  const hasBlockingUpload = Object.values(docUploads).some((d) => d.status === 'failed');
   const canSubmit = form.policy_number && form.incident_type && form.incident_description.length >= 10
-    && parseFloat(form.estimated_amount) > 0 && !typeNeedsResolution && !typeCheckLoading;
+    && parseFloat(form.estimated_amount) > 0 && !typeNeedsResolution && !typeCheckLoading && !hasBlockingUpload && !caseLoading;
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
     if (field === 'incident_type') {
-      setCheckedDocs({});
+      setDocUploads({});
       setTypeCheck(null);
       setTypeConfirmed(false);
       setTypeDisputeMode(false);
@@ -203,7 +322,44 @@ export default function SubmitClaim() {
     setForm((f) => ({ ...f, [field]: value }));
   };
 
-  const toggleDoc = (docKey) => setCheckedDocs((prev) => ({ ...prev, [docKey]: !prev[docKey] }));
+  const handleDocFileChange = (slot) => async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // allow re-selecting the same file name
+    if (!file) return;
+    setDocUploads((prev) => ({ ...prev, [slot]: { status: 'uploading', message: '' } }));
+    try {
+      const res = await claimsAPI.uploadDocument(uploadToken, slot, file);
+      const { status, message } = res.data;
+      setDocUploads((prev) => ({ ...prev, [slot]: { status, message, keptAnyway: false, disputeReason: '' } }));
+    } catch (err) {
+      setDocUploads((prev) => ({
+        ...prev,
+        [slot]: { status: 'failed', message: err.response?.data?.detail || 'Upload failed - please try again.' },
+      }));
+    }
+  };
+
+  const handleDocRemove = async (slot) => {
+    try {
+      await claimsAPI.removeStagedDocument(uploadToken, slot);
+    } catch {
+      // best-effort - fall through and clear the local state regardless
+    }
+    setDocUploads((prev) => {
+      const next = { ...prev };
+      delete next[slot];
+      return next;
+    });
+  };
+
+  const handleDocKeepAnyway = (slot) => {
+    setDocUploads((prev) => ({ ...prev, [slot]: { ...prev[slot], keptAnyway: true } }));
+  };
+
+  const handleDocDisputeReasonChange = (slot) => (e) => {
+    const value = e.target.value;
+    setDocUploads((prev) => ({ ...prev, [slot]: { ...prev[slot], disputeReason: value } }));
+  };
 
   // Runs once the claimant finishes writing the description (on blur), so
   // it doesn't fire on every keystroke. A prior accepted/disputed answer is
@@ -248,17 +404,27 @@ export default function SubmitClaim() {
     setError('');
     setLoading(true);
     try {
+      const documentDisputes = Object.entries(docUploads)
+        .filter(([, d]) => d.keptAnyway)
+        .map(([slot, d]) => ({ slot, reason: d.disputeReason?.trim() || null }));
       const payload = {
         ...form,
         estimated_amount: parseFloat(form.estimated_amount),
         vehicle_year: form.vehicle_year ? parseInt(form.vehicle_year) : null,
-        documents: requiredDocs.filter((d) => checkedDocs[d]),
+        documents: Object.entries(docUploads).filter(([, d]) => d.status !== 'failed').map(([slot]) => slot),
+        upload_token: uploadToken,
+        document_disputes: documentDisputes,
+        prebuilt_documents: activeCase?.prebuilt_documents || null,
         type_disputed_by_claimant: Boolean(typeCheck && !typeCheck.match && typeConfirmed && typeDisputeReason.trim()),
         type_dispute_reason: typeDisputeReason.trim() || null,
       };
-      await claimsAPI.submitClaim(payload);
+      const res = await claimsAPI.submitClaim(payload);
       setSuccess(true);
-      setTimeout(() => navigate('/my-claims'), 2000);
+      if (activeCase) {
+        setTimeout(() => navigate(`/observability/${res.data.claim_id}`), 1200);
+      } else {
+        setTimeout(() => navigate('/my-claims'), 2000);
+      }
     } catch (err) {
       setError(err.response?.data?.detail || 'Failed to submit claim');
     } finally {
@@ -270,31 +436,62 @@ export default function SubmitClaim() {
     <Box>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Box>
-          <Typography variant="h5" fontWeight={700} color="#F1F5F9">Submit New Claim</Typography>
-          <Typography variant="body2" color="#94A3B8">
+          <Typography variant="h5" fontWeight={700} color="#161616">Submit New Claim</Typography>
+          <Typography variant="body2" color="rgba(22,22,22,0.62)">
             Select a policy (or quick-create one), then fill in your claim details.
           </Typography>
         </Box>
         {countryName && (
-          <Typography variant="caption" color="#64748B" sx={{ border: '1px solid #334155', borderRadius: 2, px: 1.5, py: 0.5 }}>
+          <Typography variant="caption" color="rgba(22,22,22,0.45)" sx={{ border: '1px solid #161616', borderRadius: 2, px: 1.5, py: 0.5 }}>
             {countryName} ({currencySymbol})
           </Typography>
         )}
       </Box>
 
+      {!activeCase && demoScenarios.length > 0 && (
+        <Paper sx={{ p: 2.5, mb: 3, bgcolor: '#F7F5EE', borderRadius: 3, border: '1px solid #161616' }}>
+          <Typography variant="subtitle2" fontWeight={700} color="#161616" sx={{ mb: 1.5 }}>
+            Try a demo scenario
+          </Typography>
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+            {demoScenarios.map((s) => (
+              <Button
+                key={s.id}
+                size="small"
+                variant="outlined"
+                disabled={demoLoading !== null}
+                onClick={() => runDemoScenario(s.id)}
+                startIcon={demoLoading === s.id ? <CircularProgress size={14} /> : undefined}
+                sx={{ borderColor: '#161616', color: '#161616' }}
+              >
+                {s.label}
+              </Button>
+            ))}
+          </Box>
+        </Paper>
+      )}
+
+      {activeCase && (
+        <Alert severity="info" sx={{ mb: 3 }}>
+          Running test case <strong>{activeCase.caseId}</strong> - form fields
+          {activeCase.source === 'test_pdfs' ? ' and documents have' : ' have'} been pre-filled.
+          {caseLoading && ' Staging documents...'}
+        </Alert>
+      )}
+
       {success && (
         <Alert severity="success" sx={{ mb: 3 }}>
-          Claim submitted successfully! Redirecting to your claims...
+          Claim submitted successfully! {activeCase ? 'Redirecting to the live trace view...' : 'Redirecting to your claims...'}
         </Alert>
       )}
       {error && <Alert severity="error" sx={{ mb: 3 }}>{error}</Alert>}
 
       {/* ── Step 1: Policy Selection ──────────────────────────────────────── */}
-      <Paper sx={{ p: 3, mb: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
+      <Paper sx={{ p: 3, mb: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <Policy sx={{ color: '#3B82F6' }} />
-            <Typography variant="subtitle1" fontWeight={700} color="#F1F5F9">
+            <Policy sx={{ color: '#0F766E' }} />
+            <Typography variant="subtitle1" fontWeight={700} color="#161616">
               Step 1: Select Your Insurance Policy
             </Typography>
           </Box>
@@ -313,6 +510,12 @@ export default function SubmitClaim() {
               onChange={handleChange('policy_number')} sx={{ mb: 2 }}
               helperText={policies.length === 0 ? 'No policies found - create one below' : `${policies.length} policies available`}>
               <MenuItem value="">-- Select a policy --</MenuItem>
+              {activeCase && form.policy_number && !policies.some((p) => p.policy_number === form.policy_number) && (
+                <MenuItem value={form.policy_number}>
+                  <Typography fontFamily="monospace" fontWeight={600}>{form.policy_number}</Typography>
+                  <Chip label="test case" size="small" sx={{ ml: 1, height: 20, fontSize: '0.7rem' }} />
+                </MenuItem>
+              )}
               {policies.map((p) => (
                 <MenuItem key={p.policy_number} value={p.policy_number}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, width: '100%' }}>
@@ -327,15 +530,15 @@ export default function SubmitClaim() {
             </TextField>
 
             {/* Quick-create toggle */}
-            <Divider sx={{ my: 2, borderColor: '#334155' }}>
-              <Chip label="OR" size="small" sx={{ color: '#64748B', fontSize: '0.7rem' }} />
+            <Divider sx={{ my: 2, borderColor: '#161616' }}>
+              <Chip label="OR" size="small" sx={{ color: 'rgba(22,22,22,0.45)', fontSize: '0.7rem' }} />
             </Divider>
 
             <Button
               onClick={() => setShowQuickCreate(!showQuickCreate)}
               startIcon={showQuickCreate ? <ExpandLess /> : <Add />}
               endIcon={!showQuickCreate ? <ExpandMore /> : null}
-              sx={{ color: '#3B82F6', fontWeight: 600, mb: 1 }}
+              sx={{ color: '#0F766E', fontWeight: 600, mb: 1 }}
             >
               Quick-Create a Policy with {countryName || 'Default'} Defaults
             </Button>
@@ -348,11 +551,11 @@ export default function SubmitClaim() {
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 2, mt: 1 }}>
                   {templates.map((tmpl, i) => (
                     <Button key={i} variant="outlined" onClick={() => startQuickCreate(tmpl)}
-                      sx={{ borderColor: '#334155', color: '#F1F5F9', textTransform: 'none', borderRadius: 2,
-                        '&:hover': { borderColor: '#3B82F6', bgcolor: '#3B82F620' } }}>
+                      sx={{ borderColor: '#161616', color: '#161616', textTransform: 'none', borderRadius: 2,
+                        '&:hover': { borderColor: '#0F766E', bgcolor: '#0F766E20' } }}>
                       <Box sx={{ textAlign: 'left' }}>
                         <Typography variant="body2" fontWeight={600}>{tmpl.label}</Typography>
-                        <Typography variant="caption" color="#64748B">
+                        <Typography variant="caption" color="rgba(22,22,22,0.45)">
                           Deductible: {tmpl.deductible?.toLocaleString()} | Coverage keys: {Object.keys(tmpl.coverage).join(', ')}
                         </Typography>
                       </Box>
@@ -363,8 +566,8 @@ export default function SubmitClaim() {
 
               {/* Editable quick-create form */}
               {quickForm && (
-                <Paper sx={{ p: 2, bgcolor: '#0F172A', borderRadius: 2, border: '1px solid #334155', mt: 1 }}>
-                  <Typography variant="subtitle2" color="#94A3B8" fontWeight={600} sx={{ mb: 2 }}>
+                <Paper sx={{ p: 2, bgcolor: '#F7F5EE', borderRadius: 2, border: '1px solid #161616', mt: 1 }}>
+                  <Typography variant="subtitle2" color="rgba(22,22,22,0.62)" fontWeight={600} sx={{ mb: 2 }}>
                     Customize & Create (defaults pre-filled for {countryName})
                   </Typography>
                   <Grid container spacing={2}>
@@ -403,7 +606,7 @@ export default function SubmitClaim() {
                   </Grid>
 
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 2 }}>
-                    <Typography variant="caption" color="#64748B" sx={{ flex: 1 }}>
+                    <Typography variant="caption" color="rgba(22,22,22,0.45)" sx={{ flex: 1 }}>
                       Coverage: {Object.entries(quickForm.coverage || {}).map(([k, v]) => `${k}: ${v.toLocaleString()}`).join(' | ')}
                     </Typography>
                   </Box>
@@ -411,10 +614,10 @@ export default function SubmitClaim() {
                   <Box sx={{ display: 'flex', gap: 1, mt: 2 }}>
                     <Button variant="contained" size="small" onClick={handleQuickSave} disabled={quickSaving || !quickForm.policy_number || !quickForm.holder_name}
                       startIcon={quickSaving ? <CircularProgress size={16} /> : <CheckCircle />}
-                      sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #10B981, #059669)' }}>
+                      sx={{ borderRadius: 2, background: 'linear-gradient(135deg, #1a7a4c, #1a7a4c)' }}>
                       Create & Select
                     </Button>
-                    <Button size="small" onClick={() => setQuickForm(null)} sx={{ color: '#94A3B8' }}>Cancel</Button>
+                    <Button size="small" onClick={() => setQuickForm(null)} sx={{ color: 'rgba(22,22,22,0.62)' }}>Cancel</Button>
                   </Box>
                 </Paper>
               )}
@@ -424,12 +627,12 @@ export default function SubmitClaim() {
       </Paper>
 
       {/* ── Step 2: Claim Details ─────────────────────────────────────────── */}
-      <Paper component="form" onSubmit={handleSubmit} sx={{ p: 3, bgcolor: '#1E293B', borderRadius: 3, border: '1px solid #334155' }}>
-        <Typography variant="subtitle1" fontWeight={700} color="#F1F5F9" sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
-          <Send sx={{ color: '#3B82F6', fontSize: 20 }} /> Step 2: Claim Details
+      <Paper component="form" onSubmit={handleSubmit} sx={{ p: 3, bgcolor: '#FFFFFF', borderRadius: 3, border: '1px solid #161616' }}>
+        <Typography variant="subtitle1" fontWeight={700} color="#161616" sx={{ mb: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Send sx={{ color: '#0F766E', fontSize: 20 }} /> Step 2: Claim Details
         </Typography>
 
-        <Typography variant="subtitle2" color="#94A3B8" fontWeight={600} sx={{ mb: 2 }}>Incident</Typography>
+        <Typography variant="subtitle2" color="rgba(22,22,22,0.62)" fontWeight={600} sx={{ mb: 2 }}>Incident</Typography>
         <Grid container spacing={2} sx={{ mb: 3 }}>
           <Grid item xs={12} md={6}>
             <TextField select fullWidth label="Incident Type" value={form.incident_type} onChange={handleChange('incident_type')}>
@@ -469,7 +672,7 @@ export default function SubmitClaim() {
                   </Box>
                 ) : (
                   <Box>
-                    <TextField fullWidth multiline rows={2} size="small" sx={{ mb: 1, bgcolor: '#0F172A' }}
+                    <TextField fullWidth multiline rows={2} size="small" sx={{ mb: 1, bgcolor: '#F7F5EE' }}
                       label="Tell us why your original selection is correct"
                       value={typeDisputeReason} onChange={(e) => setTypeDisputeReason(e.target.value)} />
                     <Box sx={{ display: 'flex', gap: 1 }}>
@@ -504,25 +707,94 @@ export default function SubmitClaim() {
 
           {requiredDocs.length > 0 && (
             <Grid item xs={12}>
-              <Typography variant="body2" color="#94A3B8" fontWeight={600} sx={{ mb: 1 }}>
+              <Typography variant="body2" color="rgba(22,22,22,0.62)" fontWeight={600} sx={{ mb: 1 }}>
                 Required documents for {docLabel(form.incident_type)}
               </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                {requiredDocs.map((d) => (
-                  <Chip key={d} label={docLabel(d)} clickable onClick={() => toggleDoc(d)}
-                    color={checkedDocs[d] ? 'success' : 'default'}
-                    icon={checkedDocs[d] ? <CheckCircle /> : undefined}
-                    variant={checkedDocs[d] ? 'filled' : 'outlined'} />
-                ))}
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+                {requiredDocs.map((slot) => {
+                  const d = docUploads[slot];
+                  return (
+                    <Box key={slot} sx={{ border: '1px solid #161616', borderRadius: 2, p: 1.5, bgcolor: '#F7F5EE' }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+                        <Typography variant="body2" fontWeight={600} color="#161616" sx={{ minWidth: 160 }}>
+                          {docLabel(slot)}
+                        </Typography>
+
+                        {!d && (
+                          <Button component="label" size="small" variant="outlined" startIcon={<UploadFile />}
+                            sx={{ borderColor: '#161616', color: 'rgba(22,22,22,0.62)', textTransform: 'none' }}>
+                            Choose PDF
+                            <input type="file" accept="application/pdf" hidden onChange={handleDocFileChange(slot)} />
+                          </Button>
+                        )}
+
+                        {d?.status === 'uploading' && (
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <CircularProgress size={16} />
+                            <Typography variant="caption" color="rgba(22,22,22,0.62)">Uploading...</Typography>
+                          </Box>
+                        )}
+
+                        {d?.status === 'ok' && (
+                          <>
+                            <Chip size="small" color="success" icon={<CheckCircle />} label="Uploaded" variant="filled" />
+                            <IconButton size="small" onClick={() => handleDocRemove(slot)} sx={{ color: 'rgba(22,22,22,0.45)' }}>
+                              <Close fontSize="small" />
+                            </IconButton>
+                          </>
+                        )}
+
+                        {(d?.status === 'problem' || d?.status === 'failed') && (
+                          <Chip size="small" color={d.status === 'failed' ? 'error' : 'warning'}
+                            icon={d.status === 'failed' ? <ErrorOutline /> : <Warning />}
+                            label={d.status === 'failed' ? 'Failed' : 'Needs attention'} variant="filled" />
+                        )}
+                      </Box>
+
+                      {(d?.status === 'problem' || d?.status === 'failed') && (
+                        <Box sx={{ mt: 1 }}>
+                          <Typography variant="caption" color="rgba(22,22,22,0.62)" sx={{ display: 'block', mb: 1 }}>
+                            {d.message}
+                          </Typography>
+                          {!d.keptAnyway && (
+                            <Box sx={{ display: 'flex', gap: 1 }}>
+                              <Button component="label" size="small" variant="outlined" startIcon={<Replay />}
+                                sx={{ borderColor: '#161616', color: 'rgba(22,22,22,0.62)', textTransform: 'none' }}>
+                                Re-upload
+                                <input type="file" accept="application/pdf" hidden onChange={handleDocFileChange(slot)} />
+                              </Button>
+                              {d.status === 'problem' && (
+                                <Button size="small" variant="text" onClick={() => handleDocKeepAnyway(slot)}
+                                  sx={{ color: 'rgba(22,22,22,0.62)', textTransform: 'none' }}>
+                                  Keep this file anyway
+                                </Button>
+                              )}
+                            </Box>
+                          )}
+                          {d.keptAnyway && (
+                            <Box>
+                              <TextField fullWidth multiline rows={1} size="small" sx={{ mb: 1, bgcolor: '#F7F5EE' }}
+                                label="Optional: why you're keeping this file"
+                                value={d.disputeReason || ''} onChange={handleDocDisputeReasonChange(slot)} />
+                              <Typography variant="caption" color="rgba(22,22,22,0.45)">
+                                Kept as uploaded. A reviewer will take a closer look.
+                              </Typography>
+                            </Box>
+                          )}
+                        </Box>
+                      )}
+                    </Box>
+                  );
+                })}
               </Box>
-              <Typography variant="caption" color="#64748B" sx={{ display: 'block', mt: 0.5 }}>
-                Click each document you have ready. Anything left unchecked may be requested later.
+              <Typography variant="caption" color="rgba(22,22,22,0.45)" sx={{ display: 'block', mt: 1 }}>
+                Upload each document in PDF format. Anything left empty may be requested later.
               </Typography>
             </Grid>
           )}
         </Grid>
 
-        <Typography variant="subtitle2" color="#94A3B8" fontWeight={600} sx={{ mb: 2 }}>Damage Estimate</Typography>
+        <Typography variant="subtitle2" color="rgba(22,22,22,0.62)" fontWeight={600} sx={{ mb: 2 }}>Damage Estimate</Typography>
         <Grid container spacing={2} sx={{ mb: 3 }}>
           <Grid item xs={12} md={3}>
             <TextField fullWidth label={`Estimated Amount (${currencySymbol}) *`} type="number" value={form.estimated_amount} onChange={handleChange('estimated_amount')}
@@ -552,7 +824,7 @@ export default function SubmitClaim() {
 
         <Button type="submit" variant="contained" size="large" disabled={!canSubmit || loading}
           startIcon={loading ? <CircularProgress size={20} /> : <Send />}
-          sx={{ px: 4, py: 1.5, fontWeight: 600, borderRadius: 2, background: 'linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)' }}
+          sx={{ px: 4, py: 1.5, fontWeight: 600, borderRadius: 2, background: 'linear-gradient(135deg, #0F766E 0%, #0B5B54 100%)' }}
         >
           Submit Claim
         </Button>

@@ -1,0 +1,48 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "pre-fan-out dispute pause; reviewer approves -> fan-out launches after resume -> settlement -> communication",
+  "claimant": "Mateo Silva",
+  "location": "State Route 20 near Cle Elum, WA",
+  "vehicle": {
+    "age_years": 6,
+    "make": "Jeep",
+    "model": "Cherokee"
+  },
+  "incident_days_ago": 26,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.4
+  },
+  "police_report_number": "WSP-24-225018",
+  "documents": [
+    "police_report",
+    "repair_estimate"
+  ],
+  "type_dispute_reason": "I hit a deer on the highway. The form flagged this as possibly an animal strike, but the car collided with the animal at speed so I consider it a collision claim.",
+  "narrative": "At dusk on {location} a deer ran across the road and I could not avoid hitting it. The impact damaged the hood, grille and radiator support. A state trooper attended and wrote a report. I filed it as a collision claim.",
+  "resume": {
+    "decision": "approved",
+    "reviewer_id": "golden-set",
+    "notes": "Collision coverage confirmed",
+    "override_ai": false,
+    "settlement_override_usd": null
+  },
+  "expected": {
+    "paused": true,
+    "trigger": "disputed",
+    "decision": [
+      "approved",
+      "approved_partial"
+    ],
+    "payout": "oracle",
+    "path_includes": [
+      "damage_assessor",
+      "settlement_calculator",
+      "communication_agent"
+    ]
+  },
+  "id": "GOLD-18",
+  "slug": "disputed_type_reviewer_approves"
+}

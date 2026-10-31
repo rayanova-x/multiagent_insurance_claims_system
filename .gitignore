@@ -25,6 +25,12 @@ build/
 *.db-journal
 data/memory/
 data/audit_logs/
+data/uploads/
+
+# Reference/study PDFs at the repo root (not project source). data/test_pdfs/
+# is excluded from this rule - those PDFs ARE project test fixtures the
+# document-agent tests and demo-scenario picker depend on.
+/*.pdf
 
 # Frontend
 node_modules/

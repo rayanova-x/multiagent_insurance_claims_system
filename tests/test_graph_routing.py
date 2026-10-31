@@ -74,6 +74,24 @@ def test_undisputed_incident_type_proceeds_to_fast_mode_settlement():
     assert graph.route_after_intake(state) == "settlement_calculator"
 
 
+def test_document_verification_findings_route_to_hitl_checkpoint_regardless_of_amount():
+    state = {
+        "intake_output": intake(is_valid=True, flags=[]),
+        "claim": {"estimated_amount": 100},  # small claim - would otherwise sail through
+        "document_verification_findings": [{"slot": "repair_estimate", "issue": "wrong_document_type", "detail": "..."}],
+    }
+    assert graph.route_after_intake(state) == "hitl_checkpoint"
+
+
+def test_no_document_verification_findings_proceeds_to_fast_mode_settlement():
+    state = {
+        "intake_output": intake(is_valid=True, flags=[]),
+        "claim": {"estimated_amount": 100},
+        "document_verification_findings": [],
+    }
+    assert graph.route_after_intake(state) == "settlement_calculator"
+
+
 def test_normal_claim_above_fast_mode_fans_out_to_all_three_branches():
     """The real fan-out case: a claim above the fast-mode threshold routes
     to all three parallel branches at once, as a list - not one at a time."""
@@ -368,3 +386,13 @@ def test_a_claim_a_human_already_reviewed_is_not_paused_twice_for_value():
 def test_signoff_reason_names_the_threshold():
     state = _eval_state(100_000, settlement_output=object())
     assert any("needs human sign-off" in r for r in graph._routing_reasons("hitl_checkpoint", state))
+
+
+def test_an_unresolved_judge_dimension_is_named_not_shown_as_a_passing_score():
+    # Live run: fairness came back "unsure", the other two dimensions averaged 1.00, and the reviewer saw
+    # "score 1.00 < 0.70", which looks like a bug.
+    state = {"evaluation_passed": False,
+             "evaluation_output": SimpleNamespace(overall_score=1.0, flags=["fairness_unresolved: judge could not score confidently, requires human review"])}
+    reasons = graph._routing_reasons("hitl_checkpoint", state)
+    assert any("judge could not score fairness" in r for r in reasons)
+    assert not any("1.00 < 0.70" in r for r in reasons)

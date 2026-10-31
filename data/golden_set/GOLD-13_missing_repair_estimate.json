@@ -1,0 +1,32 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "damage_assessor rule 4: no repair-estimate document -> requires_physical_inspection forced True -> pause",
+  "claimant": "Fiona McAllister",
+  "location": "Harbor Street, Baltimore, MD",
+  "vehicle": {
+    "age_years": 3,
+    "make": "Hyundai",
+    "model": "Tucson"
+  },
+  "incident_days_ago": 10,
+  "policy": {
+    "kind": "standard"
+  },
+  "estimated_amount": 6200,
+  "documents": [
+    "police_report",
+    "other_driver_info"
+  ],
+  "police_report_number": "BAL-24-190046",
+  "other_driver": "Curtis Boyd",
+  "narrative": "Another driver turned left across my path on {location} and we collided at low speed. I have the police report and the other driver's details, but my regular body shop cannot see the car until next week so I do not yet have a written repair estimate. My own estimate of the repair is about six thousand dollars.",
+  "expected": {
+    "paused": true,
+    "trigger": "physical inspection",
+    "path_includes": [
+      "damage_assessor"
+    ]
+  },
+  "id": "GOLD-13",
+  "slug": "missing_repair_estimate"
+}

@@ -1,0 +1,34 @@
+{
+  "label_basis": "code-deterministic",
+  "rule_citation": "type_disputed_by_claimant=True -> property-based pause before the fan-out",
+  "claimant": "Leah Sutherland",
+  "location": "Birchwood Avenue, Minneapolis, MN",
+  "vehicle": {
+    "age_years": 5,
+    "make": "Subaru",
+    "model": "Outback"
+  },
+  "incident_days_ago": 33,
+  "policy": {
+    "kind": "standard"
+  },
+  "repair": {
+    "ratio_of_acv": 0.35
+  },
+  "police_report_number": null,
+  "documents": [
+    "repair_estimate"
+  ],
+  "type_dispute_reason": "A large branch fell onto my parked car during the storm. I filed it as a collision because the branch struck the car and crushed the roof panel, and I believe collision coverage should apply.",
+  "narrative": "During the storm last month a large tree branch came down on my parked car on {location} and crushed part of the roof and the rear window. I selected auto collision on the form because an object struck the car.",
+  "expected": {
+    "paused": true,
+    "trigger": "disputed",
+    "path_excludes": [
+      "damage_assessor",
+      "settlement_calculator"
+    ]
+  },
+  "id": "GOLD-17",
+  "slug": "disputed_incident_type"
+}
